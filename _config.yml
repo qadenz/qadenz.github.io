@@ -30,6 +30,7 @@ url: "https://qadenz.github.io" # the base hostname & protocol for your site
 
 # Social (First three Required)
 repo: "https://github.com/qadenz/qadenz"
+repo2: "https://github.com/qadenz/qadenz.github.io"
 github_user: "qadenz"
 github_repo: "qadenz"
 github_branch: "master"
@@ -40,7 +41,7 @@ linkedin: null
 dockerhub: null
 
 # Should there be feedback buttons at the bottom of pages?
-feedback: true
+feedback: false
 
 # Link to a privacy policy in footer, uncomment and define if wanted
 # privacy: https://domain.com/privacy
