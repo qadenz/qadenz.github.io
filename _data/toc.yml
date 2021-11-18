@@ -3,13 +3,31 @@
   links:
     - title: "Getting Started"
       url: "docs/getting-started"
-      children:
-        - title: Features
-          url: "docs/getting-started#getting-started"
-        - title: Development
-          url: "docs/getting-started#development"
-        - title: Customization
-          url: "docs/getting-started#customization"
+    - title: "Qadenz Approach"
+      url: "docs/qadenz-approach"
+    - title: "Component Overview"
+      url: "docs/component-overview"
+    - title: "Extending Qadenz"
+      url: "docs/extending-qadenz"
+    - title: "UI Modeling"
+      url: "docs/ui-modeling"
+    - title: "Validations"
+      url: "docs/validations"
+    - title: "Executing Tests"
+      url: "docs/executing-tests"
+    - title: "Reports"
+      url: "docs/reports"
+    - title: "FAQ"
+      url: "docs/faq"
+#     - title: "Getting Started"
+#       url: "docs/getting-started"
+#       children:
+#         - title: Features
+#           url: "docs/getting-started#getting-started"
+#         - title: Development
+#           url: "docs/getting-started#development"
+#         - title: Customization
+#           url: "docs/getting-started#customization"
 #     - title: "About"
 #       url: "about"
 #     - title: "News"
