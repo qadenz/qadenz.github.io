@@ -1,4 +1,6 @@
-- title: Documentation
+- title: Home
+  url: index
+- title: Qadenz Docs
   url: docs
   links:
     - title: "Getting Started"
