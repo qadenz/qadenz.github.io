@@ -5,8 +5,8 @@
   links:
     - title: "Getting Started"
       url: "docs/getting-started"
-    - title: "Qadenz Approach"
-      url: "docs/qadenz-approach"
+    - title: "Philosophy of Use"
+      url: "docs/philosophy-of-use"
     - title: "Component Overview"
       url: "docs/component-overview"
     - title: "Extending Qadenz"
