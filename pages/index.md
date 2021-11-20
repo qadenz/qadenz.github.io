@@ -8,7 +8,7 @@ permalink: /
 
 Qadenz is a robus test automation library that wraps Selenium for browser automation, TestNG for suite management, and Hamcrest for validations.
 
-The goal of Qadenz is to take the heavy lifting out of developing a test automation project, allowing teams to focus instead on rapid scripting of tests. Qadenz takes a mildly opinionated approach to solving the common issue of how to implement a wrapper layer between the tests and accompanying UI model layer, and the underlying frameworks (like Selenium and TestNG). Qadenz handles element initialization, executes test step commands, enables precise and flexible validations, and provides a fully detailed HTML report of test results that includes integrated screenshots.
+The goal of Qadenz is to take the heavy lifting out of developing a test automation project, allowing teams to focus instead on rapid scripting of tests. Qadenz takes a mildly opinionated approach to solving the common issues in implementing a wrapper layer between the tests and accompanying UI model layer, and the underlying frameworks (like Selenium and TestNG). Qadenz handles element initialization, executes test step commands, enables precise and flexible validations, and provides a fully detailed HTML report of test results that includes integrated screenshots.
 
 Qadenz is easy to learn and encourages simple to read tests without having to resort to using Gherkin-based tools that add unnecessary complexity and abstraction to the development workload. Qadenz is also extensible and ready to support custom functionality based on the needs of the tests to be automated, and provides quick and easy design patterns that can be followed for seamless integration of team-specific features.
 
