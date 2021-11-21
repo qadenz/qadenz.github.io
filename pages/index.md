@@ -21,7 +21,7 @@ Qadenz is also extensible and stands ready to support custom functionality based
 
 # License
 
-The Qadenz Library is made freely available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/). While this is not an Open Source license by the definition of the Open Source Initiative, Qadenz can be considered as "Source Avaialble". Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or using Qadenz as a product for their customers. Please see the FAQ for more detail on licensing.
+The Qadenz Library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available" library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz as a product for their customers. Please see the FAQ for more detail on licensing.
 
 # Getting Started
 
