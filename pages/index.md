@@ -17,7 +17,7 @@ Core Features of Qadenz:
 - A unique conditions-based approach to validations
 - Custom built-in HTML reporting that provides detailed results data along with integrated screenshots
 
-Qadenz is also extensible and stands ready to support custom functionality based on the needs of the tests to be automated. The quick and easy design patterns that Qadenz provides can be followed for seamless integration of team-specific features.
+Qadenz is also extensible and stands ready to support custom functionality based on the needs of the tests to be automated. The design patterns that Qadenz provides can quickly and easily be followed for seamless integration of team-specific features.
 
 # License
 
