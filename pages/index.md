@@ -12,7 +12,7 @@ The goal of Qadenz is to take the heavy lifting out of developing a test automat
 
 Core Features of Qadenz:
 
-- Boiler-plate test setup and configuration is built and ready to use
+- Boilerplate test setup and configuration is built and ready to use
 - Selenium element interaction functionality is wrapped in a simple to use API
 - A unique conditions-based approach to validations
 - Custom built-in HTML reporting that provides detailed results data along with integrated screenshots
@@ -21,7 +21,7 @@ Qadenz is also extensible and stands ready to support custom functionality based
 
 # License
 
-The Qadenz Library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available" library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz as a product for their customers. Please see the FAQ for more detail on licensing.
+The Qadenz Library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available" library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz) as a product for their customers. Please see the FAQ for more detail on licensing.
 
 # Getting Started
 
