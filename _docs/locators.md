@@ -33,9 +33,7 @@ Selenium does not readily provide a meaningful friendly reference to element nam
 By requiring a `name` value to be given in the `Locator` constructor, Qadenz refers to the context-friendly name of an element as the primary identifier in all logging and reporting output. This eliminates the time needed to perform any lookup or cross-referencing of selectors to elements in relation to test steps. By reviewing the default logging output or report content, the point at which a problem appears in a test is clearly marked and quickly identified.
 
 ```
-public Locator signInButton() {
-    return new Locator("Sign In Button", ".btn-signIn");
-}
+Locator signInButton = new Locator("Sign In Button", ".btn-signIn");
 ```
 
 ### Parameterized Selectors
@@ -55,3 +53,13 @@ public Locator searchResultLink(String name) {
 Using `PageFactory.initElements()` will instantiate the page class, and all `WebElement` instances annotated with `@FindBy` will be initialized. If the page on the UI is static and all mapped elements are already present, there should be no issues. Modern webapps, though, use very dynamic interfaces. This frequently results in situations where some `@FindBy` mapped elements will change state at some point between the time `.initElements()` is called and when the element is actually used. To mitigate these issues, additional code in the form of Explicit Waits or other custom logic must be written to handle each element. 
 
 With Qadenz, Locators are defined and passed to commands methods, which in turn initialize a `WebElement` prior to acting upon the element. Further, each command will initialize the target element each time the command is called. By initializing WebElements *at the time they are used*, this mitigates situation that might produce a `StaleElementReferenceException`, and when errors are encountered, the problem can be presented far more clearly.
+
+# Using Locators
+
+## Standard Locators
+
+A `Locator` holds two required values, `name` and `selector`. The `name` field is completely user-definable, but is recommended to at least convey some level of meaningful context to the element being mapped. This value will appear in the logs, on the final report output, as well as within any error handling. 
+
+## Parent Locators
+
+The `Locator` can hold a third, optional value, of another `Locator` instance. 
