@@ -77,12 +77,19 @@ As a very simple HTML representation:
             <div class="item-qty input-field">
                 <input type="text"></div>
             <div class="item-add action-button">
-                <button type="submit">Add to Cart</button></div>            
+                <button type="submit">Add to Cart</button></div>
+        </div>
     </div>
 <div>
 ```
 
-The selector for the 'Add to Cart' button could be `#item-list-section .item-card:contains(ACME Rocket Powered Roller Skates) .item-add button`. While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as it's own element mapping.
+The selector for the 'Add to Cart' button could be:
+
+```
+#item-list-section .item-card:contains(ACME Rocket Powered Roller Skates) .item-add button
+```
+
+While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as it's own element mapping.
 
 With a parent `Locator` the resulting element mappings for the item card, 'Quantity' field, and 'Add to Cart' button could be:
 
@@ -97,3 +104,25 @@ public Locator itemAddToCartButton(String itemName) {
     return new Locator(itemName + " Add to Cart Button", itemCard(itemName), " .item-add button");
 }
 ```
+
+In the above example, the `itemCard()` Locator could have the added benefit of not only being an abstracted selector, but could also serve as the target element of a verification of a given item card element to be visible on the page.
+
+Parent Locators are also not limited to a single layer. Locators can be passed as parent references as many times as needed.
+
+# LocatorGroup
+
+The [`LocatorGroup`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/LocatorGroup.java) allows multiple `Locator` instances to be combined together on a `List`, and acted upon as a group. This is commonly applied to verify the visibility of UI component, or a set of default UI elements. Instead of passing multiple individual Conditions to a `.verify()` or `.check()` validation, a `LocatorGroup` can be verified with a single `Condition` call.
+
+For example, a simple authentication form has several basic elements, the 'Username' field, the 'Password' field, a 'Remember Me' checkbox, and a 'Sign In' button. Each element would be mapped as an individual `Locator` instance for the purposes of input, but these same elements could also be included in a `LocatorGroup`, should the need arise to verify each element to be visible as part of the form.
+
+```JAVA
+Locator usernameField = new Locator("Username Field", "#username");
+Locator passwordField = new Locator("Password Field", "#password");
+Locator rememberMeCheckbox = new Locator("Remember Me Checkbox", "#remember-me");
+Locator signInButton = new Locator("Sign In Button", "#sign-in");
+
+LocatorGroup signInForm = new LocatorGroup("Sign In Form", usernameField, passwordField, 
+                                           rememberMeCheckbox, signInButton);
+```
+
+By combining individual Locators onto a `LocatorGroup` instance, testers are able to identify and refer to collections of elements as the UI Components they represent.
