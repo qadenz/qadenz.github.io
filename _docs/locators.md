@@ -32,7 +32,7 @@ Selenium does not readily provide a meaningful friendly reference to element nam
 
 By requiring a `name` value to be given in the `Locator` constructor, Qadenz refers to the context-friendly name of an element as the primary identifier in all logging and reporting output. This eliminates the time needed to perform any lookup or cross-referencing of selectors to elements in relation to test steps. By reviewing the default logging output or report content, the point at which a problem appears in a test is clearly marked and quickly identified.
 
-```
+```JAVA
 Locator signInButton = new Locator("Sign In Button", ".btn-signIn");
 ```
 
@@ -42,7 +42,7 @@ Using list of search results as an example, testers would be forced to create a 
 
 Using a parameterized Locator (coupled with the benefits of Sizzle CSS Selectors), testers will be able to define a single `Locator` instance for a generic search result, and rely upon the parameterization to direct the test to choose the appropriate element instance.
 
-```
+```JAVA
 public Locator searchResultLink(String name) {
     return new Locator(name + " Search Result Link", ".search-result:contains(" + name + ")");
 }
@@ -52,7 +52,7 @@ public Locator searchResultLink(String name) {
 
 Using `PageFactory.initElements()` will instantiate the page class, and all `WebElement` instances annotated with `@FindBy` will be initialized. If the page on the UI is static and all mapped elements are already present, there should be no issues. Modern webapps, though, use very dynamic interfaces. This frequently results in situations where some `@FindBy` mapped elements will change state at some point between the time `.initElements()` is called and when the element is actually used. To mitigate these issues, additional code in the form of Explicit Waits or other custom logic must be written to handle each element. 
 
-With Qadenz, Locators are defined and passed to commands methods, which in turn initialize a `WebElement` prior to acting upon the element. Further, each command will initialize the target element each time the command is called. By initializing WebElements *at the time they are used*, this mitigates situation that might produce a `StaleElementReferenceException`, and when errors are encountered, the problem can be presented far more clearly.
+With Qadenz, Locators are defined and passed to commands methods, which in turn initialize a `WebElement` prior to acting upon the element. Further, each command will initialize the target element each time the command is called. By initializing WebElements *at the time they are used*, this mitigates situations that might produce a `StaleElementReferenceException`, and when errors are encountered, the problem can be presented far more clearly.
 
 # Using Locators
 
@@ -62,4 +62,38 @@ A `Locator` holds two required values, `name` and `selector`. The `name` field i
 
 ## Parent Locators
 
-The `Locator` can hold a third, optional value, of another `Locator` instance. 
+The `Locator` can hold a third, optional value of another `Locator` instance. This is intended to allow abstraction of selector segments by combining the selector of the parent Locator with that of the current Locator as a single selector value. This can be helpful in reducing repeated selector segments when creating Locators for closely related UI Elements. 
+
+Consider an e-commerce application wherein a list of catalog items are presented on the UI. Each item card contains the item name text, a 'Cost' value, a 'Quantity' field, and an 'Add to Cart' button. 
+
+As a very simple HTML representation:
+
+```HTML
+<div id="item-list-section" class="grid">
+    <div class="item-row even">
+        <div class="item-card">
+            <div class="item-name">ACME Rocket Powered Roller Skates</div>
+            <div class="item-cost">$99.99</div>
+            <div class="item-qty input-field">
+                <input type="text"></div>
+            <div class="item-add action-button">
+                <button type="submit">Add to Cart</button></div>            
+    </div>
+<div>
+```
+
+The selector for the 'Add to Cart' button could be `#item-list-section .item-card:contains(ACME Rocket Powered Roller Skates) .item-add button`. While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as it's own element mapping.
+
+With a parent `Locator` the resulting element mappings for the item card, 'Quantity' field, and 'Add to Cart' button could be:
+
+```JAVA
+public Locator itemCard(String itemName) {
+    return new Locator(itemName + " Item Card", "#item-list-section .item-card:contains(" + itemName + ")");
+}
+public Locator itemQuantityField(String itemName) {
+    return new Locator(itemName + " Quantity Field", itemCard(itemName), " .item-qty input");
+}
+public Locator itemAddToCartButton(String itemName) {
+    return new Locator(itemName + " Add to Cart Button", itemCard(itemName), " .item-add button");
+}
+```
