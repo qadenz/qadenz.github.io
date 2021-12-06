@@ -29,6 +29,8 @@ The [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/q
 5. If an exception is caught, capture a screenshot of the application under test.
 6. Re-throw the exception to stop execution of the test.
 
+All `WebCommander` commands include an Explicit Wait during `WebElement` initialization. Commands that involve a Click action include a wait for the clickability of the target element. All other commands include a wait for the visibility of the target element to be `true`.
+
 ## The WebInspector
 
 The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java) class works alongside the `WebCommander`. Instead of performing actions on UI elements, `WebInspector` work to extract and return data from UI elements. This includes retriving text or attribute values from elements, and discovering selected, enabled, or visible state of elements. The workflow for `WebInspector` methods is as follows:
@@ -39,6 +41,8 @@ The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/
 4. Catch and log any exceptions that are thrown.
 5. If an exception is caught, capture a screenshot of the application under test.
 6. Re-throw the exception to stop execution of the test.
+
+All `WebInspector` commands that involve a single target element also include an Explicit Wait during `WebElement` initializationfor the visibility of the target element to be `true`. Commands that involve a `List<WebElement>` do not include an Explicit Wait.
 
 ## Using WebCommander and WebInspector
 
