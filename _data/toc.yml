@@ -5,7 +5,11 @@
   links:
     - title: Philosophy of Use
       url: "docs/qadenz#Philosophy Of Use"
-
+      children:
+      - title: Objectives
+        url: "docs/qadenz#objectives"
+      - title: Opinionation
+        url: "docs/qadenz#opinionation"
 - title: Qadenz Docs - OLD
   url: docs
   links:
