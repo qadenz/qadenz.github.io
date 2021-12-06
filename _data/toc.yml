@@ -1,6 +1,8 @@
 - title: Home
   url: index
 - title: Qadenz Docs
+  url: "docs/qadenz"
+- title: Qadenz Docs - OLD
   url: docs
   links:
     - title: "Philosophy of Use"
