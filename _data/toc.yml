@@ -4,12 +4,14 @@
   url: "docs/qadenz"
   links:
     - title: Philosophy of Use
-      url: "docs/qadenz#Philosophy Of Use"
+      url: "docs/qadenz#philosophy-of-use"
       children:
-      - title: Objectives
-        url: "docs/qadenz#objectives"
-      - title: Opinionation
-        url: "docs/qadenz#opinionation"
+        - title: Objectives
+          url: "docs/qadenz#objectives"
+        - title: Opinionation
+          url: "docs/qadenz#opinionation"
+    - title: UI Modeling
+      url: "docs/qadenz#ui-modeling"
 - title: Qadenz Docs - OLD
   url: docs
   links:
