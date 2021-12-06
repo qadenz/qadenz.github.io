@@ -42,7 +42,7 @@ The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/
 
 ## Using WebCommander and WebInspector
 
-The `WebCommander` and `WebInspector` can be instantiated and used from either the tests directly, or from the UI Modeling layer, depending on the design of the test project.
+The `WebCommander` and `WebInspector` can be instantiated and used either from the tests directly, or from the UI Modeling layer, depending on the design of the test project.
 
 ### Constructors & Loggers
 
@@ -85,3 +85,4 @@ The overloaded constructor requires a `Class<?>` argument, and allows for anothe
 09:55:02.583 | INFO | DashboardPage | Verifying Condition - Visibility of element [Company Logo Image] is TRUE.
 09:55:02.998 | INFO | DashboardPage | Result - PASS
 ```
+
