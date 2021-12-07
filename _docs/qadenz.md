@@ -3,7 +3,7 @@ title: Qadenz Documentation
 description: Working with the Qadenz Automation Library
 --- 
 
-# Philosophy of Use
+## **Philosophy of Use**
 
 Very seldom will teams forge forward with writing tests using raw Selenium, joined with a unit testing framework and perhaps a data library (JDBC, Apache POI, etc). They might even have a basic Page Object model in place to abstract repeated code. At best, and most rarely, this type of team is typically running like an extremely well oiled machine with highly disciplined developers writing detailed code with a consistent implementation. Usually, this type of team may be in a Wild West environment where anything goes as far as design, and little attention is paid to things like maintenance. More than likely, a this type of team may very well be plowing full steam toward a brick wall, and may not realize it.
 
@@ -41,7 +41,7 @@ TestNG provides basic reporting out of the the box. The `emailable-report.html` 
 
 Qadenz tries to keep a balance between opinionated design, and remaining flexible for user implementation.
 
-# UI Modeling
+## **UI Modeling**
 
 Qadenz is a departure from the commonly practiced use of the Selenium Page Factory pattern when implementing the Page Object Model. The `@FindBy` annotation-based approach to mapping UI elements lacks the ability to parameterize selectors. Instead, testers are forced to create repetitive annotated `WebElement` instances for every needed permutation of a selector. Without adding additional calls to `WebDriverWait` in order to use an Explicit Wait to initialize the element (and dealing with the resulting added clutter), these selectors are notoriously susceptible to the dreaded `StaleElementReferenceException`.
 
