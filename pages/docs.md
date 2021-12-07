@@ -19,29 +19,15 @@ Qadenz is built to satisfy the need for such toolset, and allow testers to focus
 
 To this end, Qadenz targets a number of core objectives...
 
-#### Drive easy to read tests with a clearly worded API
-
-Simply, readable code is manageable code. Everything from the API syntax to the logging and reporting output has been carefully chosen to maximize readability and to be a simple to understand as possible.
-
-### Reduce coding overhead by doing the heavy lifting
-
-Selenium interactions can, with one method call, log the activity, initialize an element, perform an interaction against the element, handle exceptions with logging and reporting, and capture screenshots. By offloading this work to the library, users can focus on scripting their tests rather than sorting out all the supporting functionality. 
-
-### Encourage efficient UI Modeling
-
-Qadenz uses CSS Selectors exclusively due to maximized flexibility and easy of use. This is further enhanced by injecting SizzleJS to enable parameterized element selectors. CSS Selectors are versatile, simple to understand, and most importantly (well crafted selectors are) more resistant to change compared to XPath. Wrapping the element selectors on the Locator object also enhances reporting with friendly element names, and encourages teams to move beyond antiquated and inefficient patterns. Page Factory is old and busted. Simon even says so.
-
-### Provide flexible and precise validations
-
-The Conditions-based validations functionality is custom to Qadenz and enables high levels of precision using the What/How relationship of Conditions and Expectations. Additionally, the Verify/Check language in the API allows for hard and soft assertions, which enables the user to decide exactly when a test will be halted following a failure. Finally, the iterative nature of Qadenz validations allows for multiple validations to be made in groups, providing a more complete picture of test failures and maximized potential for quickly exposing system issues. 
-
-### Include detailed and easily shared reports
-
-The `emailable-report.html` provided by TestNG is nice for basic pass/fail results, but leaves much to be desired when it comes to detail and user experience. Other reporting libraries add a lot of noise to the code, and don't tend to coexist with standard logging frameworks. The Qadenz reporter is powered by Logback, is fully integrated with TestNG, and produces a singular HTML output file that contains full detailed results of each test and embedded screenshots of errors and failed validations.
+- **Drive easy to read tests with a clearly worded API:** Simply, readable code is manageable code. Everything from the API syntax to the logging and reporting output has been carefully chosen to maximize readability and to be a simple to understand as possible.
+- **Reduce coding overhead by doing the heavy lifting:** Selenium interactions can, with one method call, log the activity, initialize an element, perform an interaction against the element, handle exceptions with logging and reporting, and capture screenshots. By offloading this work to the library, users can focus on scripting their tests rather than sorting out all the supporting functionality. 
+- **Encourage efficient UI Modeling:** Qadenz uses CSS Selectors exclusively due to maximized flexibility and easy of use. This is further enhanced by injecting SizzleJS to enable parameterized element selectors. CSS Selectors are versatile, simple to understand, and most importantly (well crafted selectors are) more resistant to change compared to XPath. Wrapping the element selectors on the Locator object also enhances reporting with friendly element names, and encourages teams to move beyond antiquated and inefficient patterns. Page Factory is old and busted. Simon even says so.
+- **Provide flexible and precise validations:** The Conditions-based validations functionality is custom to Qadenz and enables high levels of precision using the What/How relationship of Conditions and Expectations. Additionally, the Verify/Check language in the API allows for hard and soft assertions, which enables the user to decide exactly when a test will be halted following a failure. Finally, the iterative nature of Qadenz validations allows for multiple validations to be made in groups, providing a more complete picture of test failures and maximized potential for quickly exposing system issues. 
+- **Include detailed and easily shared reports:** The `emailable-report.html` provided by TestNG is nice for basic pass/fail results, but leaves much to be desired when it comes to detail and user experience. Other reporting libraries add a lot of noise to the code, and don't tend to coexist with standard logging frameworks. The Qadenz reporter is powered by Logback, is fully integrated with TestNG, and produces a singular HTML output file that contains full detailed results of each test and embedded screenshots of errors and failed validations.
 
 ## Opinionation
 
-Qadenz tries to keep a balance between opinionated design, and remaining flexible for user implementation.
+Qadenz tries to keep a balance between opinionated design and remaining flexible for user implementation. There are, however, certain areas where Qadenz has chosen a specific solution with the intent of 
 
 ## **UI Modeling**
 
