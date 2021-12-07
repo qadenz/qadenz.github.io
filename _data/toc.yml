@@ -1,17 +1,17 @@
 - title: Home
   url: index
 - title: Qadenz Docs
-  url: "docs/qadenz"
+  url: "docs"
   links:
     - title: Philosophy of Use
-      url: "docs/qadenz#philosophy-of-use"
+      url: "docs#philosophy-of-use"
       children:
         - title: Objectives
-          url: "docs/qadenz#objectives"
+          url: "docs#objectives"
         - title: Opinionation
-          url: "docs/qadenz#opinionation"
+          url: "docs#opinionation"
     - title: UI Modeling
-      url: "docs/qadenz#ui-modeling"
+      url: "docs#ui-modeling"
 - title: Qadenz Docs - OLD
   url: docs
   links:
