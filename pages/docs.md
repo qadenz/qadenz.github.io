@@ -156,3 +156,24 @@ LocatorGroup signInForm = new LocatorGroup("Sign In Form", usernameField, passwo
 
 By combining individual Locators onto a `LocatorGroup` instance, testers are able to identify and refer to collections of elements as the UI Components they represent.
 
+## Page Objects
+
+With Qadenz placing focus on the `Locator` component, this leaves the design of any Page Object implementation is left as open ended as possible. This is done to allow any given team to design and implement an UI Model layer that fits their needs and the modeling needs of their UI under test.
+
+Qadenz does not force a particular means of initializing Page Objects like the `PageFactory`. In fact, unless a more sophisticated implementation is needed by a team, Locator-based UI Models can be initialized by simply calling a constructor.
+
+### UI Models as Locator Maps
+
+A team could choose simply to create Page classes that only declare and return `Locator` instances, then instantiate and call the Commands classes directly within their tests. The resulting tests would be slightly more verbose, but completely self-contained, requiring no stepping through code calls to follow the logic path. This does not allow for much abstraction of common test steps, but for simple and small test projects, it enables quick development.
+
+### UI Models with Simple or Complex Actions
+
+Alternately, a team could choose to create Page classes that both store `Locators` as well as instances of Commands classes, then expose individual methods that perform singular actions against mapped elements. The Page classes would be instantiated somewhere accessible to the test, and the resulting code calls in the test would be clean and concise. With descriptive method names on the Page classes, minimal stepping through code would be required in order to infer the logic path.
+
+Should the tests be more complex, or the UI workflows containing repetitive tasks, a team could build upon the above design and add more complex procedure methods that call multiple individual actions. This lessens the code required directly in a test, but with descriptive method names the resulting code calls would remain clean and concise. More reusable code is created, but would require a moderate amount of stepping through code calls in order to follow the details of the logic path.
+
+A secondary benefit of this and similar designs is the logger injection for the Commands classes. `WebCommander` and `WebInspector` both use overloaded constructors to allow users to choose either a default logger or custom logger. A default logger will result in logging and reporting output that shows events originating from the Commands classes. Using a custom logger, teams can pass the `.class` value of the Page class to the `WebCommander` and `WebInspector` instances that reside on the Page class. This results in logging and reporting output that shows events orginating from the Page classes, adding better clarity to the reporting output. This is explained in more detail in the [Commands]() section.
+
+Finally, if the Page classes are becoming too cumbersome due to a complex UI, the Locators could be separated into a Map class, allowing for some division in the UI Modeling components. A test would call a Page class in order to perform actions against elements, and the Page class would call the Map class in order to retrieve the element mappings.
+
+# Commands

@@ -21,6 +21,8 @@
           url: "docs#using-locators"
         - title: The LocatorGroup
           url: "docs#the-locatorgroup"
+        - title: Page Objects
+          url: "docs#page-objects"
 - title: Qadenz Docs - OLD
   url: docs
   links:
@@ -46,26 +48,6 @@
       url: "docs/extending-qadenz"
     - title: "FAQ"
       url: "docs/faq"
-- title: "Getting Started"
-  url: "docs/getting-started"
-  children:
-    - title: Features
-      url: "docs/getting-started#getting-started"
-    - title: Development
-      url: "docs/getting-started#development"
-    - title: Customization
-      url: "docs/getting-started#customization"
-    - title: "About"
-      url: "about"
-    - title: "News"
-      url: "news"
-- title: "Extras"
-  url: "docs/extras"
-  links:
-    - title: Quizzes
-      url: "docs/extras/example-quiz"
-    - title: Tags Page
-      url: "tags"
 - title: Documentation
   url: docs
   links:
