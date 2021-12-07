@@ -36,6 +36,8 @@
           url: "docs#browser-commands"
     - title: Conditions & Expectations
       url: "docs#conditions--expectations"
+    - title: Validations
+      url: "docs#validations"
 - title: Qadenz Docs - OLD
   url: docs
   links:
