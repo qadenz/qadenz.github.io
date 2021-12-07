@@ -180,17 +180,11 @@ Finally, if the Page classes are becoming too cumbersome due to a complex UI, th
 
 The Commands classes are a collection of functionality that execute actions against elements on the UI, or the browser itself. In short, these are test steps ranging from actions such as clicks and inputs, inspections such as reading text or determining the state of an element, browser actions such as navigation or window management, and validations.
 
-## Browser Commands
-
-The [`Browser`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Browser.java) class manages the browser under test. This includes activities within the browser, but outside the rendered DOM of the application. Actions such as navigation, alert handling, cookie management, and switching between browser windows, are all handled by the `Browser`. The methods on the `Browser` class are static, and are able to be called from anywhere within the scope of the test, be it from the UI Modeling layer, or directly from the test itself.
-
-## The Commands class
-
 The [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Commands.java) class is abstract and sits atop the Commands Hierarchy (described in greater detail [here]({{ site.baseurl }}{% link _docs/extending-qadenz.md %})). This class provides common commands and is completely agnostic of any underlying automation frameworks. 
 
 `Commands` is home to the validation functionality (explained [here]({{ site.baseurl }}{% link _docs/validations.md %})), as well as the `log()` and `annotate()` commands (explained [here]({{ site.baseurl }}{% link _docs/logging-and-reporting.md %})).
 
-### The WebCommander
+## The WebCommander
 
 [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebCommander.java) is a child of `Commands`, and wraps Selenium `WebElement` and `Actions` commands for use in tests and UI Models. Each of the methods on `WebCommander` provide a number of acitivities beyond simply performing Selenium actions. The workflow for `WebCommander` methods is as follows:
 
@@ -203,7 +197,7 @@ The [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/q
 
 All `WebCommander` commands include an Explicit Wait during `WebElement` initialization. Commands that involve a Click action include a wait for the clickability of the target element. All other commands include a wait for the visibility of the target element to be `true`.
 
-### The WebInspector
+## The WebInspector
 
 The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java) class works alongside the `WebCommander`. Instead of performing actions on UI elements, `WebInspector` work to extract and return data from UI elements. This includes retriving text or attribute values from elements, and discovering selected, enabled, or visible state of elements. The workflow for `WebInspector` methods is as follows:
 
@@ -216,7 +210,7 @@ The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/
 
 All `WebInspector` commands that involve a single target element also include an Explicit Wait during `WebElement` initializationfor the visibility of the target element to be `true`. Commands that involve a `List<WebElement>` do not include an Explicit Wait.
 
-### Constructors & Loggers
+## Constructors & Loggers
 
 The `WebCommander` and `WebInspector` can be instantiated and used either from the tests directly, or from the UI Modeling layer, depending on the design of the test project. Both `WebCommander` and `WebInspector` have overloaded constructors that enable different types of logging to take place, and will both directly impact how the logs are presented on the report output.
 
@@ -240,7 +234,7 @@ public WebCommander(Class<?> logger) {
 
 The no-args constructor is generic and can be used regardless of how the classes are consumed. This constructor assigns the `WebCommander.class` as the `Logger`, and all logging output for method calls on this class will be shown to originate from the `WebCommander` class. If the UI of the application under test is very simple, or the team simply does not require a level of detail in the logging that ties actions to specific UI Models, then this constructor will provide an ideal configuration.
 
-```TXT
+```
 09:55:00.939 | INFO | WebCommander | Entering text [admin@qadenz.io] into element [Username Field].
 09:55:01.308 | INFO | WebCommander | Entering text [Test123$] into element [Password Field].
 09:55:01.472 | INFO | WebCommander | Clicking element [Sign In Button].
@@ -257,4 +251,8 @@ The overloaded constructor requires a `Class<?>` argument, and allows for anothe
 09:55:02.583 | INFO | DashboardPage | Verifying Condition - Visibility of element [Company Logo Image] is TRUE.
 09:55:02.998 | INFO | DashboardPage | Result - PASS
 ```
+
+## Browser Commands
+
+The [`Browser`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Browser.java) class manages the browser under test. This includes activities within the browser, but outside the rendered DOM of the application. Actions such as navigation, alert handling, cookie management, and switching between browser windows, are all handled by the `Browser`. The methods on the `Browser` class are static, and are able to be called from anywhere within the scope of the test, be it from the UI Modeling layer, or directly from the test itself.
 

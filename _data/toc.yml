@@ -23,6 +23,17 @@
           url: "docs#the-locatorgroup"
         - title: Page Objects
           url: "docs#page-objects"
+    - title: Commands
+      url: "docs#commands"
+      children:
+        - title: The WebCommander
+          url: "docs#the-webcommander"
+        - title: The WebInspector
+          url: "docs#the-webinspector"
+        - title: Constructors & Loggers
+          url: "docs#constructors--loggers"
+        - title: Browser Commands
+          url: "docs#browser-commands"
 - title: Qadenz Docs - OLD
   url: docs
   links:
