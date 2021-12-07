@@ -186,7 +186,7 @@ The [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/q
 
 ## The WebCommander
 
-[`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebCommander.java) is a child of `Commands`, and wraps Selenium `WebElement` and `Actions` commands for use in tests and UI Models. Each of the methods on `WebCommander` provide a number of acitivities beyond simply performing Selenium actions. The workflow for `WebCommander` methods is as follows:
+[`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebCommander.java) is a child of `Commands`, and wraps Selenium `WebElement` and `Actions` commands for use in tests and UI Models. Each of the methods on `WebCommander` provide a number of activities beyond simply performing Selenium actions. The workflow for `WebCommander` methods is as follows:
 
 1. Log the action taking place and the name of the target element.
 2. Initialize a `WebElement` using the provided `Locator` instance.
@@ -256,3 +256,22 @@ The overloaded constructor requires a `Class<?>` argument, and allows for anothe
 
 The [`Browser`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Browser.java) class manages the browser under test. This includes activities within the browser, but outside the rendered DOM of the application. Actions such as navigation, alert handling, cookie management, and switching between browser windows, are all handled by the `Browser`. The methods on the `Browser` class are static, and are able to be called from anywhere within the scope of the test, be it from the UI Modeling layer, or directly from the test itself.
 
+## **Conditions & Expectations**
+
+The pairing of [`Conditions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/conditions/Conditions.java) and [`Expectations`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/conditions/Expectations.java) becomes the core evaluative logic of Qadenz. These classes are used to determine if the state of the UI under test meets a given criteria.
+
+When used with the Explicit Wait provided by the `pause()` command, or with the Assertions provided by the `verify()` and `check()` commands, a Condition is used to describe precisely what on the UI is being evaluated, and the accompanying Expectation describes excatly the expected outcome of the evaluation.
+
+The goal of the Condition/Expectation pairing is to provide a unified structure for making evaluations throughout a testing project, rather than mixing Selenium `ExpectedConditions` calls for Explicit Waits, and various syntax patterns for test assertions. The resulting code is simple to read and quickly understand, and is easily maintained as the application under test evolves.
+
+## How does it work?
+
+Each Condition accepts a variety of Expectations based on the type of evaluation being performed. For example, Conditions pertaining to element state (visibility, selected, enabled) accept boolean-based Expectations, while Conditions evaluating text will require String-based Expectations.
+
+From a technical perspective, Conditions and Expectations is a Hamcrest wrapper. The output of a Condition is based on whether the outcome of the evaluation matched the expected result. The Condition will return `true` is there was a match, `false` otherwise.
+
+## Logging evaluations
+
+Implementations of the [`Condition`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/conditions/Condition.java) interface will provide a description of the Condition under evaluation to the logs and subsequent report output. Should the evaluation fail to match with the Expectation, the Condition will also provide a summary of the actual results.
+
+Implementations of the [`Expectation`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/conditions/Expectation.java) interface will provide a description of the Expectation that will be added to the Condition logs, as well as the wrapped Hamcrest Matcher that will be used to compute the result of the Condition.

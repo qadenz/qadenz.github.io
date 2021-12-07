@@ -34,6 +34,8 @@
           url: "docs#constructors--loggers"
         - title: Browser Commands
           url: "docs#browser-commands"
+    - title: Conditions & Expectations
+      url: "docs#conditions--expectations"
 - title: Qadenz Docs - OLD
   url: docs
   links:
