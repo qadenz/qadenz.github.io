@@ -12,6 +12,15 @@
           url: "docs#opinionation"
     - title: UI Modeling
       url: "docs#ui-modeling"
+      children:
+        - title: Why only CSS Selectors?
+          url: "docs#why-only-css-selectors"
+        - title: The Locator
+          url: "docs#the-locator"
+        - title: Using Locators
+          url: "docs#using-locators"
+        - title: The LocatorGroup
+          url: "docs#the-locatorgroup"
 - title: Qadenz Docs - OLD
   url: docs
   links:
