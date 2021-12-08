@@ -63,3 +63,5 @@
           url: "docs#testng-suite-xml-parameters"
         - title: Browser Config Profiles
           url: "docs#browser-configuration-profiles"
+        - title: Custom Visibility Checks
+          url: "docs#custom-visibility-checks"

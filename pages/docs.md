@@ -504,3 +504,24 @@ This example configures Chrome to run in headless mode.
 ```
 
 The JSON format is an array of configuration objects. Each object holds `profile` and `args` fields. The `profile` field will be matched to the `browserConfigProfile` parameter on the Suite XML. The `args` is an array of individual arguments to be passed to the `WebDriver` configuration.
+
+## Custom Visibility Checks
+
+The `WebInspector` provides a means to determine whether an element is visible. The inspection conducts a number of checks including matching selectors, element dimensions, attributes, and rudimentary CSS. There are many ways to hide or otherwise render an element invisible, so Qadenz offers a way for testers to insert additional checks into this inspection.
+
+Configurations are stored in JSON files within the project's `resources` directory. To create a new configuration, within the `resources` directory, add a new folder called `config`, and create a new JSON file. This file must be named `visibility.json`.
+
+In the above example, for any element where the `class` attribute contains `hidden`, the element will be determined to be invisible. This JSON configuration can contain as many entries on the array as needed to cover all scenarios in the UI under test where an element can become hidden. 
+
+```
+[
+    {
+        "attribute": "class",
+        "value": "hidden"
+    }
+]
+```
+
+The JSON format is an array of configuration objects that hold an `attribute` and `value` fields. 
+
+It is important to note that the `getVisibilityOfElement()` inspection presumes the element to be visible, and runs this series of checks until one check indicates that the element is not visible. With that in mind, the only items that should be added to this JSON configuration should items that define invisible or hidden elements.
