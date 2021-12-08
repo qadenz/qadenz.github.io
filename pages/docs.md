@@ -35,6 +35,59 @@ Qadenz can be considered an opinionated library. Some features and solutions hav
 - **Conditions-powered validations and Explicit Waits:** The `Conditions` and `Expectations` consist of precise and clearly defined evaluations. These provide a unified alternative to both sorting through the variety of assertion types or `ExpectedConditions` for Explicit Waits. Additionally, these classes ensure consistent and detailed information are passed to the logs and report output.
 - **Locator-based UI Modeling over Page Factory & @FindBy:** `PageFactory` is an overly complex form of instantiating page objects. `@FindBy` does not support parameterization and mitigating issues like the `StaleElementReferenceException` requires additional code in order to tune and make reliable for a given web application. Locators support parameterization, provide a context-friendly element name for the logs, and a reference to a UI element that is later used by the `WebCommander` or `WebInspector` to initialize an element at the appropriate time of use.
 
+## **Component Overview**
+
+## Configuration and Execution
+
+### TestNG Suite XML Parameters
+
+Primary suite configuration in Qadenz is made via parameters on the TestNG Suite XML file.
+
+- `gridHost`: Directs the tests to a Selenium Grid Hub. The expected value is simply the IP address of the Hub. The default port number (4444) is pre-configured.
+- `applicationName`: This is an obscure item that can be enabled in the Capabilities configuration on Grid Nodes. This setting allows tests to be directed to specific Nodes on a Grid. This is an optional parameter on the Suite XML, and the Selenium Grid must be configured for this to function.
+- `browser`: Specifies which browser will run the test.
+- `browserVersion`: An optional parameter that allows a specific version of the browser to be used for the test.
+- `platform`: Directs the tests to a Node running a given OS. This parameter is optional.
+- `timeout`: Sets the max allowable time for the Explicit Waits to run in Qadenz. This is an optional parameter, expressed in seconds. If this parameter is not given, a default of 30 seconds will be used.
+- `appUrl`: The full URL of the application under test.
+- `retryInterceptedClicks`: This works with the `click()` command. If a click throws an `ElementClickInterceptedException`, enabling this parameter will direct the `WebDriver` to retry the click using the `Actions` API. Do note, however, that this exception is typicaly a symptom of a selector issue. This parameter is optional, and defaults to enabled.
+
+The `gridHost` and `applicationName` are Suite-level parameters, and are assigned only once during execution prior to any tests executing. The others are all Test-level parameters, and are assigned before each `<test>` node on the TestNG Suite XML file.
+
+The Test-level parameters allow for configuration changes to take place during the execution cycle. For example, if the goal of the suite is to run the same set of tests in multiple browsers, rather than create 3 different Suite XML files, 3 `<test>` nodes can be added to the same Suite XML file with different configurations.
+
+In the below example, both `<test>` nodes will use the same set of parameter values:
+
+```XML
+two tests, all params at suite
+```
+
+Parameters on TestNG Suite XML files obey scoping rules. That is to say, a parameter declared within a `<test>` will take precedence over the same parameter as declared on the `<suite>`. 
+
+In this next example, the second `<test>` will override the `browser` parameter, while the others will use follow what is declared at the `<suite>`.
+
+```XML
+3 tests, second has browser
+```
+
+In another example, to run the same set of tests in three different browsers as part of the same execution, Test-level parameters can be used accordingly:
+
+```XML
+three tests, different browser in each
+```
+
+### AutomatedWebTest
+
+The `AutomatedWebTest` is the base class for all test classes in a Qadenz-powered test project. This class is responsible for gathering paramter values from the TestNG Suite XML file, configuring and starting a `WebDriver` instance on a Selenium Grid for each test method, stopping the `WebDriver` after each test, and invoking the reporters after the Suite has completed.
+
+While classes the hold `@Test` methods must inherit from this class, an intermediate class may be inserted into the inheritence hierarchy to allow for project-specific configurations to be performed during the setup or teardown phases of the execution cycle. For example, a project may require that certain data items be in place as preconditions for tests, or other custom testing components would have to be started. These tasks would be well suited to be kept on a class that extends `AutomatedWebTest`, and is then extended by test classes.
+
+### WebConfig
+
+`WebConfig` stores information that Qadenz uses at various points throughout the execution cycle. Primarily, these are the values given as parameters on the TestNG Suite XML file. While Qadenz calls these values during the setup and reporting phases they are made available on the chance these values are needed for any project-specific configuration.
+
+Since these fields are all static, there really is no need to extend this class. Teams are encouraged to follow this pattern, though, and create a ProjectConfig class of their own should the need arise to track specific values or project-specific Suite parameters are in play.
+
 ## **UI Modeling**
 
 Qadenz is a departure from the commonly practiced use of the Selenium Page Factory pattern when implementing the Page Object Model. The `@FindBy` annotation-based approach to mapping UI elements lacks the ability to parameterize selectors. Instead, testers are forced to create repetitive annotated `WebElement` instances for every needed permutation of a selector. Without adding additional calls to `WebDriverWait` in order to use an Explicit Wait to initialize the element (and dealing with the resulting added clutter), these selectors are notoriously susceptible to the dreaded `StaleElementReferenceException`.
@@ -327,3 +380,34 @@ verify(Screenshot.SKIP, Conditions.visibilityOfElement(locator, Expectations.isT
 ```
 
 A `boolean` could also be passed to achieve the same outcome. The `Screenshot.SKIP` value is intended as a means to keep the resulting code easily readable at a glance.
+
+## **Configuring Qadenz**
+
+## Execution Lifecycle
+
+### Before the Suite Begins
+
+The first task performed after launching a Suite execution is to capture a timestamp and save as the `suiteStartDate` value on the `WebConfig`. This will be used later by the reporter to calculate the duration of the execution. Next, the Suite-level parameters are retrieved from the `ITestContext`, which were specified by the user on the TestNG Suite XML file. The  `gridHost` and `applicationName` are validated and saved.
+
+### Before Each Test
+
+Repeated before each test method, the Test-level parameters are retrieved from the `ITestContext`, which are the `browser`, `browserVersion`, `browserConfigProfile`, `platform`, `timeout`, `appUrl`, `retryInterceptedClicks`. These parameters are validated and saved to the `WebConfig`.
+
+Once all the parameters are processed, the `WebDriver` can be launched and execution of a test method can begin. The `CapabilityProvider` is invoked to configure the browser session. The `CapabilityProvider` calls values on the `WebConfig` and attempts to load any Browser Config Profiles declared in one of the browser configuration JSON files. This process chooses a browser, determines if a specific version of the browser is required if a version has been declared, ensures that the test will be run on the appropriate OS if one has been specified, and applies any arguments provided on the JSON file if a matching Browser Config Profile was found.
+
+These options are then used to configure and initialize a `WebDriver` instance, which is in turn set on the `WebDriverProvider`.
+
+Finally, the browser window is maximized, and the `appUrl` value is loaded.
+
+### After Each Test
+
+At the end of each test method, the `WebDriver` is stopped.
+
+### After the Suite Ends
+
+The final task of the execution cycle is to capture a second timestamp as the `suiteEndDate` on the `WebConfig`. 
+
+### Reporting
+
+The default TestNG reporters are not disabled by default, so the standard HTML & XML reports will be generated, along with the `emailable-report.html`. Next, the `TestReporter` is invoked which generates the Qadenz Reports in JSON and HTML formats.
+
