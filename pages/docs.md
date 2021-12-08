@@ -9,11 +9,11 @@ permalink: /docs/
 
 The role in a test automation project of an intermediate API that wraps frameworks such as Selenium and TestNG is far from uncommon. Many teams realize the importance of an API layer for these underlying tools as a means of simply abstracting common code and building re-usable components for frequently utilized features of the base frameworks. Some teams will take this a step further and design a wrapper layer that works to unify the development approach and adopted design patterns within the test project, thus answering the question "What is the best way for **our team** to implement these tools?".
 
-It's certainly not uncommon for teams to implement such a solution. We as testers freqently find ourselves in fast-paced and ever-evolving environments. Designing, building, and importanly, maintaining an API such as this can be as significant an effort as keeping up with the demands for expanding test coverage. 
+It's certainly not uncommon for teams to implement such a solution. We as testers frequently find ourselves in fast-paced and ever-evolving environments. Designing, building, and importantly, maintaining an API such as this can be as significant an effort as keeping up with the demands for expanding test coverage. 
 
 At the end of the day, it becomes about development efficiency and code maintainability. How quickly can we automate this next block of tests? Is the tooling reliable enough to ensure repeatable executions? Are the implementation details tribal knowledge, or is the code clear enough that a new developer can easily and quickly ramp up for maintenance? If the answers to these questions leads to increased efficiency and improved maintainability, then the investment in these tools becomes quite worthwhile.
 
-Qadenz is built to satisfy the need for such toolset, and allow testers to focus on the more important task... build tests quickly.
+Qadenz is built to satisfy the need for such tool-set, and allow testers to focus on the more important task... build tests quickly.
 
 ## Objectives
 
@@ -39,7 +39,7 @@ Qadenz can be considered an opinionated library. Some features and solutions hav
 
 The `AutomatedWebTest` is the base class for all test classes in a Qadenz-powered test project. This class is responsible for gathering parameter values from the TestNG Suite XML file, configuring and starting a `WebDriver` instance on a Selenium Grid for each test method, stopping the `WebDriver` after each test, and invoking the reporters after the Suite has completed.
 
-While classes the hold `@Test` methods must inherit from this class, an intermediate class may be inserted into the inheritence hierarchy to allow for project-specific configurations to be performed during the setup or teardown phases of the execution cycle. For example, a project may require that certain data items be in place as preconditions for tests, or other custom testing components would have to be started. These tasks would be well suited to be kept on a class that extends `AutomatedWebTest`, and is then extended by test classes.
+While classes the hold `@Test` methods must inherit from this class, an intermediate class may be inserted into the inheritance hierarchy to allow for project-specific configurations to be performed during the setup or tear-down phases of the execution cycle. For example, a project may require that certain data items be in place as preconditions for tests, or other custom testing components would have to be started. These tasks would be well suited to be kept on a class that extends `AutomatedWebTest`, and is then extended by test classes.
 
 ### The Execution Cycle
 
@@ -91,7 +91,7 @@ The end result is a powerful and straightforward selector strategy that supports
 
 ## The Locator
 
-The [`Locator`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/Locator.java) is the primary component of UI Modeling in the Qadenz environment. This object simply carries the name of an element, the element's CSS Selectorm, and an optional parent Locator instance to assist with abstracting element relationships and re-using selector content. The `Locator` is passed to methods on classes such as the [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebCommander.java) and [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java), which will then use the data within to initialize WebElements with the [`WebFinder`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/WebFinder.java).
+The [`Locator`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/Locator.java) is the primary component of UI Modeling in the Qadenz environment. This object simply carries the name of an element, the element's CSS Selectors, and an optional parent Locator instance to assist with abstracting element relationships and re-using selector content. The `Locator` is passed to methods on classes such as the [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebCommander.java) and [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java), which will then use the data within to initialize WebElements with the [`WebFinder`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/WebFinder.java).
 
 The `Locator` provides several major advantages over the `@FindBy` and `PageFactory`. 
 
@@ -107,7 +107,7 @@ Locator signInButton = new Locator("Sign In Button", ".btn-signIn");
 
 ### Parameterized Selectors
 
-Using list of search results as an example, testers would be forced to create a seperate `@FindBy` annotated `WebElement` instance for each result element needed for a test. Alternately, a `@FindBy` could be used to initialize a single `List<WebElement>`, but additional logic would be necessary to identify a specific result element needed for a test step. In either case, the result is many extra lines of code. 
+Using list of search results as an example, testers would be forced to create a separate `@FindBy` annotated `WebElement` instance for each result element needed for a test. Alternately, a `@FindBy` could be used to initialize a single `List<WebElement>`, but additional logic would be necessary to identify a specific result element needed for a test step. In either case, the result is many extra lines of code. 
 
 Using a parameterized Locator (coupled with the benefits of Sizzle CSS Selectors), testers will be able to define a single `Locator` instance for a generic search result, and rely upon the parameterization to direct the test to choose the appropriate element instance.
 
@@ -119,7 +119,7 @@ public Locator searchResultLink(String name) {
 
 ### On-the-fly Element Initialization
 
-Using `PageFactory.initElements()` will instantiate the page class, and all `WebElement` instances annotated with `@FindBy` will be initialized. If the page on the UI is static and all mapped elements are already present, there should be no issues. Modern webapps, though, use very dynamic interfaces. This frequently results in situations where some `@FindBy` mapped elements will change state at some point between the time `.initElements()` is called and when the element is actually used. To mitigate these issues, additional code in the form of Explicit Waits or other custom logic must be written to handle each element. 
+Using `PageFactory.initElements()` will instantiate the page class, and all `WebElement` instances annotated with `@FindBy` will be initialized. If the page on the UI is static and all mapped elements are already present, there should be no issues. Modern web-apps, though, use very dynamic interfaces. This frequently results in situations where some `@FindBy` mapped elements will change state at some point between the time `.initElements()` is called and when the element is actually used. To mitigate these issues, additional code in the form of Explicit Waits or other custom logic must be written to handle each element. 
 
 With Qadenz, Locators are defined and passed to commands methods, which in turn initialize a `WebElement` prior to acting upon the element. Further, each command will initialize the target element each time the command is called. By initializing WebElements *at the time they are used*, this mitigates situations that might produce a `StaleElementReferenceException`, and when errors are encountered, the problem can be presented far more clearly.
 
@@ -212,7 +212,7 @@ Alternately, a team could choose to create Page classes that both store `Locator
 
 Should the tests be more complex, or the UI workflows containing repetitive tasks, a team could build upon the above design and add more complex procedure methods that call multiple individual actions. This lessens the code required directly in a test, but with descriptive method names the resulting code calls would remain clean and concise. More reusable code is created, but would require a moderate amount of stepping through code calls in order to follow the details of the logic path.
 
-A secondary benefit of this and similar designs is the logger injection for the Commands classes. `WebCommander` and `WebInspector` both use overloaded constructors to allow users to choose either a default logger or custom logger. A default logger will result in logging and reporting output that shows events originating from the Commands classes. Using a custom logger, teams can pass the `.class` value of the Page class to the `WebCommander` and `WebInspector` instances that reside on the Page class. This results in logging and reporting output that shows events orginating from the Page classes, adding better clarity to the reporting output. This is explained in more detail in the [Commands]() section.
+A secondary benefit of this and similar designs is the logger injection for the Commands classes. `WebCommander` and `WebInspector` both use overloaded constructors to allow users to choose either a default logger or custom logger. A default logger will result in logging and reporting output that shows events originating from the Commands classes. Using a custom logger, teams can pass the `.class` value of the Page class to the `WebCommander` and `WebInspector` instances that reside on the Page class. This results in logging and reporting output that shows events originating from the Page classes, adding better clarity to the reporting output. This is explained in more detail in the [Commands]() section.
 
 Finally, if the Page classes are becoming too cumbersome due to a complex UI, the Locators could be separated into a Map class, allowing for some division in the UI Modeling components. A test would call a Page class in order to perform actions against elements, and the Page class would call the Map class in order to retrieve the element mappings.
 
@@ -239,7 +239,7 @@ All `WebCommander` commands include an Explicit Wait during `WebElement` initial
 
 ## The WebInspector
 
-The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java) class works alongside the `WebCommander`. Instead of performing actions on UI elements, `WebInspector` work to extract and return data from UI elements. This includes retriving text or attribute values from elements, and discovering selected, enabled, or visible state of elements. The workflow for `WebInspector` methods is as follows:
+The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java) class works alongside the `WebCommander`. Instead of performing actions on UI elements, `WebInspector` work to extract and return data from UI elements. This includes retrieving text or attribute values from elements, and discovering selected, enabled, or visible state of elements. The workflow for `WebInspector` methods is as follows:
 
 1. Log the action taking place and the name of the target element.
 2. Initialize a `WebElement` using the provided `Locator` instance.
@@ -248,7 +248,7 @@ The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/
 5. If an exception is caught, capture a screenshot of the application under test.
 6. Re-throw the exception to stop execution of the test.
 
-All `WebInspector` commands that involve a single target element also include an Explicit Wait during `WebElement` initializationfor the visibility of the target element to be `true`. Commands that involve a `List<WebElement>` do not include an Explicit Wait.
+All `WebInspector` commands that involve a single target element also include an Explicit Wait during `WebElement` initialization for the visibility of the target element to be `true`. Commands that involve a `List<WebElement>` do not include an Explicit Wait.
 
 ## Constructors & Loggers
 
@@ -300,7 +300,7 @@ The [`Browser`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qa
 
 The pairing of [`Conditions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/conditions/Conditions.java) and [`Expectations`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/conditions/Expectations.java) becomes the core evaluative logic of Qadenz. These classes are used to determine if the state of the UI under test meets a given criteria.
 
-When used with the Explicit Wait provided by the `pause()` command, or with the Assertions provided by the `verify()` and `check()` commands, a Condition is used to describe precisely what on the UI is being evaluated, and the accompanying Expectation describes excatly the expected outcome of the evaluation.
+When used with the Explicit Wait provided by the `pause()` command, or with the Assertions provided by the `verify()` and `check()` commands, a Condition is used to describe precisely what on the UI is being evaluated, and the accompanying Expectation describes exactly the expected outcome of the evaluation.
 
 The goal of the Condition/Expectation pairing is to provide a unified structure for making evaluations throughout a testing project, rather than mixing Selenium `ExpectedConditions` calls for Explicit Waits, and various syntax patterns for test assertions. The resulting code is simple to read and quickly understand, and is easily maintained as the application under test evolves.
 
@@ -322,7 +322,7 @@ Qadenz is built with a versatile and easy to use approach to performing validati
 
 ## Why not Assertions?
 
-Unit testing frameworks such as TestNG or JUnit include assertion functionality as a core component, and are relatively simple to use. Being open-ended frameworks, however, indiviudal users may tend to express very similar validations in a variety of different assertions. This leads to inconsistent coding patterns, and more difficult maintenance of test code.
+Unit testing frameworks such as TestNG or JUnit include assertion functionality as a core component, and are relatively simple to use. Being open-ended frameworks, however, individual users may tend to express very similar validations in a variety of different assertions. This leads to inconsistent coding patterns, and more difficult maintenance of test code.
 
 Using `Conditions` and `Expectations` allows a team to ensure all contributors are following the same pattern for validations.
 
@@ -472,6 +472,3 @@ In another example, to run the same set of tests in three different browsers as 
     </test>
 </suite>
 ```
-
-
-
