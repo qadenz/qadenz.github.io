@@ -298,17 +298,15 @@ The concept of Hard Assertions and Soft Assertions are not new in the test autom
 
 `check()` represents a Soft Assertion. If the validation fails, the test will be marked as failed, but execution will be allowed to continue until a call to `Assertions.flush()` is made, which will stop execution of the test if any failures have been encountered.
 
-## Working with validations
-
 The `verify()` or `check()` methods are available on the Commands Hierarchy and are callable on any descendant class of `Commands`. The mechanics of using these validations are the same, with the only difference being an additional step with `check()` required to call `Assertions.flush()` in order to handle any failed Soft Assertions and stop execution.
 
-### Grouped Conditions
+## Grouped Conditions
 
 Validations in Qadenz are further enhanced with the ability to evaluate multiple Conditions as a group. In scenarios where a single UI action can trigger multiple verification points in a test, a tester may have to express multiple assert statements to ensure necessary coverage. If, for example, the first assertion were to fail, the remaining assertions would remain unchecked until either the UI under test is fixed, or the test scenario is executed manually. 
 
 Using Qadenz, a tester is able to execute these same validations in one call to `verify()` or `check()`, and will receive results for each Condition evaluation regardless of individual results. If again, the first validation fails, Qadenz will perform handling tasks on the failure, then proceed to evaluate each of the other Conditions that were passed. In the case of a `verify()` with multiple Conditions where one or more have failed, halting of test execution will be delayed until all Conditions have been evaluated, which will ensure that the test step is completed in its entirety. 
 
-### Managing soft assertions
+## Managing Soft Assertions
 
 The `check()` methods works alongside the static `Assertions.flush()` method to delay execution stoppages in the event of failed validations. As calls to `check()` are made and executed through the course of a test, the [`Assertions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Assertions.java) class tracks whether any failures have been encountered. When the call to `Assertions.flush()` is made, this tracker is checked. If any failures are present, execution will be stopped. If no failures are found, execution continues.
 
@@ -318,7 +316,7 @@ Please note, however, that at least one call to `Assertions.flush()` is required
 
 One additional design consideration must be made when mixing `verify()` and `check()` validations within the same test. When a `check()` validation is made, and is followed by a `verify()` validation prior to calling `Assertions.flush()`, if the `verify()` validation fails, the test will be stopped at the failed `verify()` validation.
 
-### Screenshots
+## Screenshots
 
 Qadenz validations are built to capture screenshots whenever a Condition evaluation fails. If screenshots are desired for validation failures, no special action need be taken. Should screenshots *not* be needed for a validation, disabling is easy with the overloaded `verify()` and `check()` methods.
 
