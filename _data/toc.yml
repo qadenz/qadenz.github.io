@@ -10,6 +10,13 @@
           url: "docs#objectives"
         - title: Opinionation
           url: "docs#opinionation"
+    - title: Execution Management
+      url: "docs#execution-management"
+      children:
+        - title: The Execution Cycle
+          url: "docs#the-execution-cycle"
+        - title: WebConfig
+          url: "docs#webconfig"
     - title: UI Modeling
       url: "docs#ui-modeling"
       children:
@@ -47,3 +54,8 @@
           url: "docs#managing-soft-assertions"
         - title: Screenshots
           url: "docs#screenshots"
+    - title: Configuring Qadenz
+      url: "docs#configuring-qadenz"
+      children:
+        - title: Suite XML Parameters
+          url: "docs#testng-suite-xml-parameters"
