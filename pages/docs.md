@@ -497,7 +497,7 @@ This example configures Chrome to run in headless mode.
         "args": [
             "--headless",
             "--window-size=1920,1080",
-            "--enable-gpu"
+            "--disable-gpu"
         ]
     }
 ]
