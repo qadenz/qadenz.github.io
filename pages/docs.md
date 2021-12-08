@@ -41,7 +41,7 @@ The `AutomatedWebTest` is the base class for all test classes in a Qadenz-powere
 
 While classes the hold `@Test` methods must inherit from this class, an intermediate class may be inserted into the inheritance hierarchy to allow for project-specific configurations to be performed during the setup or tear-down phases of the execution cycle. For example, a project may require that certain data items be in place as preconditions for tests, or other custom testing components would have to be started. These tasks would be well suited to be kept on a class that extends `AutomatedWebTest`, and is then extended by test classes.
 
-### The Execution Cycle
+## The Execution Cycle
 
 **Before the Suite Begins**
 
@@ -69,11 +69,19 @@ The final task of the execution cycle is to capture a second timestamp as the `s
 
 The default TestNG reporters are not disabled by default, so the standard HTML & XML reports will be generated, along with the `emailable-report.html`. Next, the `TestReporter` is invoked which generates the Qadenz Reports in JSON and HTML formats.
 
-### WebConfig
+## WebConfig
 
 `WebConfig` stores information that Qadenz uses at various points throughout the execution cycle. Primarily, these are the values given as parameters on the TestNG Suite XML file. While Qadenz calls these values during the setup and reporting phases they are made available on the chance these values are needed for any project-specific configuration.
 
 Since these fields are all static, there really is no need to extend this class. Teams are encouraged to follow this pattern, though, and create a ProjectConfig class of their own should the need arise to track specific values or project-specific Suite parameters are in play.
+
+## WebDriverProvider
+
+The `WebDriverProvider` stores the `WebDriver` instance and makes it available to components where it is needed. Since the test classes work on an inheritance hierarchy, and with how TestNG manages threads, the `WebDriver` instance is required to be kept on a `ThreadLocal<WebDriver>` object. Rather than forcing testers to pass the `WebDriver` around to various library components, Qadenz has chosen to make the `ThreadLocal` static, and allow components that need the `WebDriver` to call a centralized location. On the (hopefully) rare occurrence where the `WebDriver` is needed directly, it can be invoked with the following call.
+
+```
+WebDriver webDriver = WebDriverProvider.getWebDriver();
+```
 
 ## **UI Modeling**
 
@@ -101,7 +109,7 @@ Selenium does not readily provide a meaningful friendly reference to element nam
 
 By requiring a `name` value to be given in the `Locator` constructor, Qadenz refers to the context-friendly name of an element as the primary identifier in all logging and reporting output. This eliminates the time needed to perform any lookup or cross-referencing of selectors to elements in relation to test steps. By reviewing the default logging output or report content, the point at which a problem appears in a test is clearly marked and quickly identified.
 
-```JAVA
+```
 Locator signInButton = new Locator("Sign In Button", ".btn-signIn");
 ```
 
@@ -111,7 +119,7 @@ Using list of search results as an example, testers would be forced to create a 
 
 Using a parameterized Locator (coupled with the benefits of Sizzle CSS Selectors), testers will be able to define a single `Locator` instance for a generic search result, and rely upon the parameterization to direct the test to choose the appropriate element instance.
 
-```JAVA
+```
 public Locator searchResultLink(String name) {
     return new Locator(name + " Search Result Link", ".search-result:contains(" + name + ")");
 }
@@ -137,7 +145,7 @@ Consider an e-commerce application wherein a list of catalog items are presented
 
 As a very simple HTML representation:
 
-```HTML
+```
 <div id="item-list-section" class="grid">
     <div class="item-row even">
         <div class="item-card">
@@ -162,7 +170,7 @@ While mapping the other elements on an item card, however, it would be discovere
 
 With a parent `Locator` the resulting element mappings for the item card, 'Quantity' field, and 'Add to Cart' button could be:
 
-```JAVA
+```
 public Locator itemCard(String itemName) {
     return new Locator(itemName + " Item Card", "#item-list-section .item-card:contains(" + itemName + ")");
 }
@@ -184,7 +192,7 @@ The [`LocatorGroup`](https://github.com/qadenz/qadenz/blob/master/src/main/java/
 
 For example, a simple authentication form has several basic elements, the 'Username' field, the 'Password' field, a 'Remember Me' checkbox, and a 'Sign In' button. Each element would be mapped as an individual `Locator` instance for the purposes of input, but these same elements could also be included in a `LocatorGroup`, should the need arise to verify each element to be visible as part of the form.
 
-```JAVA
+```
 Locator usernameField = new Locator("Username Field", "#username");
 Locator passwordField = new Locator("Password Field", "#password");
 Locator rememberMeCheckbox = new Locator("Remember Me Checkbox", "#remember-me");
@@ -256,8 +264,7 @@ The `WebCommander` and `WebInspector` can be instantiated and used either from t
 
 The `WebCommander` constructor is used as an example, but the `WebInspector` shares this same pattern:
 
-```Java
-
+```
 private Logger LOG;
 
 public WebCommander() {
@@ -389,7 +396,7 @@ The Test-level parameters allow for configuration changes to take place during t
 
 In the below example, both `<test>` nodes will use the same set of parameter values:
 
-```XML
+```
 <suite name="Automated Tests" parallel="methods" thread-count="6">
     
     <parameter name="gridHost" value="10.1.10.10"/>
@@ -414,7 +421,7 @@ Parameters on TestNG Suite XML files obey scoping rules. That is to say, a param
 
 In this next example, the second `<test>` will override the `browser` parameter, while the others will use follow what is declared at the `<suite>`.
 
-```XML
+```
 <suite name="Automated Tests" parallel="methods" thread-count="6">
     
     <parameter name="gridHost" value="10.1.10.10"/>
@@ -444,7 +451,7 @@ In this next example, the second `<test>` will override the `browser` parameter,
 
 In another example, to run the same set of tests in three different browsers as part of the same execution, Test-level parameters can be used accordingly:
 
-```XML
+```
 <suite name="Automated Tests" parallel="methods" thread-count="6">
     
     <parameter name="gridHost" value="10.1.10.10"/>

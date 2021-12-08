@@ -17,6 +17,8 @@
           url: "docs#the-execution-cycle"
         - title: WebConfig
           url: "docs#webconfig"
+        - title: WebDriverProvider
+          url: "docs#webdriverprovider"
     - title: UI Modeling
       url: "docs#ui-modeling"
       children:
