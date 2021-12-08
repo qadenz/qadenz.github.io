@@ -59,7 +59,24 @@ The Test-level parameters allow for configuration changes to take place during t
 In the below example, both `<test>` nodes will use the same set of parameter values:
 
 ```XML
-two tests, all params at suite
+<suite name="Automated Tests" parallel="methods" thread-count="6">
+    
+    <parameter name="gridHost" value="10.1.10.10"/>
+    <parameter name="appUrl" value="http://qa.acmecorp.com"/>
+    <parameter name="browser" value="chrome"/>
+    
+    <test name="Authentication Tests">
+        <classes>
+            <class name="com.acme.test.cases.AuthenticationTest"/>        
+        </classes>
+    </test>
+    
+    <test name="Permissions Tests">
+        <classes>
+            <class name="com.acme.test.cases.PermissionsTest"/>        
+        </classes>
+    </test>
+</suite>
 ```
 
 Parameters on TestNG Suite XML files obey scoping rules. That is to say, a parameter declared within a `<test>` will take precedence over the same parameter as declared on the `<suite>`. 
@@ -67,13 +84,62 @@ Parameters on TestNG Suite XML files obey scoping rules. That is to say, a param
 In this next example, the second `<test>` will override the `browser` parameter, while the others will use follow what is declared at the `<suite>`.
 
 ```XML
-3 tests, second has browser
+<suite name="Automated Tests" parallel="methods" thread-count="6">
+    
+    <parameter name="gridHost" value="10.1.10.10"/>
+    <parameter name="appUrl" value="http://qa.acmecorp.com"/>
+    <parameter name="browser" value="chrome"/>
+    
+    <test name="Authentication Tests">
+        <classes>
+            <class name="com.acme.test.cases.AuthenticationTest"/>        
+        </classes>
+    </test>
+    
+    <test name="Permissions Tests">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.acme.test.cases.PermissionsTest">        
+        </classes>
+    </test>
+
+    <test name="Account Management Tests">
+        <classes>
+            <class name="com.acme.test.cases.AccountManagementTest">        
+        </classes>
+    </test>
+</suite>
 ```
 
 In another example, to run the same set of tests in three different browsers as part of the same execution, Test-level parameters can be used accordingly:
 
 ```XML
-three tests, different browser in each
+<suite name="Automated Tests" parallel="methods" thread-count="6">
+    
+    <parameter name="gridHost" value="10.1.10.10"/>
+    <parameter name="appUrl" value="http://qa.acmecorp.com"/>
+    
+    <test name="Authentication Tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.acme.test.cases.AuthenticationTest"/>        
+        </classes>
+    </test>
+    
+    <test name="Authentication Tests">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.acme.test.cases.AuthenticationTest"/>        
+        </classes>
+    </test>
+
+    <test name="Authentication Tests">
+        <parameter name="browser" value="edge"/>
+        <classes>
+            <class name="com.acme.test.cases.AuthenticationTest"/>        
+        </classes>
+    </test>
+</suite>
 ```
 
 ### AutomatedWebTest
