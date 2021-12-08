@@ -385,10 +385,11 @@ Primary suite configuration in Qadenz is made via parameters on the TestNG Suite
 - `applicationName`: This is an obscure item that can be enabled in the Capabilities configuration on Grid Nodes. This setting allows tests to be directed to specific Nodes on a Grid. This is an optional parameter on the Suite XML, and the Selenium Grid must be configured for this to function.
 - `browser`: Specifies which browser will run the test.
 - `browserVersion`: An optional parameter that allows a specific version of the browser to be used for the test.
+- `browserConfigProfile`: Provides arguments for the browser configuration. This is optional. If the parameter is not declared, or if the parameter value does not match an existing profile name, no arguments will be passed to the `WebDriver` for the execution cycle.
 - `platform`: Directs the tests to a Node running a given OS. This parameter is optional.
 - `timeout`: Sets the max allowable time for the Explicit Waits to run in Qadenz. This is an optional parameter, expressed in seconds. If this parameter is not given, a default of 30 seconds will be used.
 - `appUrl`: The full URL of the application under test.
-- `retryInterceptedClicks`: This works with the `click()` command. If a click throws an `ElementClickInterceptedException`, enabling this parameter will direct the `WebDriver` to retry the click using the `Actions` API. Do note, however, that this exception is typicaly a symptom of a selector issue. This parameter is optional, and defaults to enabled.
+- `retryInterceptedClicks`: This works with the `click()` command. If a click throws an `ElementClickInterceptedException`, enabling this parameter will direct the `WebDriver` to retry the click using the `Actions` API. Do note, however, that this exception is typically a symptom of a selector issue. This parameter is optional, and defaults to enabled.
 
 The `gridHost` and `applicationName` are Suite-level parameters, and are assigned only once during execution prior to any tests executing. The others are all Test-level parameters, and are assigned before each `<test>` node on the TestNG Suite XML file.
 
@@ -479,3 +480,27 @@ In another example, to run the same set of tests in three different browsers as 
     </test>
 </suite>
 ```
+
+## Browser Configuration Profiles
+
+In some cases, extra configuration arguments need to be passed to the browser Options instance for `WebDriver` configuration. A common case for this is instructing a browser to run in headless mode. Qadenz provides a simple means to set these configurations, and allows for multiple "profiles" of these configurations to be set on the TestNG Suite XML file. For example, if a tester wishes to run in headless mode on the Selenium Grid, but run in a native browser when executing locally, the switch is as simple as altering a parameter value.
+
+Configurations are stored in JSON files within the project's `resources` directory. To create a new configuration, within the `resources` directory, add a new folder called `config`, and create a new JSON file. This file must be named `{browser}-config.json`, where `{browser}` is the name of the browser being configured. A separate file must be created for each browser
+requiring configuration.
+
+This example configures Chrome to run in headless mode.
+
+```
+[
+    {
+        "profile": "headless",
+        "args": [
+            "--headless",
+            "--window-size=1920,1080",
+            "--enable-gpu"
+        ]
+    }
+]
+```
+
+The JSON format is an array of configuration objects. Each object holds `profile` and `args` fields. The `profile` field will be matched to the `browserConfigProfile` parameter on the Suite XML. The `args` is an array of individual arguments to be passed to the `WebDriver` configuration.
