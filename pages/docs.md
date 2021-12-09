@@ -45,7 +45,7 @@ While classes the hold `@Test` methods must inherit from this class, an intermed
 
 **Before the Suite Begins**
 
-The first task performed after launching a Suite execution is to capture a timestamp and save as the `suiteStartDate` value on the `WebConfig`. This will be used later by the reporter to calculate the duration of the execution. Next, the Suite-level parameters are retrieved from the `ITestContext`, which were specified by the user on the TestNG Suite XML file. The  `gridHost` and `applicationName` are validated and saved.
+The first task performed after launching a Suite execution is to capture a timestamp and save as the `suiteStartDate` value on the `WebConfig`. This will be used later by the reporter to calculate the duration of the execution. Next, the Suite-level parameters are retrieved from the `ITestContext`, which were specified by the user on the TestNG Suite XML file. The  `gridHost` is validated and saved.
 
 **Before Each Test**
 
@@ -382,7 +382,6 @@ A `boolean` could also be passed to achieve the same outcome. The `Screenshot.SK
 Primary suite configuration in Qadenz is made via parameters on the TestNG Suite XML file.
 
 - `gridHost`: Directs the tests to a Selenium Grid Hub. The expected value is simply the IP address of the Hub. The default port number (4444) is pre-configured.
-- `applicationName`: This is an obscure item that can be enabled in the Capabilities configuration on Grid Nodes. This setting allows tests to be directed to specific Nodes on a Grid. This is an optional parameter on the Suite XML, and the Selenium Grid must be configured for this to function.
 - `browser`: Specifies which browser will run the test.
 - `browserVersion`: An optional parameter that allows a specific version of the browser to be used for the test.
 - `browserConfigProfile`: Provides arguments for the browser configuration. This is optional. If the parameter is not declared, or if the parameter value does not match an existing profile name, no arguments will be passed to the `WebDriver` for the execution cycle.
@@ -391,7 +390,7 @@ Primary suite configuration in Qadenz is made via parameters on the TestNG Suite
 - `appUrl`: The full URL of the application under test.
 - `retryInterceptedClicks`: This works with the `click()` command. If a click throws an `ElementClickInterceptedException`, enabling this parameter will direct the `WebDriver` to retry the click using the `Actions` API. Do note, however, that this exception is typically a symptom of a selector issue. This parameter is optional, and defaults to enabled.
 
-The `gridHost` and `applicationName` are Suite-level parameters, and are assigned only once during execution prior to any tests executing. The others are all Test-level parameters, and are assigned before each `<test>` node on the TestNG Suite XML file.
+The `gridHost` is a Suite-level parameter, and is assigned only once during execution prior to any tests executing. The others are all Test-level parameters, and are assigned before each `<test>` node on the TestNG Suite XML file.
 
 The Test-level parameters allow for configuration changes to take place during the execution cycle. For example, if the goal of the suite is to run the same set of tests in multiple browsers, rather than create 3 different Suite XML files, 3 `<test>` nodes can be added to the same Suite XML file with different configurations.
 
