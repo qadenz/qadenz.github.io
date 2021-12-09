@@ -65,3 +65,10 @@
           url: "docs#browser-configuration-profiles"
         - title: Custom Visibility Checks
           url: "docs#custom-visibility-checks"
+    - title: Logging & Reporting
+      url: "docs#logging--reporting"
+      children:
+        - title: Console Logging
+          url: "docs#console-logging"
+        - title: The Qadenz HTML Reporter
+          url: "docs#the-qadenz-html-reporter"
