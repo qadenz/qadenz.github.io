@@ -536,3 +536,7 @@ Qadenz uses Logback to handle all logging within the library. These logs are pre
 ## Console Logging
 
 ## The Qadenz HTML Reporter
+
+## **Extending Qadenz
+
+## **Executing Tests**
