@@ -29,7 +29,7 @@ To this end, Qadenz targets a number of core objectives...
 
 Qadenz can be considered an opinionated library. Some features and solutions have been designed specifically to guide users into a particular pattern of usage based on certain best practices, or simply to speed up the development process for testers by choosing a particular path over another. While each is explained in greater detail elsewhere in the documentation, these points are the major areas of opinionation within the Qadenz library:
 
-- **The WebDriver is scoped to the test method:** By limiting the scope of the `WebDriver` session, Qadenz ensures that a fresh browser is used for each test case. This also has provided an avenue to more precisely define the execution workflow.
+- **The WebDriver is scoped to the test method:** By limiting the scope of the `WebDriver` session, Qadenz ensures that a fresh browser is used for each test case. This also has provided an avenue to tune the execution workflow.
 - **Explicit Waits over Implicit Waits:** Explicit Waits allow for precise conditions to be met within a given amount of time. Implicit waits are only time-based, and cause problems when used alongside Explicit Waits.
 - **Sizzle CSS Selectors only:** CSS Selectors are fast, extremely versatile, and resistant to DOM change. Adding Sizzle increases their versatility and adds a number of pseudo-classes that improve the ability to parameterize element selectors. This approach is a unified strategy that ensures all contributors to a test project are following the same pattern, which further enhances the ease of code maintenance.
 - **Conditions-powered validations and Explicit Waits:** The `Conditions` and `Expectations` consist of precise and clearly defined evaluations. These provide a unified alternative to both sorting through the variety of assertion types or `ExpectedConditions` for Explicit Waits. Additionally, these classes ensure consistent and detailed information are passed to the logs and report output.
@@ -524,3 +524,15 @@ In the above example, for any element where the `class` attribute contains `hidd
 The JSON format is an array of configuration objects that hold an `attribute` and `value` fields. 
 
 It is important to note that the `getVisibilityOfElement()` inspection presumes the element to be visible, and runs this series of checks until one check indicates that the element is not visible. With that in mind, the only items that should be added to this JSON configuration should items that define invisible or hidden elements.
+
+## **Logging & Reporting**
+
+Logs tell a very important story during the lifecycle of any software application, and a testing library is no different. In fact, it could easily be argued that logging in a testing context is doubly important in order to capture all the details of what happened during the execution cycle. It's the step by step details that tell us what a test was doing when something goes wrong, which in turn helps us testers to more quickly understand and recreate these failure scenarios so that system defects can be reported earlier in the testing cycle.
+
+Qadenz uses two primary loggers to tell the story of an execution run. The Suite Logger monitors major activity with the execution run itself and captures events outside of the tests themselves. This includes setup and tear-down activities, configuration details, the starting and stopping of tests, and errors that are encountered during the reporting phase. The Test Logger captures the step by step details of each test that runs as part of a Suite. This includes every action, inspection, validation, and any errors that are encountered along the way.
+
+Qadenz uses Logback to handle all logging within the library. These logs are presented on the console during a Suite execution, and are also used to generate content for the Qadenz HTML Reporter.
+
+## Console Logging
+
+## The Qadenz HTML Reporter
