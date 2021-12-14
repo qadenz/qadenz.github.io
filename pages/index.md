@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Qadenz.io - Test Automation with Qadenz
+title: Qadenz.dev - Test Automation with Qadenz
 permalink: /
 ---
 
