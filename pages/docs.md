@@ -186,6 +186,63 @@ In the above example, the `itemCard()` Locator could have the added benefit of n
 
 Parent Locators are also not limited to a single layer. Locators can be passed as parent references as many times as needed.
 
+## Definable Element State Attributes
+
+There are some cases where the UI under test experiences conditions where traditional element state inspections are unreliable due to styling, DOM structure, unconventional UI development, or perhaps the UI framework in use. This can sometimes produce incorrect results on inspections like visibility, selected, or enabled states. To mitigate this issue, the `Locator` holds three additional fields to assist evaluating these element states.
+
+These fields are available as setter methods on the `Locator` class, and each will define an HTML attribute and expected value that will be added to the corresponding element inspection methods on `WebInspector`. Each of these methods are overloaded to allow a tester to define either an attribute/value combo, or just an attribute name in the case of empty or boolean attributes.
+
+When a `WebInspector` method that supports custom attribute checks runs, the attribute check will be appended to any default checks made to determine the given state of an element.
+
+**Disabled Elements**
+
+The `getEnabledStateOfElement()` method checks `<input>` to determine whether the element is enabled for user input. This method presumes the element to be enabled, and performs each check in an attempt to prove the element is disabled.
+
+To specify a custom attribute that determines the element as disabled, the `setDisabledByAttribute()` method on the `Locator` must be called.
+
+Consider an example where a form is present on the UI that contains a checkbox that is only enabled for input under specific conditions. The form UI is heavily stylized, and the UI developer has chosen to create checkboxes using CSS, with no underlying `<input>` element. The tester has identified the CSS class that renders the checkbox inoperable, and will configure the `Locator` to provide this information to `WebInspector` to yield accurate inspections.
+
+```
+Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
+        .setDisabledByAttribute("class", "checkbox-disabled");
+```
+
+**Hidden Elements**
+
+The `getVisibilityOfElement()` method checks for elements that match the provided selector, dimensions of the element, and standard W3C defined means of rendering elements invisible. This method presumes the element to be visible, and performs each of the checks to attempt to prove the element is in fact hidden until a check proves the element hidden (and returns a result accordingly), or no additional checks can be made (in which case the element is determined to indeed be visible). 
+
+To specify a custom attribute that defines the element as hidden, the `setHiddenByAttribute()` method must be called. 
+
+Consider an example of a "Confirm" button that is present on a form page, but is hidden from view until the form input has been completed by the user. Unfortunately, the UI developers have taken an unconventional approach to hiding this element, and normal visibility inspections are determining the element is visible. The tester has identified the CSS class that hides the element, and is able to pass this information to the `WebInspector` for a more accurate result.
+
+```
+Locator confirmButton = new Locator("Confirm Button", ".customButton-confirm")
+        .setHiddenByAttribute("class", "invisible");
+```
+
+**Selected Elements**
+
+The `getSelectedStateOfElement()` method checks element such as checkboxes, options in a `<select>` menu, and radio buttons to determine whether the element is selected. This method presumes the element to be unselected and performs each check in an attempt to prove the element to be selected.
+
+To specify a custom attribute that defines the element as selected, the `setSelectedByAttribute()` method must be called.
+
+Revisiting the example above for the disabled checkbox, the UI developer has also created an animated interaction when the checkbox is selected. The tester has identified the resulting CSS class responsible for rendering the checkbox as checked, and will configure the `Locator` as required.
+
+```
+Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
+        .setSelectedByAttribute("class", "checkbox-checked");
+```
+
+**Fluent Design**
+
+The setters on the `Locator` for each of the element state attributes all return a self-reference. This allows the setter calls to be chained together. In the examples above where the "I Agree" checkbox has both disabled-by and selected-by attributes defined, the `Locator` can be instantiated and both configurations can be made in one chained method call.
+
+```
+Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
+        .setDisabledByAttribute("class", "checkbox-disabled")
+        .setSelectedByAttribute("class", "checkbox-checked");
+```
+
 ## The LocatorGroup
 
 The [`LocatorGroup`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/LocatorGroup.java) allows multiple `Locator` instances to be combined together on a `List`, and acted upon as a group. This is commonly applied to verify the visibility of UI component, or a set of default UI elements. Instead of passing multiple individual Conditions to a `.verify()` or `.check()` validation, a `LocatorGroup` can be verified with a single `Condition` call.

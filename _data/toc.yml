@@ -28,6 +28,8 @@
           url: "docs#the-locator"
         - title: Using Locators
           url: "docs#using-locators"
+        - title: Definable Element State Attributes
+          url: "docs#definable-element-state-attributes"
         - title: The LocatorGroup
           url: "docs#the-locatorgroup"
         - title: Page Objects
