@@ -613,7 +613,7 @@ By limiting the "Failed" category to validation failures, this allows teams to f
 
 The Qadenz HTML report is completely inclusive of all detailed reporting content and screenshots. The ease of distribution is the same as the TestNG emailable report.
 
-Screenshots in the Qadenz library are captured and immediately encoded to a Base64 String. This allows the images to be embedded directly into the report and to be shared without having to work with cumbersome zip files or deal with broken image links. 
+Screenshots in the Qadenz library are captured and immediately encoded to a Base64 String, which is then added to the report. This allows the images to be embedded directly into the report and to be shared without having to work with cumbersome zip files or deal with broken image links. 
 
 ## **Extending Qadenz**
 
