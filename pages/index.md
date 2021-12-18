@@ -29,9 +29,9 @@ Getting started with Qadenz is as simple as importing the dependency from Maven.
 
 ```xml
 <dependency>
-    <groupId>io.qadenz</groupId>
+    <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.0-BETA-2</version>
+    <version>1.0.0-BETA-3</version>
 </dependency>
 ```
 
