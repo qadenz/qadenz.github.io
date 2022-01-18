@@ -21,7 +21,7 @@ Qadenz is also extensible and stands ready to support custom functionality based
 
 # License
 
-The Qadenz Library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available" library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz) as a product for their customers. Please see the FAQ for more detail on licensing.
+The Qadenz Library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available" library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz) as a product for their customers. 
 
 # Getting Started
 
@@ -38,5 +38,9 @@ Getting started with Qadenz is as simple as importing the dependency from Maven.
 The code is also available at [GitHub](https://github.com/qadenz/qadenz).
 
 This documentation on this site covers the general approach to automated test design from Qadenz, the major components and how they can be implemented, how test suites can be executed and results can be reviewed and shared.
+
+# BETA
+
+Qadenz is currently in Beta. All current known issues are availble on [GitHub](https://github.com/qadenz/qadenz/issues). Generally speaking, unless any severe issues are currently open, the code can be considered stable. Additionally, the documentation contained on this site remains "in progress" throughout the Beta cycle. While the available documentation is accurate for the latest version, code examples, other visual aids, and coverage in some remaining areas is still ongoing.
 
 Happy automating :)
