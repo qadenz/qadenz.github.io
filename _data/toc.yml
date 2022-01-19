@@ -1,15 +1,17 @@
 - title: Home
   url: index
+- title: Qadenz Documentation
+  url: "docs/philosophy-of-use"
 - title: Qadenz Docs
   url: "docs"
   links:
     - title: Philosophy of Use
-      url: "docs#philosophy-of-use"
-      children:
-        - title: Objectives
-          url: "docs#objectives"
-        - title: Opinionation
-          url: "docs#opinionation"
+      url: "docs/philosophy-of-use"
+      #children:
+        #- title: Objectives
+          #url: "docs#objectives"
+        #- title: Opinionation
+          #url: "docs#opinionation"
     - title: Execution Management
       url: "docs#execution-management"
       children:
