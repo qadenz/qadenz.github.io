@@ -51,15 +51,15 @@
       url: "docs/conditions-and-expectations"
     - title: Validations
       url: "docs/validations"
-      children:
-        - title: Why Not Assertions?
-          url: "docs#why-not-assertions"
-        - title: Grouped Conditions
-          url: "docs#grouped-conditions"
-        - title: Managing Soft Assertions
-          url: "docs#managing-soft-assertions"
-        - title: Screenshots
-          url: "docs#screenshots"
+      #children:
+        #- title: Why Not Assertions?
+          #url: "docs#why-not-assertions"
+        #- title: Grouped Conditions
+          #url: "docs#grouped-conditions"
+        #- title: Managing Soft Assertions
+          #url: "docs#managing-soft-assertions"
+        #- title: Screenshots
+          #url: "docs#screenshots"
     - title: Configuring Qadenz
       url: "docs#configuring-qadenz"
       children:
