@@ -1,7 +1,5 @@
 - title: Home
   url: index
-- title: Qadenz Documentation
-  url: "docs/philosophy-of-use"
 - title: Qadenz Docs
   url: "docs"
   links:
