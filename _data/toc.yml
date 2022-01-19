@@ -68,15 +68,15 @@
         #- title: Browser Config Profiles
           #url: "docs#browser-configuration-profiles"
     - title: Logging & Reporting
-      url: "docs#logging--reporting"
-      children:
-        - title: Console Logging
-          url: "docs#console-logging"
-        - title: The Qadenz HTML Reporter
-          url: "docs#the-qadenz-html-reporter"
-    - title: Extending Qadenz
-      url: "docs#extending-qadenz"
-    - title: Executing Tests
-      url: "docs#executing-tests"
+      url: "docs/logging-and-reporting"
+      #children:
+        #- title: Console Logging
+          #url: "docs#console-logging"
+        #- title: The Qadenz HTML Reporter
+          #url: "docs#the-qadenz-html-reporter"
+    #- title: Extending Qadenz
+      #url: "docs#extending-qadenz"
+    #- title: Executing Tests
+      #url: "docs#executing-tests"
 - title: FAQ
   url: faq
