@@ -6,9 +6,9 @@ description: Understanding Qadenz
 
 ## **Philosophy of Use**
 
-The role in a test automation project of an intermediate API that wraps frameworks such as Selenium and TestNG is far from uncommon. Many teams realize the importance of an API layer for these underlying tools as a means of simply abstracting common code and building re-usable components for frequently utilized features of the base frameworks. Some teams will take this a step further and design a wrapper layer that works to unify the development approach and adopted design patterns within the test project, thus answering the question "What is the best way for **our team** to implement these tools?".
+The role in a test automation project of an intermediate API that wraps frameworks such as Selenium and TestNG is far from uncommon. Many teams realize the importance of an API layer for these underlying tools as a means of simply abstracting common code and building re-usable components for frequently utilized features of the base frameworks. Some teams will take this a step further and design a wrapper layer that works to unify the development approach and adopted design patterns within the test project, thus answering the question "What is the best way for **our team** to implement these tools?"
 
-It's certainly not uncommon for teams to implement such a solution. We as testers frequently find ourselves in fast-paced and ever-evolving environments. Designing, building, and importantly, maintaining an API such as this can be as significant an effort as keeping up with the demands for expanding test coverage. 
+Unfortunately, we as testers frequently find ourselves in fast-paced and ever-evolving environments. Designing, building, and importantly, maintaining an API such as this can be as significant an effort as keeping up with the demands for expanding test coverage. 
 
 ## Objectives
 
