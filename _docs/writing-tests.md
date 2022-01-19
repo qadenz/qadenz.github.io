@@ -13,3 +13,5 @@ description: WRiting Tests with Qadenz
 - TestNG functionality is available with things like Groups, Data Providers and Factory classes (examples)
 
 - Test dependencies are not recommended for @Test methods.
+
+- Remove any overlap from Execution Management. In fact, rename Execution Management completely.
