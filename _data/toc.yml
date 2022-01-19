@@ -48,9 +48,9 @@
         #- title: Browser Commands
           #url: "docs#browser-commands"
     - title: Conditions & Expectations
-      url: "docs#conditions--expectations"
+      url: "docs/conditions-and-expectations"
     - title: Validations
-      url: "docs#validations"
+      url: "docs/validations"
       children:
         - title: Why Not Assertions?
           url: "docs#why-not-assertions"

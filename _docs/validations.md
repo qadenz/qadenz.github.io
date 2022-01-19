@@ -4,13 +4,13 @@ tags:
 description: Making assertions with Conditions and Expectations
 --- 
 
-# Test Validations
+## **Validations**
 
 Qadenz is built with a versatile and easy to use approach to performing validations against the UI under test. The key component of this approach is the inclusion of `Conditions` and `Expectations` (explained [here]({{ site.baseurl }}{% link _docs/conditions-and-expectations.md %})) as evaluation criteria for validations. These classes combine Selenium `WebElement` inspections to retrieve the 'actual' state of the UI, with Hamcrest Matchers to provide the 'expected' state, to return a result that represents a passing or failing outcome.
 
-# Why not Assertions?
+## Why not Assertions?
 
-Unit testing frameworks such as TestNG or JUnit include assertion functionality as a core component, and are relatively simple to use. Being open-ended frameworks, however, indiviudal users may tend to express very similar validations in a variety of different assertions. This leads to inconsistent coding patterns, and more difficult maintenance of test code.
+Unit testing frameworks such as TestNG or JUnit include assertion functionality as a core component, and are relatively simple to use. Being open-ended frameworks, however, individual users may tend to express very similar validations in a variety of different assertions. This leads to inconsistent coding patterns, and more difficult maintenance of test code.
 
 Using `Conditions` and `Expectations` allows a team to ensure all contributors are following the same pattern for validations.
 
@@ -18,15 +18,13 @@ That said, Qadenz does employ a single TestNG assertion, the `assertTrue()` meth
 
 By passing this result to the `assertTrue()` method, Qadenz is ensuring that a passing result depends on the Condition evaluation meeting the Expectation. If not, the validation will fail.
 
-# Assertion Types
+## Assertion Types
 
 The concept of Hard Assertions and Soft Assertions are not new in the test automation world. Qadenz implements both concepts by way of the `verify()` and `check()` methods.
 
 `verify()` represents a Hard Assertion. If the validation fails, the test will be marked as failed and execution will be stopped.
 
 `check()` represents a Soft Assertion. If the validation fails, the test will be marked as failed, but execution will be allowed to continue until a call to `Assertions.flush()` is made, which will stop execution of the test if any failures have been encountered.
-
-# Working with validations
 
 The `verify()` or `check()` methods are available on the Commands Hierarchy and are callable on any descendant class of `Commands`. The mechanics of using these validations are the same, with the only difference being an additional step with `check()` required to call `Assertions.flush()` in order to handle any failed Soft Assertions and stop execution.
 
@@ -36,7 +34,7 @@ Validations in Qadenz are further enhanced with the ability to evaluate multiple
 
 Using Qadenz, a tester is able to execute these same validations in one call to `verify()` or `check()`, and will receive results for each Condition evaluation regardless of individual results. If again, the first validation fails, Qadenz will perform handling tasks on the failure, then proceed to evaluate each of the other Conditions that were passed. In the case of a `verify()` with multiple Conditions where one or more have failed, halting of test execution will be delayed until all Conditions have been evaluated, which will ensure that the test step is completed in its entirety. 
 
-## Managing soft assertions
+## Managing Soft Assertions
 
 The `check()` methods works alongside the static `Assertions.flush()` method to delay execution stoppages in the event of failed validations. As calls to `check()` are made and executed through the course of a test, the [`Assertions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Assertions.java) class tracks whether any failures have been encountered. When the call to `Assertions.flush()` is made, this tracker is checked. If any failures are present, execution will be stopped. If no failures are found, execution continues.
 
