@@ -14,19 +14,19 @@ The UI Modeling strategy behind Qadenz centers around the [`Locator`](https://gi
 
 ## Why only CSS Selectors?
 
-Many teams will choose either a default standard selector strategy (ID, CSS, XPath, etc.), or at least prioritize one over others. Qadenz has chosen CSS selectors for the superior performance, ease of use, and better browser compatibility when compared to XPath. The addition of the [SizzleJS](https://github.com/jquery/sizzle) library provides a number of pseudo-classes that make element selection more flexible and accurate.
+Many teams will choose either a default standard selector strategy (ID, CSS, XPath, etc.), or at least set an order of prioritization for the varying types. Qadenz has chosen CSS selectors for the superior performance, ease of use, and better browser compatibility when compared to XPath. The addition of the [SizzleJS](https://github.com/jquery/sizzle) library provides a number of pseudo-classes that make element selection more flexible and accurate.
 
 The end result is a powerful and straightforward selector strategy that supports full parameterization capabilities. This also leads to a singular defined approach that an entire team can adopt and consistently apply across the entire project.
 
 ## The Locator
 
-The [`Locator`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/Locator.java) is the primary component of UI Modeling in the Qadenz environment. This object simply carries the name of an element, the element's CSS Selectors, and an optional parent Locator instance to assist with abstracting element relationships and re-using selector content. The `Locator` is passed to methods on classes such as the [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebCommander.java) and [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java), which will then use the data within to initialize WebElements with the [`WebFinder`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/WebFinder.java).
+The [`Locator`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/Locator.java) is the primary component of UI Modeling in the Qadenz environment. This object simply carries the name of an element, the element's CSS Selector, and an optional parent Locator instance to assist with abstracting element relationships and re-using selector content. The `Locator` is passed to methods on classes such as the [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebCommander.java) and [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/WebInspector.java), which will then use the data within to initialize WebElements with the [`WebFinder`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/ui/WebFinder.java).
 
 The `Locator` provides several major advantages over the `@FindBy` and `PageFactory`. 
 
 ### Context-friendly Element Names
 
-Selenium does not readily provide a meaningful friendly reference to element names, which can complicate debugging and troubleshooting when problems arise. Without additional logging in the test project, testers are generally only provided references to elements expressed as the given selectors. This has a very strong potential to slow down the resolution process as testers must first translate the selector in their stack trace to an actual element on the UI, which can then establish a point of orientation within the progression of test steps.
+Selenium does not readily (nor should it, being simply the tool that automates browsers) provide a meaningful context-friendly reference to element names, which can complicate debugging and troubleshooting when problems arise. Without additional logging in the test project, testers are generally only provided references to elements expressed as the given selectors. This has a very strong potential to slow down the resolution process as testers must first translate the selector in their stack trace to an actual element on the UI, which can then establish a point of orientation within the progression of test steps.
 
 By requiring a `name` value to be given in the `Locator` constructor, Qadenz refers to the context-friendly name of an element as the primary identifier in all logging and reporting output. This eliminates the time needed to perform any lookup or cross-referencing of selectors to elements in relation to test steps. By reviewing the default logging output or report content, the point at which a problem appears in a test is clearly marked and quickly identified.
 
@@ -46,6 +46,8 @@ public Locator searchResultLink(String name) {
 }
 ```
 
+In this example, we also have a benefit of passing the parameter to the `name` field on the Locator, which increases clarity in the logs and reports by providing the exact instance of the element against which the interaction takes place.
+
 ### On-the-fly Element Initialization
 
 Using `PageFactory.initElements()` will instantiate the page class, and all `WebElement` instances annotated with `@FindBy` will be initialized. If the page on the UI is static and all mapped elements are already present, there should be no issues. Modern web-apps, though, use very dynamic interfaces. This frequently results in situations where some `@FindBy` mapped elements will change state at some point between the time `.initElements()` is called and when the element is actually used. To mitigate these issues, additional code in the form of Explicit Waits or other custom logic must be written to handle each element. 
@@ -54,9 +56,7 @@ With Qadenz, Locators are defined and passed to commands methods, which in turn 
 
 ## Using Locators
 
-### Standard Locators
-
-A `Locator` holds two required values, `name` and `selector`. The `name` field is completely user-definable, but is recommended to at least convey some level of meaningful context to the element being mapped. This value will appear in the logs, on the final report output, as well as within any error handling. 
+A simple standard `Locator` can be defined by providing a friendly name and a valid CSS Selector to the constructor. A number of optional methods are available, however, to enhance both the convenience and capability of a Locator. These include abstracting selector segments, and additional configuration values that will aid any determinations that are made of various states of the element.
 
 ### Parent Locators
 
