@@ -22,20 +22,20 @@
         #- title: WebDriverProvider
           #url: "docs#webdriverprovider"
     - title: UI Modeling
-      url: "docs#ui-modeling"
-      children:
-        - title: Why only CSS Selectors?
-          url: "docs#why-only-css-selectors"
-        - title: The Locator
-          url: "docs#the-locator"
-        - title: Using Locators
-          url: "docs#using-locators"
-        - title: Definable Element State Attributes
-          url: "docs#definable-element-state-attributes"
-        - title: The LocatorGroup
-          url: "docs#the-locatorgroup"
-        - title: Page Objects
-          url: "docs#page-objects"
+      url: "docs/ui-modeling"
+      #children:
+        #- title: Why only CSS Selectors?
+          #url: "docs#why-only-css-selectors"
+        #- title: The Locator
+          #url: "docs#the-locator"
+        #- title: Using Locators
+          #url: "docs#using-locators"
+        #- title: Definable Element State Attributes
+          #url: "docs#definable-element-state-attributes"
+        #- title: The LocatorGroup
+          #url: "docs#the-locatorgroup"
+        #- title: Page Objects
+          #url: "docs#page-objects"
     - title: Commands
       url: "docs#commands"
       children:
