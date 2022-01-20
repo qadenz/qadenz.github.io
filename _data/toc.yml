@@ -12,6 +12,8 @@
           #url: "docs#opinionation"
     - title: Configuration Overview
       url: "docs/configuration-overview"
+    - title: Commands Overview
+      url: "docs/commands-overview"
     - title: Writing Tests
       url: "docs/writing-tests"
     - title: Execution Management
