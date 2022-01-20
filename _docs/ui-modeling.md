@@ -109,7 +109,7 @@ Parent Locators are also not limited to a single layer. Locators can be passed a
 
 ## Definable Element State Attributes
 
-There are some cases where the UI under test experiences conditions where traditional element state inspections are unreliable due to styling, DOM structure, unconventional UI development, or perhaps the UI framework in use. This can sometimes produce incorrect results on inspections like visibility, selected, or enabled states. To mitigate this issue, the `Locator` holds three additional fields to assist evaluating these element states.
+There are some cases where the UI under test experiences conditions where traditional element state inspections are unreliable due to styling, DOM structure, UI framework in use, or perhaps even unconventional UI development. This can sometimes produce incorrect results on inspections like visibility, selected, or enabled states. To mitigate this issue, the `Locator` allows three additional fields to be set to assist evaluating these element states.
 
 These fields are available as setter methods on the `Locator` class, and each will define an HTML attribute and expected value that will be added to the corresponding element inspection methods on `WebInspector`. Each of these methods are overloaded to allow a tester to define either an attribute/value combo, or just an attribute name in the case of empty or boolean attributes.
 
