@@ -10,6 +10,8 @@
           #url: "docs#objectives"
         #- title: Opinionation
           #url: "docs#opinionation"
+    - title: Component Overview
+      url: "docs/component-overview"
     - title: Writing Tests
       url: "docs/writing-tests"
     - title: Execution Management
