@@ -1,12 +1,8 @@
 ---
-title: Component Overview
+title: Configuration Overview
 tags: 
-description: Understanding the major components of the Qadenz library
+description: Understanding the default suite configuration of Qadenz.
 --- 
-
-# Qadenz Components
-
-This is an overview of the primary components that user will encounter while automating tests with Qadenz. These components will be referenced freqently throughout the documentation.
 
 ## Configuration Components
 
