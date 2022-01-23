@@ -22,8 +22,8 @@ The [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/q
 2. Initialize a `WebElement` using the provided `Locator` instance.
 3. Perform the `WebElement` or `Actions` command.
 4. Catch and log any exceptions that are thrown.
-5. If an exception is caught, capture a screenshot of the application under test.
-6. Re-throw the exception to stop execution of the test.
+5. If an exception is caught, capture a screenshot of the UI under test.
+6. Throw the exception to stop execution of the test.
 
 All `WebCommander` commands include an Explicit Wait during `WebElement` initialization. Commands that involve a Click action include a wait for the clickability of the target element. All other commands include a wait for the visibility of the target element to be `true`.
 
@@ -35,8 +35,8 @@ The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/
 2. Initialize a `WebElement` using the provided `Locator` instance.
 3. Retrieve the required information from the `WebElement`.
 4. Catch and log any exceptions that are thrown.
-5. If an exception is caught, capture a screenshot of the application under test.
-6. Re-throw the exception to stop execution of the test.
+5. If an exception is caught, capture a screenshot of the UI under test.
+6. Throw the exception to stop execution of the test.
 
 All `WebInspector` commands that involve a single target element also include an Explicit Wait during `WebElement` initialization for the visibility of the target element to be `true`. Commands that involve a `List<WebElement>` do not include an Explicit Wait.
 
