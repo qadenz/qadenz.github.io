@@ -12,6 +12,19 @@
           #url: "docs#opinionation"
     - title: Component Overview
       url: "docs/component-overview"
+      children:
+        - title: AutomatedWebTest
+          url: "docs/component-overview#automatedwebtest"
+        - title: WebConfig
+          url: "docs/component-overview#webconfig"
+        - title: WebDriverProvider
+          url: "docs/component-overview#webdriverprovider"
+        - title: Commands
+          url: "docs/component-overview#commands"
+        - title: WebCommander
+          url: "docs/component-overview#the-webcommander"
+        - title: WebInspector
+          url: "docs/component-overview#the-webinspector"
     - title: Writing Tests
       url: "docs/writing-tests"
     - title: Execution Management
@@ -49,8 +62,8 @@
           #url: "docs#constructors--loggers"
         #- title: Browser Commands
           #url: "docs#browser-commands"
-    - title: Conditions & Expectations
-      url: "docs/conditions-and-expectations"
+    #- title: Conditions & Expectations
+      #url: "docs/conditions-and-expectations"
     - title: Validations
       url: "docs/validations"
       #children:

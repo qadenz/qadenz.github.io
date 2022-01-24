@@ -6,7 +6,7 @@ description: Making assertions with Conditions and Expectations
 
 ## **Validations**
 
-Qadenz is built with a versatile and easy to use approach to performing validations against the UI under test. The key component of this approach is the inclusion of `Conditions` and `Expectations` (explained [here]({{ site.baseurl }}{% link _docs/conditions-and-expectations.md %})) as evaluation criteria for validations. These classes combine Selenium `WebElement` inspections to retrieve the 'actual' state of the UI, with Hamcrest Matchers to provide the 'expected' state, to return a result that represents a passing or failing outcome.
+Qadenz is built with a versatile and easy to use approach to performing validations against the UI under test. The key component of this approach is the inclusion of `Conditions` and `Expectations` as evaluation criteria for validations. These classes combine Selenium `WebElement` inspections to retrieve the 'actual' state of the UI, with Hamcrest Matchers to provide the 'expected' state, to return a result that represents a passing or failing outcome.
 
 ## Why not Assertions?
 
