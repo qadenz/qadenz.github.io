@@ -32,6 +32,6 @@ Qadenz can be considered an opinionated library. Some features and solutions hav
 
 ## A Turn-Key Solution
 
-In the end, development efficiency and code maintainability are the major factor for automation teams. How quickly can we automate this next block of tests? Is the tooling reliable enough to ensure repeatable executions? Are the implementation details tribal knowledge, or is the code clear enough that a new developer can easily and quickly ramp up for maintenance? If the answers to these questions leads to increased efficiency and improved maintainability, then the investment in these tools becomes quite worthwhile.
+In the end, development efficiency and code maintainability are major success factors for automation teams. How quickly can we automate this next block of tests? Is the tooling reliable enough to ensure repeatable executions? Are the implementation details tribal knowledge, or is the code clear enough that a new developer can easily and quickly ramp up for maintenance? If the answers to these questions leads to increased efficiency and improved maintainability, then the investment in these tools becomes quite worthwhile.
 
 Qadenz is built to satisfy the need for such tool-set, and allow testers to focus on the more important task... build tests quickly.
