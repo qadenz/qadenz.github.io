@@ -31,32 +31,13 @@
       url: "docs/writing-tests"
     - title: UI Modeling
       url: "docs/ui-modeling"
-      #children:
-        #- title: Why only CSS Selectors?
-          #url: "docs#why-only-css-selectors"
-        #- title: The Locator
-          #url: "docs#the-locator"
-        #- title: Using Locators
-          #url: "docs#using-locators"
-        #- title: Definable Element State Attributes
-          #url: "docs#definable-element-state-attributes"
-        #- title: The LocatorGroup
-          #url: "docs#the-locatorgroup"
-        #- title: Page Objects
-          #url: "docs#page-objects"
-    - title: Commands
-      url: "docs/commands"
-      #children:
-        #- title: The WebCommander
-          #url: "docs#the-webcommander"
-        #- title: The WebInspector
-          #url: "docs#the-webinspector"
-        #- title: Constructors & Loggers
-          #url: "docs#constructors--loggers"
-        #- title: Browser Commands
-          #url: "docs#browser-commands"
-    #- title: Conditions & Expectations
-      #url: "docs/conditions-and-expectations"
+      children:
+        - title: The Locator
+          url: "docs/ui-modeling#the-locator"
+        - title: The LocatorGroup
+          url: "docs/ui-modeling#the-locatorgroup"
+        - title: Page Objects
+          url: "docs/ui-modeling#page-objects"
     - title: Validations
       url: "docs/validations"
       #children:

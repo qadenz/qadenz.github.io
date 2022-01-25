@@ -4,7 +4,7 @@ tags:
 description: Modeling the UI Under Test
 --- 
 
-## **UI Modeling**
+# UI Modeling
 
 Qadenz is a departure from the commonly practiced use of the Selenium Page Factory pattern when implementing the Page Object Model. The `@FindBy` annotation-based approach to mapping UI elements lacks the ability to parameterize selectors. Instead, testers are forced to create repetitive annotated `WebElement` instances for every needed permutation of a selector. Without adding additional calls to `WebDriverWait` in order to use an Explicit Wait to initialize the element (and dealing with the resulting added clutter), these selectors are notoriously susceptible to the dreaded `StaleElementReferenceException`.
 
@@ -115,7 +115,7 @@ These fields are available as setter methods on the `Locator` class, and each wi
 
 When a `WebInspector` method that supports custom attribute checks runs, the attribute check will be appended to any default checks made to determine the given state of an element.
 
-**Disabled Elements**
+### Disabled Elements
 
 The `getEnabledStateOfElement()` method checks `<input>` to determine whether the element is enabled for user input. This method presumes the element to be enabled, and performs each check in an attempt to prove the element is disabled.
 
@@ -128,7 +128,7 @@ Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
         .setDisabledByAttribute("class", "checkbox-disabled");
 ```
 
-**Hidden Elements**
+### Hidden Elements
 
 The `getVisibilityOfElement()` method checks for elements that match the provided selector, dimensions of the element, and standard W3C defined means of rendering elements invisible. This method presumes the element to be visible, and performs each of the checks to attempt to prove the element is in fact hidden until a check proves the element hidden (and returns a result accordingly), or no additional checks can be made (in which case the element is determined to indeed be visible). 
 
@@ -141,7 +141,7 @@ Locator confirmButton = new Locator("Confirm Button", ".customButton-confirm")
         .setHiddenByAttribute("class", "invisible");
 ```
 
-**Selected Elements**
+### Selected Elements
 
 The `getSelectedStateOfElement()` method checks element such as checkboxes, options in a `<select>` menu, and radio buttons to determine whether the element is selected. This method presumes the element to be unselected and performs each check in an attempt to prove the element to be selected.
 
@@ -154,7 +154,7 @@ Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
         .setSelectedByAttribute("class", "checkbox-checked");
 ```
 
-**Fluent Design**
+### Fluent Design
 
 The setters on the `Locator` for each of the element state attributes all return a self-reference. This allows the setter calls to be chained together. In the examples above where the "I Agree" checkbox has both disabled-by and selected-by attributes defined, the `Locator` can be instantiated and both configurations can be made in one chained method call.
 
@@ -176,8 +176,8 @@ Locator passwordField = new Locator("Password Field", "#password");
 Locator rememberMeCheckbox = new Locator("Remember Me Checkbox", "#remember-me");
 Locator signInButton = new Locator("Sign In Button", "#sign-in");
 
-LocatorGroup signInForm = new LocatorGroup("Sign In Form", usernameField, passwordField, 
-                                           rememberMeCheckbox, signInButton);
+LocatorGroup signInForm = new LocatorGroup("Sign In Form", 
+        usernameField, passwordField, rememberMeCheckbox, signInButton);
 ```
 
 By combining individual Locators onto a `LocatorGroup` instance, testers are able to identify and refer to collections of elements as the UI Components they represent.
