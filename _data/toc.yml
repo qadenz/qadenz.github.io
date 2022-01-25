@@ -25,6 +25,8 @@
           url: "docs/component-overview#the-webcommander"
         - title: WebInspector
           url: "docs/component-overview#the-webinspector"
+        - title: Conditions & Expectations
+          url: "docs/component-overview#conditions--expectations"
     - title: Writing Tests
       url: "docs/writing-tests"
     - title: UI Modeling

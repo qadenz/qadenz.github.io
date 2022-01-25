@@ -185,7 +185,7 @@ The goal of the Condition/Expectation pairing is to provide a unified structure 
 
 Each Condition accepts a variety of Expectations based on the type of evaluation being performed. For example, Conditions pertaining to element state (visibility, selected, enabled) accept boolean-based Expectations, while Conditions evaluating text will require String-based Expectations.
 
-From a technical perspective, Conditions and Expectations is a Hamcrest wrapper. The output of a Condition is based on whether the outcome of the evaluation matched the expected result. The Condition will return `true` is there was a match, `false` otherwise.
+Conditions and Expectations are powered by Hamcrest. The return value of a Condition is based on whether the outcome of the evaluation matched the expected result. The Condition will return `true` is there was a match, `false` otherwise.
 
 ## Logging evaluations
 
