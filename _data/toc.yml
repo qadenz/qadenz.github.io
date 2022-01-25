@@ -5,11 +5,6 @@
   links:
     - title: Philosophy of Use
       url: "docs/philosophy-of-use"
-      #children:
-        #- title: Objectives
-          #url: "docs#objectives"
-        #- title: Opinionation
-          #url: "docs#opinionation"
     - title: Component Overview
       url: "docs/component-overview"
       children:
@@ -40,15 +35,6 @@
           url: "docs/ui-modeling#page-objects"
     - title: Validations
       url: "docs/validations"
-      #children:
-        #- title: Why Not Assertions?
-          #url: "docs#why-not-assertions"
-        #- title: Grouped Conditions
-          #url: "docs#grouped-conditions"
-        #- title: Managing Soft Assertions
-          #url: "docs#managing-soft-assertions"
-        #- title: Screenshots
-          #url: "docs#screenshots"
     - title: Configuring Qadenz
       url: "docs/configuring-qadenz"
       children:
@@ -58,14 +44,5 @@
           url: "docs/configuring-qadenz#browser-configuration-profiles"
     - title: Logging & Reporting
       url: "docs/logging-and-reporting"
-      #children:
-        #- title: Console Logging
-          #url: "docs#console-logging"
-        #- title: The Qadenz HTML Reporter
-          #url: "docs#the-qadenz-html-reporter"
-    #- title: Extending Qadenz
-      #url: "docs#extending-qadenz"
-    #- title: Executing Tests
-      #url: "docs#executing-tests"
 - title: FAQ
   url: faq
