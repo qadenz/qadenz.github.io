@@ -4,7 +4,7 @@ tags:
 description: Setup and teardown of a Suite
 --- 
 
-## **Configuring Qadenz**
+# Configuring Qadenz
 
 ## TestNG Suite XML Parameters
 
