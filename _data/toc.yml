@@ -51,11 +51,11 @@
           #url: "docs#screenshots"
     - title: Configuring Qadenz
       url: "docs/configuring-qadenz"
-      #children:
-        #- title: Suite XML Parameters
-          #url: "docs#testng-suite-xml-parameters"
-        #- title: Browser Config Profiles
-          #url: "docs#browser-configuration-profiles"
+      children:
+        - title: Suite XML Parameters
+          url: "docs/configuring-qadenz#testng-suite-xml-parameters"
+        - title: Browser Config Profiles
+          url: "docs/configuring-qadenz#browser-configuration-profiles"
     - title: Logging & Reporting
       url: "docs/logging-and-reporting"
       #children:
