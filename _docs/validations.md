@@ -14,6 +14,10 @@ Unit testing frameworks such as TestNG or JUnit include assertion functionality 
 
 Using `Conditions` and `Expectations` allows a team to ensure all contributors are following the same pattern for validations.
 
+```
+Conditions.textOfElement(greetingText, Expectations.isEqualTo("Hello World!");
+```
+
 That said, Qadenz does employ a single TestNG assertion, the `assertTrue()` method, as a means of validating a Condition. The `result()` of a Condition is a simple representation of whether the state of the UI under test meets expectation. If the output of the Condition evaluation matches the Expectation, `result()` will return `true`. 
 
 By passing this result to the `assertTrue()` method, Qadenz is ensuring that a passing result depends on the Condition evaluation meeting the Expectation. If not, the validation will fail.
@@ -33,6 +37,17 @@ The `verify()` or `check()` methods are available on the Commands Hierarchy and 
 Validations in Qadenz are further enhanced with the ability to evaluate multiple Conditions as a group. In scenarios where a single UI action can trigger multiple verification points in a test, a tester may have to express multiple assert statements to ensure necessary coverage. If, for example, the first assertion were to fail, the remaining assertions would remain unchecked until either the UI under test is fixed, or the test scenario is executed manually. 
 
 Using Qadenz, a tester is able to execute these same validations in one call to `verify()` or `check()`, and will receive results for each Condition evaluation regardless of individual results. If again, the first validation fails, Qadenz will perform handling tasks on the failure, then proceed to evaluate each of the other Conditions that were passed. In the case of a `verify()` with multiple Conditions where one or more have failed, halting of test execution will be delayed until all Conditions have been evaluated, which will ensure that the test step is completed in its entirety. 
+
+In the example below, a user has added an item to the shopping cart, and the next step will verify a snackbar notification is displayed with a confirmation message, the item quantity is shown on the shopping cart icon, and the 'Checkout Now' button is enabled.
+
+```
+commander.verify(
+        Conditions.textOfElement(snackBarNotification, Expectations.isEqualTo("Items added successfully!")),
+        Conditions.textOfElement(quantityInCartIndicator, Expectations.isEqualTo("1")),
+        Conditions.enabledStateOfElement(checkOutNowButton, Expectations.isTrue()));
+```
+
+By grouping these verifications together, even if one (or more) Conditions fail, all will be evaluated and reported individually. 
 
 ## Managing Soft Assertions
 
