@@ -1,5 +1,5 @@
 ---
 title: Executing Tests
 tags: 
-description: Preparing and executing Test Suites with Qadenz
+description: Executing Test Suites with Qadenz
 --- 

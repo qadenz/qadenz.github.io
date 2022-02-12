@@ -42,6 +42,8 @@
           url: "docs/configuring-qadenz#testng-suite-xml-parameters"
         - title: Browser Config Profiles
           url: "docs/configuring-qadenz#browser-configuration-profiles"
+    - title: Executing Tests
+      url: "docs/executing-tests"
     - title: Logging & Reporting
       url: "docs/logging-and-reporting"
 - title: FAQ
