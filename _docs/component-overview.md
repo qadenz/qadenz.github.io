@@ -18,39 +18,6 @@ The [`AutomatedWebTest`](https://github.com/qadenz/qadenz/blob/master/src/main/j
 
 Classes that hold `@Test` methods must extend this class in order for tests to run using Qadenz configurations.
 
-```
-public class AuthenticationTest extends AutomatedWebTest {
-    
-    @Test
-    public void verifySuccessfulAuthenticationWithValidCredentials() {
-        // add test code
-    }
-
-    @Test
-    public void verifyAuthenticationErrorWhenUsingInvalidCredentials() {
-        // add test code
-    }
-}
-```
-
-Classes that hold `@Test` methods must inherit from this class in order for tests to run using Qadenz configurations. If project-specific configurations need to be performed during the setup or tear-down phases of the execution cycle, an intermediate class may be inserted into the inheritance hierarchy. For example, a project may require that certain data items be in place as preconditions for tests, or other custom testing components would have to be started. These tasks would be well suited to be kept on a class that extends `AutomatedWebTest`, and is in turn extended by classes that hold `@Test` methods.
-
-```
-public class AcmeAutomatedWebTest extends AutomatedWebTest {
-    
-    @BeforeSuite
-    public void loadItemData() {
-        // perform setup tasks
-    }
-}
-
-public class ItemInventorySearchTest extends AcmeAutomatedWebTest {
-    // add @Test methods
-}
-```
-
-AutomatedWebTest uses standard [TestNG Annotations](https://testng.org/doc/documentation-main.html#annotations) for configuration steps. As such, any intermediate configuration class that performs custom setup and tear-down tasks can utilize the same annotations to integrate seamlessly into the TestNG suite workflow.
-
 ### The Execution Cycle
 
 **Before the Suite Begins**
