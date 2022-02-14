@@ -99,7 +99,7 @@ The classes from the `dev.qadenz.automation.commands` package are a collection o
 
 ## Commands
 
-The [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Commands.java) class is abstract and sits atop the Commands Hierarchy (described in greater detail [here]({{ site.baseurl }}{% link _docs/extending-qadenz.md %})). This class provides common commands and is completely agnostic of any underlying automation frameworks. 
+The [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Commands.java) class is abstract and sits atop the Commands Hierarchy. This class provides common commands and is completely agnostic of any underlying automation frameworks. 
 
 `Commands` is home to the validation functionality (explained [here]({{ site.baseurl }}{% link _docs/validations.md %})), as well as the `log()` and `annotate()` commands (explained [here]({{ site.baseurl }}{% link _docs/logging-and-reporting.md %})).
 
