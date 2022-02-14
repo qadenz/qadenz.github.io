@@ -41,12 +41,12 @@ public class ItemInventorySearchTest extends AcmeAutomatedWebTest {
 }
 ```
 
+## Integrating with TestNG
+
 AutomatedWebTest uses standard [TestNG Annotations](https://testng.org/doc/documentation-main.html#annotations) for configuration steps. As such, any intermediate configuration class that performs custom setup and tear-down tasks can utilize the same annotations to integrate seamlessly into the TestNG suite workflow.
 
+Accessibility to TestNG features is generally open-ended with Qadenz. This was done intentionally so as to minimize restrictions on how users could configure their suites. Data handling features such as DataProviders and Parameters are usable, as are other features like Test Factories and disabling tests via the `@Ignore` annotation.
 
+Parallelism can be set as desired, but do keep in mind that Qadenz executes WebDriver startup and shutdown in the `@BeforeMethod` and `@AfterMethod`. As such, for most projects, specifying `parallel="methods"` on the TestNG Suite XML file is recommended. Deviating from this approach should only be done if there is a specific need to do so within the design of the test project.
 
-- TestNG functionality is available with things like Groups, Data Providers and Factory classes (examples)
-
-- Test dependencies are not recommended for @Test methods.
-
-- Remove any overlap from Execution Management. In fact, rename Execution Management completely.
+Qadenz does make use of dependencies within the scope of configuration methods to ensure that methods that take place at the same point in the workflow (for example, there are two `@BeforeSuite` methods) are executed in a certain order. This pattern can be repeated as needed should custom configurations need also to be performed in order. Given the focus on parallel execution with Qadenz, however, it is not recommended that `@Test` methods utilize any dependencies among one another.
