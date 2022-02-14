@@ -47,4 +47,7 @@
     - title: Logging & Reporting
       url: "docs/qadenz/logging-and-reporting"
 - title: FAQ
-  url: faq
+  url: "faq"
+  links:
+    - title: Licensing
+      url: "docs/faq/licensing"
