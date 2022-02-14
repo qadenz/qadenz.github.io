@@ -4,47 +4,47 @@
   url: "docs"
   links:
     - title: Philosophy of Use
-      url: "docs/philosophy-of-use"
+      url: "docs/qadenz/philosophy-of-use"
     - title: Component Overview
-      url: "docs/component-overview"
+      url: "docs/qadenz/component-overview"
       children:
         - title: AutomatedWebTest
-          url: "docs/component-overview#automatedwebtest"
+          url: "docs/qadenz/component-overview#automatedwebtest"
         - title: WebConfig
-          url: "docs/component-overview#webconfig"
+          url: "docs/qadenz/component-overview#webconfig"
         - title: WebDriverProvider
-          url: "docs/component-overview#webdriverprovider"
+          url: "docs/qadenz/component-overview#webdriverprovider"
         - title: Commands
-          url: "docs/component-overview#commands"
+          url: "docs/qadenz/component-overview#commands"
         - title: WebCommander
-          url: "docs/component-overview#the-webcommander"
+          url: "docs/qadenz/component-overview#the-webcommander"
         - title: WebInspector
-          url: "docs/component-overview#the-webinspector"
+          url: "docs/qadenz/component-overview#the-webinspector"
         - title: Conditions & Expectations
-          url: "docs/component-overview#conditions--expectations"
+          url: "docs/qadenz/component-overview#conditions--expectations"
     - title: Writing Tests
-      url: "docs/writing-tests"
+      url: "docs/qadenz/writing-tests"
     - title: UI Modeling
-      url: "docs/ui-modeling"
+      url: "docs/qadenz/ui-modeling"
       children:
         - title: The Locator
-          url: "docs/ui-modeling#the-locator"
+          url: "docs/qadenz/ui-modeling#the-locator"
         - title: The LocatorGroup
-          url: "docs/ui-modeling#the-locatorgroup"
+          url: "docs/qadenz/ui-modeling#the-locatorgroup"
         - title: Page Objects
-          url: "docs/ui-modeling#page-objects"
+          url: "docs/qadenz/ui-modeling#page-objects"
     - title: Validations
-      url: "docs/validations"
+      url: "docs/qadenz/validations"
     - title: Configuring Qadenz
-      url: "docs/configuring-qadenz"
+      url: "docs/qadenz/configuring-qadenz"
       children:
         - title: Suite XML Parameters
-          url: "docs/configuring-qadenz#testng-suite-xml-parameters"
+          url: "docs/qadenz/configuring-qadenz#testng-suite-xml-parameters"
         - title: Browser Config Profiles
-          url: "docs/configuring-qadenz#browser-configuration-profiles"
+          url: "docs/qadenz/configuring-qadenz#browser-configuration-profiles"
     - title: Executing Tests
-      url: "docs/executing-tests"
+      url: "docs/qadenz/executing-tests"
     - title: Logging & Reporting
-      url: "docs/logging-and-reporting"
+      url: "docs/qadenz/logging-and-reporting"
 - title: FAQ
   url: faq
