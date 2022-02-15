@@ -51,7 +51,7 @@ By grouping these verifications together, even if one (or more) Conditions fail,
 
 ## Managing Soft Assertions
 
-The `check()` methods works alongside the static `Assertions.flush()` method to delay execution stoppages in the event of failed validations. As calls to `check()` are made and executed through the course of a test, the [`Assertions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/io/qadenz/automation/commands/Assertions.java) class tracks whether any failures have been encountered. When the call to `Assertions.flush()` is made, this tracker is checked. If any failures are present, execution will be stopped. If no failures are found, execution continues.
+The `check()` methods works alongside the static `Assertions.flush()` method to delay execution stoppages in the event of failed validations. As calls to `check()` are made and executed through the course of a test, the [`Assertions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Assertions.java) class tracks whether any failures have been encountered. When the call to `Assertions.flush()` is made, this tracker is checked. If any failures are present, execution will be stopped. If no failures are found, execution continues.
 
 Since the tracker is live for the entire duration of a test, there is no limit to how many calls to `Assertions.flush()` can be made throughout a test. It is possible then, to create a series of "checkpoints" in longer tests whenever it is deemed sensible to stop a test if failures have been found. This is especially convenient for smoke to end-to-end tests where a focus on completion of test is important for a full accounting of key validation points. 
 
