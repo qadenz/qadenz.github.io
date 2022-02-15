@@ -28,13 +28,17 @@ That said, if a team finds that Qadenz is lacking functionality in a certain are
 
 Compliance with the license, when it comes to creating forks of Qadenz, would come down to intent. If an individual or team is involved in any contributions to Qadenz, or is simply tinkering with the code for personal education purposes, then forking would be no problem (though perhaps forking to a private repo might be a good idea). If an individual or team has forked Qadenz with the intent to re-release as either an individual library or bundled with other libraries, then this would not be allowed by the terms of the license.
 
-### I work with a consulting/staff-augmentation/managed services vendor, may I offer Qadenz to my clients?
+### I am a vendor, may I offer Qadenz as a product to my clients?
+
+Vendors, in this context, refers to individual consultants, consulting companies, staff augmentation providers, managed services providers, and any other entity offering services and products to their clients.
 
 A vendor marketing or selling Qadenz to their clients is not an internal business use, and is prohibited by the license.
 
-A vendor recommending to a client to use Qadenz on their internal testing project(s) is perfectly acceptable. A vendor providing team members to a client to contribute to a client-owned project powered by Qadenz is also perfectly acceptable as long as the vendor terms do not lock the client into a relationship with the vendor in order to maintain ownership of any Qadenz-backed projects. These are both cases of internal business use by the client.
+A vendor recommending to a client to use Qadenz on their testing project(s) is an internal business use for the client, and perfectly acceptable. 
 
-A vendor hired by a client to design, develop, test, and deliver a software solution may use Qadenz for testing projects, as this is an internal business use for the vendor. If the deliverable package to the client includes any projects powered by Qadenz, Qadenz must not be featured as a product sold to the client; otherwise, the transfer of internal use project(s) from one party to another as internal use project(s), is acceptable.
+A vendor providing team members to a client to contribute to a client-owned project powered by Qadenz is also internal business use for the client, and acceptable - as long as the vendor terms do not lock the client into a relationship with the vendor in order for the client to maintain access or ownership of any Qadenz-backed projects.
+
+A vendor hired by a client to design, develop, test, and deliver a software solution may use Qadenz for testing projects, as this is an internal business use for the vendor. If the deliverable package to the client includes any projects powered by Qadenz, Qadenz must not be featured as a product sold to the client, and the vendor terms must not lock the client into a relationship with the vendor in order for the client to maintain access or ownership of any Qadenz-backed projects. 
 
 ### Can I build applications or libraries on top of Qadenz?
 
