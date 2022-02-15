@@ -22,7 +22,7 @@ From a technical perspective, Qadenz is built to be extensible, so that custom c
 
 From a licensing perspective, the limitations of the Internal Use license do prohibit re-distribution of Qadenz and distribution of works derivative of Qadenz. Thus, releasing changes not allowed.
 
-That said, if a team finds that Qadenz is lacking functionality in a certain area, or that a change to existing functionality positively impact their own and other teams that use Qadenz, the best course of action is to [create an issue]() so that the changes can be considered for inclusion in a future release.
+That said, if a team finds that Qadenz is lacking functionality in a certain area, or that a change to existing functionality positively impact their own and other teams that use Qadenz, the best course of action is to [create an issue]({{ site.repo }}/issues/new) so that the changes can be considered for inclusion in a future release.
 
 ### Can I fork Qadenz?
 
@@ -38,4 +38,4 @@ A vendor hired by a client to design, develop, test, and deliver a software solu
 
 ### Can I build applications or libraries on top of Qadenz?
 
-If the application is only to be used for internal business within the originating organization, yes. Otherwise, Qadenz may not be included as a component, dependency, or library of any software application intended for sale or any other distribution, as this is not an internal business use.
+Qadenz may not be included as a component, dependency, or library of any software application intended for sale or any other distribution, as this is not an internal business use. The only exception to this is if the application is only to be used for internal business within the originating organization.
