@@ -8,6 +8,10 @@ description: Questions concerning Qadenz's license terms
 
 Qadenz uses the [PolyForm Internal Use License 1.0](https://polyformproject.org/licenses/internal-use/1.0.0/). Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz) as a product for their customers. 
 
+### Is "internal use" the same as "non-commercial"?
+
+Not at all. Qadenz is intended for use in a commercial setting, just not as the commercial product. Teams/Companies may use Qadenz for the testing and validation of their commercial software products, but are restricted from distributing Qadenz, or products built upon or derived from Qadenz.
+
 ### Is Qadenz Open Source?
 
 Following the definition of "open source" as given by the Open Source Initiative, no. Due to the terms of the license, Qadenz is considered "[source available](https://en.wikipedia.org/wiki/Source-available_software)" software.
@@ -20,9 +24,9 @@ From a licensing perspective, the limitations of the Internal Use license do pro
 
 That said, if a team finds that Qadenz is lacking functionality in a certain area, or that a change to existing functionality positively impact their own and other teams that use Qadenz, the best course of action is to [create an issue]() so that the changes can be considered for inclusion in a future release.
 
-### GitHub allows me to fork code repos, can I fork Qadenz?
+### Can I fork Qadenz?
 
-GitHub certain does allow forking (and I wouldn't want to disable it even if I could), and forking could in fact be considered distribution of the library. Compliance with the license, in this case, would come down to intent. If an individual or team is involved in any contributions to Qadenz, or is simply tinkering with the code for personal education purposes, then forking would be no problem (though perhaps forking to a private repo might be a good idea). If an individual or team has forked Qadenz with the intent to re-release as either an individual library or bundled with other libraries, then this would not be allowed by the terms of the license.
+Compliance with the license, when it comes to creating forks of Qadenz, would come down to intent. If an individual or team is involved in any contributions to Qadenz, or is simply tinkering with the code for personal education purposes, then forking would be no problem (though perhaps forking to a private repo might be a good idea). If an individual or team has forked Qadenz with the intent to re-release as either an individual library or bundled with other libraries, then this would not be allowed by the terms of the license.
 
 ### I work with a consulting/staff-augmentation/managed services vendor, may I offer Qadenz to my clients?
 
