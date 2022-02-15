@@ -10,21 +10,21 @@ Qadenz uses the [PolyForm Internal Use License 1.0](https://polyformproject.org/
 
 ### Is "internal use" the same as "non-commercial"?
 
-Not at all. Qadenz is intended for use in a commercial setting, just not as the commercial product. Teams/Companies may use Qadenz for the testing and validation of their commercial software products, but are restricted from distributing Qadenz, or products built upon or derived from Qadenz.
+Not at all. Qadenz is intended for use **in** a commercial setting, just not **as** the commercial product. Teams/Companies may use Qadenz for the testing and validation of their commercial software products, but are restricted from distributing Qadenz, or products built upon or derived from Qadenz.
 
 ### Is Qadenz Open Source?
 
-Following the definition of "open source" as given by the Open Source Initiative, no. Due to the terms of the license, Qadenz is considered "[source available](https://en.wikipedia.org/wiki/Source-available_software)" software.
+Due to the terms of the license, Qadenz is considered "[source available](https://en.wikipedia.org/wiki/Source-available_software)" software. Qadenz does not meet the definition of "open source" as defined by the Open Source Initiative.
 
-### My team has made modifications to Qadenz, can we share our changes with the Community?
+### Can modifications be shared with the Community?
 
 From a technical perspective, Qadenz is built to be extensible, so that custom configuration can be made without having to alter the core code-base. Teams are encouraged to import Qadenz as a dependency, then if modifications are required, to extend and override where needed. Making changes to the core code-base adds maintenance overhead and may introduce difficulty in upgrading to future versions. 
 
 From a licensing perspective, the limitations of the Internal Use license do prohibit re-distribution of Qadenz and distribution of works derivative of Qadenz. Thus, releasing changes not allowed.
 
-That said, if a team finds that Qadenz is lacking functionality in a certain area, or that a change to existing functionality positively impact their own and other teams that use Qadenz, the best course of action is to [create an issue]({{ site.repo }}/issues/new) so that the changes can be considered for inclusion in a future release.
+That said, if a team finds that Qadenz is lacking functionality in a certain area, or that a change to existing functionality could positively impact their own and other teams that use Qadenz, the best course of action is to [create an issue]({{ site.repo }}/issues/new) so that the changes can be considered for inclusion in a future release.
 
-### Can I fork Qadenz?
+### Can I fork the Qadenz project?
 
 Compliance with the license, when it comes to creating forks of Qadenz, would come down to intent. If an individual or team is involved in any contributions to Qadenz, or is simply tinkering with the code for personal education purposes, then forking would be no problem (though perhaps forking to a private repo might be a good idea). If an individual or team has forked Qadenz with the intent to re-release as either an individual library or bundled with other libraries, then this would not be allowed by the terms of the license.
 
@@ -38,4 +38,4 @@ A vendor hired by a client to design, develop, test, and deliver a software solu
 
 ### Can I build applications or libraries on top of Qadenz?
 
-Qadenz may not be included as a component, dependency, or library of any software application intended for sale or any other distribution, as this is not an internal business use. The only exception to this is if the application is only to be used for internal business within the originating organization.
+Qadenz may not be included as a component, dependency, or library of any software application intended for sale or any other distribution, as this is not an internal business use. The only exception to this is if the application or library is only to be used for internal business within the originating organization.
