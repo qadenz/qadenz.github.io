@@ -8,18 +8,10 @@
     - title: Component Overview
       url: "docs/qadenz/component-overview"
       children:
-        - title: AutomatedWebTest
-          url: "docs/qadenz/component-overview#automatedwebtest"
-        - title: WebConfig
-          url: "docs/qadenz/component-overview#webconfig"
-        - title: WebDriverProvider
-          url: "docs/qadenz/component-overview#webdriverprovider"
+        - title: Configuration
+          url: "docs/qadenz/component-overview#configuration-components"
         - title: Commands
-          url: "docs/qadenz/component-overview#commands"
-        - title: WebCommander
-          url: "docs/qadenz/component-overview#the-webcommander"
-        - title: WebInspector
-          url: "docs/qadenz/component-overview#the-webinspector"
+          url: "docs/qadenz/component-overview#commands-components"
         - title: Conditions & Expectations
           url: "docs/qadenz/component-overview#conditions--expectations"
     - title: Writing Tests
