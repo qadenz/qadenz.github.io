@@ -8,13 +8,17 @@ description: Executing Test Suites with Qadenz
 
 Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.
 
-# The TestNG Suite XML
+# Execution Requirements
 
-The sole requirement for running test suites with Qadenz is the use of a TestNG Suite XML file. One XML file with one `<suite>` node must be provided.
+There are two requirements for running test suites with Qadenz.
 
-## XML Parameters
+First, a working Selenium Grid must be running. The Grid can be configured either remotely, or in Standlone Mode on a local machine. In the case of a remote Grid, at least one properly configured Node must be active and conencted to the Hub. In the case of a local machine running Selenium Grid in Standalone Mode, the OS must be properly configured with at least one browser driver.
 
-Primary suite configuration in Qadenz is made via parameters on the TestNG Suite XML file.
+Second, is the use of a TestNG Suite XML file. One XML file with one `<suite>` node must be provided in order to configure the Suite, and define the scope of included tests.
+
+## TestNG XML Parameters
+
+Suite configuration in Qadenz is made via parameters on the TestNG Suite XML file.
 
 - `gridHost`: Directs the tests to a Selenium Grid Hub. The expected value is simply the IP address of the Hub. The default port number (4444) is pre-configured.
 - `browser`: Specifies which browser will run the test.
@@ -114,3 +118,6 @@ In another example, to run the same set of tests in three different browsers as 
     </test>
 </suite>
 ```
+
+## Invoking the Suite XML file
+
