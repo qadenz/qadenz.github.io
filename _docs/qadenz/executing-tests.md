@@ -162,3 +162,4 @@ Further information on how the Surefire plugin works and how it can be used for 
 
 ## Launching a Suite XML in the IDE
 
+For local execution runs and debugging during the development phase, IDEs like Intellij IDEA support instant run of TestNG Suite XML files. With the TestNG plugin installed and enabled, simply right click a valid TestNG XML file, and click `Run`. If results are not generated in the `test-output` folder in the project root, go to the Run Configurations and (using IntelliJ IDEA as an example), open the configuration for the selected file, go to the `Listeners` tab, and enable the `Use default reporters` checkbox.
