@@ -37,11 +37,6 @@
       url: "docs/qadenz/validations"
     - title: Configuring Qadenz
       url: "docs/qadenz/configuring-qadenz"
-      children:
-        - title: Suite XML Parameters
-          url: "docs/qadenz/configuring-qadenz#testng-suite-xml-parameters"
-        - title: Browser Config Profiles
-          url: "docs/qadenz/configuring-qadenz#browser-configuration-profiles"
     - title: Executing Tests
       url: "docs/qadenz/executing-tests"
     - title: Logging & Reporting
