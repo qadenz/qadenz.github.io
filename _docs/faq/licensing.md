@@ -12,7 +12,7 @@ Qadenz uses the [PolyForm Internal Use License 1.0](https://polyformproject.org/
 
 Not at all. Qadenz is intended for use **in** a commercial setting, just not **as** the commercial product. Teams/Companies may use Qadenz for the testing and validation of their commercial software products, but are restricted from distributing Qadenz, or products built upon or derived from Qadenz.
 
-### Can modifications be shared with the Community?
+### I've customized Qadenz for my own use, can I release my changes?
 
 From a technical perspective, Qadenz is built to be extensible, so that custom configuration can be made without having to alter the core code-base. Teams are encouraged to import Qadenz as a dependency, then if modifications are required, to extend and override where needed. Making changes to the core code-base adds maintenance overhead and may introduce difficulty in upgrading to future versions. 
 
