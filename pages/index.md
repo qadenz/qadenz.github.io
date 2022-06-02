@@ -31,7 +31,7 @@ Getting started with Qadenz is as simple as importing the dependency from Maven.
 <dependency>
     <groupId>dev.qadenz</groupId>
     <artifactId>qadenz</artifactId>
-    <version>1.0.0-BETA-3.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
