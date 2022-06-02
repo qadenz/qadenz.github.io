@@ -37,10 +37,6 @@ Getting started with Qadenz is as simple as importing the dependency from Maven.
 
 The code is also available at [GitHub](https://github.com/qadenz/qadenz).
 
-This documentation on this site covers the general approach to automated test design from Qadenz, the major components and how they can be implemented, how test suites can be executed and results can be reviewed and shared.
-
-# BETA
-
-Qadenz is currently in Beta. All current known issues are availble on [GitHub](https://github.com/qadenz/qadenz/issues). Generally speaking, unless any severe issues are currently open, the code can be considered stable. Additionally, the documentation contained on this site remains "in progress" throughout the Beta cycle. While the available documentation is accurate for the latest version, code examples, other visual aids, and coverage in some remaining areas is still ongoing.
+This documentation on this site covers the general approach to automated test design from Qadenz, the major components and how they can be implemented, how test suites can be executed and results can be reviewed and shared. Improvements to the documentation are always in progress, but [questions and suggestions]({{ site.repo2 }}/issues/new?labels={% if page.editable %}{{ page.editable }}{% else %}question{% endif %}&title=Question:&body=Question on: {{ site.repo }}/tree/master/{{ page.path }}) are always welcome and will be a big help to understanding where to prioritize updates.
 
 Happy automating :)
