@@ -1,6 +1,6 @@
 ---
-title: "Components"
-linkTitle: "Components"
+title: "Components (Old)"
+linkTitle: "Components (old)"
 weight: 6
 ---
 
