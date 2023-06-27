@@ -1,25 +1,69 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <sitemap>
-    <loc>/fa/sitemap.xml</loc>
-    
-      <lastmod>2023-06-26T18:01:16-04:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>/no/sitemap.xml</loc>
-    
-      <lastmod>2023-06-26T18:01:16-04:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>/en/sitemap.xml</loc>
-    
-      <lastmod>2023-06-26T18:01:16-04:00</lastmod>
-    
-  </sitemap>
-  
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>//qadenz.dev/overview/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/overview/philosophy-of-use/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/components/configuration/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/overview/getting-started/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/concepts/writing-tests/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/components/commands/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/concepts/executing-tests/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/concepts/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/components/conditions-and-expectations/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/components/logging-and-reporting/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/components/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/components/validations/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/components/ui-modeling/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/tutorials/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/faq/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/blog/2023/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/blog/2023/06/20/qadenz-2.0.0-is-coming/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/blog/2023/06/11/hello-hugo/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/blog/</loc>
+    <lastmod>2023-06-26T21:02:19-04:00</lastmod>
+  </url><url>
+    <loc>//qadenz.dev/categories/</loc>
+  </url><url>
+    <loc>//qadenz.dev/tags/</loc>
+  </url>
+</urlset>

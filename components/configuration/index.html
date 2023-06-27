@@ -18,16 +18,25 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>404 Page not found | Qadenz</title>
-<meta name="description" content="A friendly automation library">
-<meta property="og:title" content="404 Page not found" />
-<meta property="og:description" content="A friendly automation library" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="//qadenz.dev/404.html" /><meta property="og:site_name" content="Qadenz" />
-<meta itemprop="name" content="404 Page not found">
-<meta itemprop="description" content="A friendly automation library"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="404 Page not found"/>
-<meta name="twitter:description" content="A friendly automation library"/>
+<title>Configuration | Qadenz</title>
+<meta name="description" content="These objects, from the `dev.qadenz.automation.config` package, handle Suite and Test configuration tasks.
+">
+<meta property="og:title" content="Configuration" />
+<meta property="og:description" content="These objects, from the `dev.qadenz.automation.config` package, handle Suite and Test configuration tasks.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//qadenz.dev/components/configuration/" /><meta property="article:section" content="Components" />
+
+<meta property="article:modified_time" content="2023-06-26T21:02:19-04:00" /><meta property="og:site_name" content="Qadenz" />
+<meta itemprop="name" content="Configuration">
+<meta itemprop="description" content="These objects, from the `dev.qadenz.automation.config` package, handle Suite and Test configuration tasks.
+">
+<meta itemprop="dateModified" content="2023-06-26T21:02:19-04:00" />
+<meta itemprop="wordCount" content="818">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Configuration"/>
+<meta name="twitter:description" content="These objects, from the `dev.qadenz.automation.config` package, handle Suite and Test configuration tasks.
+"/>
 
 
 
@@ -50,7 +59,7 @@ if (!doNotTrack) {
 }
 </script>
   </head>
-  <body class="td-404">
+  <body class="td-page">
     <header>
       <nav class="td-navbar navbar-dark js-navbar-scroll">
 <div class="container-fluid flex-column flex-md-row">
@@ -68,14 +77,260 @@ if (!doNotTrack) {
 </div>
 </nav>
     </header>
-    <div class="container-fluid td-default td-outer">
-      <main role="main" class="td-main">
-        <div class="td-content">
-  <h1>Not found</h1>
-  <p>Oops! This page doesn't exist. Try going back to the <a href="/">home page</a>.</p>
-  <p>You can learn how to make a 404 page like this in <a href="https://gohugo.io/templates/404/">Custom 404 Pages</a>.</p>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            <div id="td-sidebar-menu" class="td-sidebar__inner">
+  <div id="content-mobile">
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ms-3 fas fa-bars" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  </div>
+  <div id="content-desktop"></div>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m--li">
+  <a href="/" title="Welcome to Test Automation with Qadenz!" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-"><span class="">Documentation</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-overview-li">
+  <a href="/overview/" title="Welcome to Test Automation with Qadenz!" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-overview"><span class="">Overview</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-overviewphilosophy-of-use-li">
+  <a href="/overview/philosophy-of-use/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-overviewphilosophy-of-use"><span class="">Philosophy of Use</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-overviewgetting-started-li">
+  <a href="/overview/getting-started/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-overviewgetting-started"><span class="">Getting Started</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-concepts-li">
+  <a href="/concepts/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-concepts"><span class="">Concepts</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-conceptswriting-tests-li">
+  <a href="/concepts/writing-tests/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-conceptswriting-tests"><span class="">Writing Tests</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-conceptsexecuting-tests-li">
+  <a href="/concepts/executing-tests/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-conceptsexecuting-tests"><span class="">Executing Tests</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-components-li">
+  <a href="/components/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-components"><span class="">Components</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-componentsconfiguration-li">
+  <a href="/components/configuration/" class="align-left ps-0 active td-sidebar-link td-sidebar-link__page" id="m-componentsconfiguration"><span class="td-sidebar-nav-active-item">Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentscommands-li">
+  <a href="/components/commands/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentscommands"><span class="">Commands</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentsconditions-and-expectations-li">
+  <a href="/components/conditions-and-expectations/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentsconditions-and-expectations"><span class="">Conditions &amp; Expectations</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentslogging-and-reporting-li">
+  <a href="/components/logging-and-reporting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentslogging-and-reporting"><span class="">Logging &amp; Reporting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentsvalidations-li">
+  <a href="/components/validations/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentsvalidations"><span class="">Validations</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentsui-modeling-li">
+  <a href="/components/ui-modeling/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentsui-modeling"><span class="">UI Modeling</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-tutorials-li">
+  <a href="/tutorials/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-tutorials"><span class="">Tutorials</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-faq-li">
+  <a href="/faq/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-faq"><span class="">FAQ</span></a>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
 </div>
-      </main>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+<div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/qadenz/qadenz.github.io/issues/new?title=Configuration" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create Docs Issue</a>
+  <a href="https://github.com/qadenz/qadenz/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create Qadenz Issue</a>
+  <a id="print" href="//qadenz.dev/components/_print/"><i class="fa-solid fa-print fa-fw"></i> Print entire section</a>
+
+</div>
+
+            <div class="td-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#automatedwebtest">AutomatedWebTest</a>
+      <ul>
+        <li><a href="#the-execution-cycle">The Execution Cycle</a></li>
+      </ul>
+    </li>
+    <li><a href="#webconfig">WebConfig</a></li>
+    <li><a href="#webdriverprovider">WebDriverProvider</a></li>
+    <li><a href="#browser-configuration-profiles">Browser Configuration Profiles</a></li>
+  </ul>
+</nav>
+      </div>
+    
+            
+
+	
+		
+			
+
+
+
+  
+  
+
+		
+			
+
+
+
+  
+  
+
+		
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            
+            
+<div class="td-content">
+	<h1>Configuration</h1>
+	<div class="lead">These objects, from the <code>dev.qadenz.automation.config</code> package, handle Suite and Test configuration tasks.</div>
+	<header class="article-meta">
+		
+
+  
+    
+      
+
+
+    
+      
+
+
+    
+  
+
+		
+	</header>
+	<h2 id="automatedwebtest">AutomatedWebTest</h2>
+<p>The <a href="https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/AutomatedWebTest.java"><code>AutomatedWebTest</code></a> is the base class for all test classes in a Qadenz-powered test project. This class is responsible for gathering parameter values from the TestNG Suite XML file, configuring and starting a <code>WebDriver</code> instance on a Selenium Grid for each test method, stopping the <code>WebDriver</code> after each test, and invoking the reporters after the Suite has completed.</p>
+<p>Classes that hold <code>@Test</code> methods must extend this class in order for tests to run using Qadenz configurations.</p>
+<h3 id="the-execution-cycle">The Execution Cycle</h3>
+<p><strong>Before the Suite Begins</strong></p>
+<p>The first task performed after launching a Suite execution is to capture a timestamp and save as the <code>suiteStartDate</code> value on the <code>WebConfig</code>. This will be used later by the reporter to calculate the duration of the execution. Next, the Suite-level parameters are retrieved from the <code>ITestContext</code>, which were specified by the user on the TestNG Suite XML file. The  <code>gridHost</code> is validated and saved.</p>
+<p><strong>Before Each Test</strong></p>
+<p>Repeated before each test method, the Test-level parameters are retrieved from the <code>ITestContext</code>, which are the <code>browser</code>, <code>browserVersion</code>, <code>browserConfigProfile</code>, <code>platform</code>, <code>timeout</code>, <code>appUrl</code>, <code>retryInterceptedClicks</code>. These parameters are validated and saved to the <code>WebConfig</code>.</p>
+<p>Once all the parameters are processed, the <code>WebDriver</code> can be launched and execution of a test method can begin. The <code>CapabilityProvider</code> is invoked to configure the browser session. The <code>CapabilityProvider</code> calls values on the <code>WebConfig</code> and attempts to load any Browser Config Profiles declared in one of the browser configuration JSON files. This process chooses a browser, determines if a specific version of the browser is required if a version has been declared, ensures that the test will be run on the appropriate OS if one has been specified, and applies any arguments provided on the JSON file if a matching Browser Config Profile was found.</p>
+<p>These options are then used to configure and initialize a <code>WebDriver</code> instance, which is in turn set on the <code>WebDriverProvider</code>.</p>
+<p>Finally, the browser window is maximized, and the <code>appUrl</code> value is loaded.</p>
+<p><strong>After Each Test</strong></p>
+<p>At the end of each test method, the <code>WebDriver</code> is stopped.</p>
+<p><strong>After the Suite Ends</strong></p>
+<p>The final task of the execution cycle is to capture a second timestamp as the <code>suiteEndDate</code> on the <code>WebConfig</code>.</p>
+<p><strong>Reporting</strong></p>
+<p>The default TestNG reporters are not disabled by default, so the standard HTML &amp; XML reports will be generated, along with the <code>emailable-report.html</code>. Next, the <code>TestReporter</code> is invoked which generates the Qadenz Reports in JSON and HTML formats.</p>
+<h2 id="webconfig">WebConfig</h2>
+<p><a href="https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/WebConfig.java"><code>WebConfig</code></a> stores information that Qadenz uses at various points throughout the execution cycle. Primarily, these are the values given as parameters on the TestNG Suite XML file. While Qadenz calls these values during the setup and reporting phases they are made available on the chance these values are needed for any project-specific configuration.</p>
+<p>Since these fields are all static, there really is no need to extend this class. Teams are encouraged to follow this pattern, though, and create a ProjectConfig class of their own should the need arise to track specific values or project-specific Suite parameters are in play.</p>
+<h2 id="webdriverprovider">WebDriverProvider</h2>
+<p>The <a href="https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/WebDriverProvider.java"><code>WebDriverProvider</code></a> stores the <code>WebDriver</code> instance and makes it available to components where it is needed. Since the test classes work on an inheritance hierarchy, and with how TestNG manages threads, the <code>WebDriver</code> instance is required to be kept on a <code>ThreadLocal&lt;WebDriver&gt;</code> object. Rather than forcing testers to pass the <code>WebDriver</code> around to various library components, Qadenz has chosen to make the <code>ThreadLocal</code> static, and allow components that need the <code>WebDriver</code> to call a centralized location. On the (hopefully) rare occurrence where the <code>WebDriver</code> is needed directly, it can be invoked with the following call.</p>
+<pre tabindex="0"><code>WebDriver webDriver = WebDriverProvider.getWebDriver();
+</code></pre><h2 id="browser-configuration-profiles">Browser Configuration Profiles</h2>
+<p>In some cases, extra configuration arguments need to be passed to the browser Options instance for <code>WebDriver</code> configuration. A common case for this is instructing a browser to run in headless mode. Qadenz provides a simple means to set these configurations, and allows for multiple &ldquo;profiles&rdquo; of these configurations to be set on the TestNG Suite XML file. For example, if a tester wishes to run in headless mode on the Selenium Grid, but run in a native browser when executing locally, the switch is as simple as altering a parameter value.</p>
+<p>Configurations are stored in JSON files within the project&rsquo;s <code>resources</code> directory. To create a new configuration, within the <code>resources</code> directory, add a new folder called <code>config</code>, and create a new JSON file. This file must be named <code>{browser}-config.json</code>, where <code>{browser}</code> is the name of the browser being configured. A separate file must be created for each browser
+requiring configuration.</p>
+<p>This example configures Chrome to run in headless mode.</p>
+<pre tabindex="0"><code>[
+    {
+        &#34;profile&#34;: &#34;headless&#34;,
+        &#34;args&#34;: [
+            &#34;--headless&#34;,
+            &#34;--window-size=1920,1080&#34;,
+            &#34;--disable-gpu&#34;
+        ]
+    }
+]
+</code></pre><p>The JSON format is an array of configuration objects. Each object holds <code>profile</code> and <code>args</code> fields. The <code>profile</code> field will be matched to the <code>browserConfigProfile</code> parameter on the Suite XML. The <code>args</code> is an array of individual arguments to be passed to the <code>WebDriver</code> configuration.</p>
+
+	
+		<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<br>
+<hr>
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof ga !== 'function') return;
+    const args = {
+      command: 'send',
+      hitType: 'event',
+      category: 'Helpful',
+      action: 'click',
+      label: window.location.pathname,
+      value: value
+    };
+    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(1);
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+
+		<br />
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">
+  Last modified June 26, 2023 
+</div>
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
       <footer class="td-footer row d-print-none">
   <div class="container-fluid">
     <div class="row mx-md-2">

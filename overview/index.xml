@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Qadenz – Welcome to Test Automation with Qadenz!</title>
+    <link>//qadenz.dev/overview/</link>
+    <description>Recent content in Welcome to Test Automation with Qadenz! on Qadenz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="//qadenz.dev/overview/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+  </channel>
+</rss>

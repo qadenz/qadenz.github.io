@@ -4,7 +4,9 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.113.0">
-<meta name="robots" content="index, follow">
+<link rel="canonical" type="text/html" href="//qadenz.dev/concepts/">
+<link rel="alternate" type="application/rss&#43;xml" href="//qadenz.dev/concepts/index.xml">
+<meta name="robots" content="noindex, nofollow">
 
 
 <link rel="shortcut icon" href="/favicons/favicon.ico" >
@@ -18,15 +20,15 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>404 Page not found | Qadenz</title>
+<title>Concepts | Qadenz</title>
 <meta name="description" content="A friendly automation library">
-<meta property="og:title" content="404 Page not found" />
+<meta property="og:title" content="Concepts" />
 <meta property="og:description" content="A friendly automation library" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="//qadenz.dev/404.html" /><meta property="og:site_name" content="Qadenz" />
-<meta itemprop="name" content="404 Page not found">
+<meta property="og:url" content="//qadenz.dev/concepts/" /><meta property="og:site_name" content="Qadenz" />
+<meta itemprop="name" content="Concepts">
 <meta itemprop="description" content="A friendly automation library"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="404 Page not found"/>
+<meta name="twitter:title" content="Concepts"/>
 <meta name="twitter:description" content="A friendly automation library"/>
 
 
@@ -50,7 +52,7 @@ if (!doNotTrack) {
 }
 </script>
   </head>
-  <body class="td-404">
+  <body class="td-section">
     <header>
       <nav class="td-navbar navbar-dark js-navbar-scroll">
 <div class="container-fluid flex-column flex-md-row">
@@ -68,14 +70,263 @@ if (!doNotTrack) {
 </div>
 </nav>
     </header>
-    <div class="container-fluid td-default td-outer">
-      <main role="main" class="td-main">
-        <div class="td-content">
-  <h1>Not found</h1>
-  <p>Oops! This page doesn't exist. Try going back to the <a href="/">home page</a>.</p>
-  <p>You can learn how to make a 404 page like this in <a href="https://gohugo.io/templates/404/">Custom 404 Pages</a>.</p>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+
+
+
+
+<div class="td-content">
+<div class="pageinfo pageinfo-primary d-print-none">
+<p>
+This is the multi-page printable view of this section.
+<a href="#" onclick="print();return false;">Click here to print</a>.
+</p><p>
+<a href="/concepts/">Return to the regular view of this page</a>.
+</p>
 </div>
-      </main>
+
+
+
+<h1 class="title">Concepts</h1>
+
+
+
+
+
+    <ul>
+    
+  
+  
+  
+  
+
+  
+    
+    
+	
+<li>1: <a href="#pg-30c11cf062797018532f50ab68b59a07">Writing Tests</a></li>
+
+
+    
+  
+    
+    
+	
+<li>2: <a href="#pg-f33f8c6a3cdafd148cc1f5246eeebad3">Executing Tests</a></li>
+
+
+    
+  
+
+    </ul>
+
+
+<div class="content">
+      
+</div>
+</div>
+
+
+  
+  
+  
+  
+
+  
+  
+
+  
+    
+    
+	
+    
+
+<div class="td-content" style="">
+    
+	<h1 id="pg-30c11cf062797018532f50ab68b59a07">1 - Writing Tests</h1>
+    <div class="lead">Writing Tests with Qadenz</div>
+	<p>Adding new tests to a Qadenz-powered project is as simple as extending the <code>AutomatedWebTest</code> class, and adding <code>@Test</code> annotated methods. This inheritance is required in order to utilize the Qadenz suite configuration features.</p>
+<pre tabindex="0"><code>public class AuthenticationTest extends AutomatedWebTest {
+
+    @Test
+    public void verifySuccessfulAuthenticationWithValidCredentials() {
+        // add test code
+    }
+
+    @Test
+    public void verifyAuthenticationErrorWhenUsingInvalidCredentials() {
+        // add test code
+    }
+}
+</code></pre><h2 id="custom-configurations">Custom Configurations</h2>
+<p>If project-specific configurations need to be performed during the setup or tear-down phases of the execution cycle, an intermediate class may be inserted into the inheritance hierarchy. For example, a project may require that certain data items be in place as preconditions for tests, or other custom testing components would have to be started. These tasks would be well suited to be kept on a class that extends <code>AutomatedWebTest</code>, and is in turn extended by classes that hold <code>@Test</code> methods.</p>
+<pre tabindex="0"><code>public class AcmeAutomatedWebTest extends AutomatedWebTest {
+
+    @BeforeSuite
+    public void loadItemData() {
+        // perform setup tasks
+    }
+}
+
+public class ItemInventorySearchTest extends AcmeAutomatedWebTest {
+    // add @Test methods
+}
+</code></pre><h2 id="integrating-with-testng">Integrating with TestNG</h2>
+<p>AutomatedWebTest uses standard <a href="https://testng.org/doc/documentation-main.html#annotations">TestNG Annotations</a> for configuration steps. As such, any intermediate configuration class that performs custom setup and tear-down tasks can utilize the same annotations to integrate seamlessly into the TestNG suite workflow.</p>
+<p>Accessibility to TestNG features is generally open-ended with Qadenz. This was done intentionally so as to minimize restrictions on how users could configure their suites. Data handling features such as DataProviders and Parameters are usable, as are other features like Test Factories and disabling tests via the <code>@Ignore</code> annotation.</p>
+<p>Parallelism can be set as desired, but do keep in mind that Qadenz executes WebDriver startup and shutdown in the <code>@BeforeMethod</code> and <code>@AfterMethod</code>. As such, for most projects, specifying <code>parallel=&quot;methods&quot;</code> on the TestNG Suite XML file is recommended. Deviating from this approach should only be done if there is a specific need to do so within the design of the test project.</p>
+<p>Qadenz does make use of dependencies within the scope of configuration methods to ensure that methods that take place at the same point in the workflow (for example, there are two <code>@BeforeSuite</code> methods) are executed in a certain order. This pattern can be repeated as needed should custom configurations need also to be performed in order. Given the focus on parallel execution with Qadenz, however, it is not recommended that <code>@Test</code> methods utilize any dependencies among one another.</p>
+
+</div>
+
+
+
+    
+	
+  
+    
+    
+	
+    
+
+<div class="td-content" style="page-break-before: always">
+    
+	<h1 id="pg-f33f8c6a3cdafd148cc1f5246eeebad3">2 - Executing Tests</h1>
+    <div class="lead">Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.</div>
+	<h2 id="execution-requirements">Execution Requirements</h2>
+<p>There are two requirements for running test suites with Qadenz.</p>
+<p>First, a working Selenium Grid must be running. The Grid can be configured either remotely, or in Standlone Mode on a local machine. In the case of a remote Grid, at least one properly configured Node must be active and conencted to the Hub. In the case of a local machine running Selenium Grid in Standalone Mode, the OS must be properly configured with at least one browser driver.</p>
+<p>Second, is the use of a TestNG Suite XML file. One XML file with one <code>&lt;suite&gt;</code> node must be provided in order to configure the Suite, and define the scope of included tests.</p>
+<h2 id="testng-xml-parameters">TestNG XML Parameters</h2>
+<p>Suite configuration in Qadenz is made via parameters on the TestNG Suite XML file.</p>
+<ul>
+<li><code>gridHost</code>: Directs the tests to a Selenium Grid Hub. The expected value is simply the IP address of the Hub. The default port number (4444) is pre-configured.</li>
+<li><code>browser</code>: Specifies which browser will run the test.</li>
+<li><code>browserVersion</code>: An optional parameter that allows a specific version of the browser to be used for the test.</li>
+<li><code>browserConfigProfile</code>: Provides arguments for the browser configuration. This is optional. If the parameter is not declared, or if the parameter value does not match an existing profile name, no arguments will be passed to the <code>WebDriver</code> for the execution cycle.</li>
+<li><code>platform</code>: Directs the tests to a Node running a given OS. This parameter is optional.</li>
+<li><code>timeout</code>: Sets the max allowable time for the Explicit Waits to run in Qadenz. This is an optional parameter, expressed in seconds. If this parameter is not given, a default of 30 seconds will be used.</li>
+<li><code>appUrl</code>: The full URL of the application under test.</li>
+<li><code>retryInterceptedClicks</code>: This works with the <code>click()</code> command. If a click throws an <code>ElementClickInterceptedException</code>, enabling this parameter will direct the <code>WebDriver</code> to retry the click using the <code>Actions</code> API. Do note, however, that this exception is typically a symptom of a selector issue. This parameter is optional, and defaults to enabled.</li>
+</ul>
+<p>The <code>gridHost</code> is a Suite-level parameter, and is assigned only once during execution prior to any tests executing. The others are all Test-level parameters, and are assigned before each <code>&lt;test&gt;</code> node on the TestNG Suite XML file.</p>
+<p>The Test-level parameters allow for configuration changes to take place during the execution cycle. For example, if the goal of the suite is to run the same set of tests in multiple browsers, rather than create 3 different Suite XML files, 3 <code>&lt;test&gt;</code> nodes can be added to the same Suite XML file with different configurations.</p>
+<p>In the below example, both <code>&lt;test&gt;</code> nodes will use the same set of parameter values:</p>
+<pre tabindex="0"><code>&lt;suite name=&#34;Automated Tests&#34; parallel=&#34;methods&#34; thread-count=&#34;6&#34;&gt;
+
+    &lt;parameter name=&#34;gridHost&#34; value=&#34;10.1.10.10&#34;/&gt;
+    &lt;parameter name=&#34;appUrl&#34; value=&#34;http://qa.acmecorp.com&#34;/&gt;
+    &lt;parameter name=&#34;browser&#34; value=&#34;chrome&#34;/&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Permissions Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.PermissionsTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;
+</code></pre><p>Parameters on TestNG Suite XML files obey scoping rules. That is to say, a parameter declared within a <code>&lt;test&gt;</code> will take precedence over the same parameter as declared on the <code>&lt;suite&gt;</code>.</p>
+<p>In this next example, the second <code>&lt;test&gt;</code> will override the <code>browser</code> parameter, while the others will use follow what is declared at the <code>&lt;suite&gt;</code>.</p>
+<pre tabindex="0"><code>&lt;suite name=&#34;Automated Tests&#34; parallel=&#34;methods&#34; thread-count=&#34;6&#34;&gt;
+
+    &lt;parameter name=&#34;gridHost&#34; value=&#34;10.1.10.10&#34;/&gt;
+    &lt;parameter name=&#34;appUrl&#34; value=&#34;http://qa.acmecorp.com&#34;/&gt;
+    &lt;parameter name=&#34;browser&#34; value=&#34;chrome&#34;/&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Permissions Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;firefox&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.PermissionsTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Account Management Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AccountManagementTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;
+</code></pre><p>In another example, to run the same set of tests in three different browsers as part of the same execution, Test-level parameters can be used accordingly:</p>
+<pre tabindex="0"><code>&lt;suite name=&#34;Automated Tests&#34; parallel=&#34;methods&#34; thread-count=&#34;6&#34;&gt;
+
+    &lt;parameter name=&#34;gridHost&#34; value=&#34;10.1.10.10&#34;/&gt;
+    &lt;parameter name=&#34;appUrl&#34; value=&#34;http://qa.acmecorp.com&#34;/&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;chrome&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;firefox&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;edge&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;
+</code></pre><h2 id="maven-surefire-plugin">Maven Surefire Plugin</h2>
+<p>Any means of invoking the TestNG XML file that is valid for TestNG should work without issue for a Qadenz-based project. Depending on the approach, however, some additional coding may be required. One simple method that is highly recommended is using the <a href="https://maven.apache.org/surefire/maven-surefire-plugin/">Maven Surefire</a> plugin. This allows a Suite XML file to be stored within the project itself and invoked as part of the Maven Test command.</p>
+<p>Start by adding the Surefire plugin to the project&rsquo;s <code>pom.xml</code>.</p>
+<pre tabindex="0"><code>&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0-M4&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;suiteXmlFiles&gt;
+            &lt;suiteXmlFile&gt;TestNGSuite.xml&lt;/suiteXmlFile&gt;
+        &lt;/suiteXmlFiles&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre><p>The example above assumes a TestNG Suite XML file called <code>TestNGSuite.xml</code> is located at the project root. Storing TestNG XML files in a subdirectory is also possible, but would require a reference to the directory in the <code>&lt;suiteXmlFile&gt;</code> node. Additionally, if multiple TestNG XML files are stored, it is possible to parameterize the file specification so that a command-line argument can be passed to Maven to specify which file to use for a given execution run.</p>
+<pre tabindex="0"><code>&lt;suiteXmlFiles&gt;
+    &lt;suiteXmlFile&gt;xml-suites/${suiteFile}&lt;/suiteXmlFile&gt;
+&lt;/suiteXmlFiles&gt;
+</code></pre><p>This example shows a folder at the project root called <code>xml-suites</code> which stores multiple suite files. The <code>${suiteFile}</code> property then becomes a command-line argument, allowing the TestNG XML file to be specified. It is worth noting that the above example may be interpreted as an error in some IDEs such as IntelliJ IDEA. This will not impact the ability to compile the project, nor will it impact test execution. This is an issue where the <code>pom.xml</code> does not have a value defined for the declared property. As long as the value is declared on the command line, the test run will launch.</p>
+<h2 id="command-line-execution">Command Line Execution</h2>
+<p>To run a TestNG XML file called <code>acme-tests.xml</code>, the following command would be used.</p>
+<pre tabindex="0"><code>mvn clean test -DsuiteFile=&#34;acme-tests.xml&#34;
+</code></pre><p>This approach can be used on the local machine, or defined in a CI/CD tool like Jenkins or TeamCity as the build command.</p>
+<p>Further information on how the Surefire plugin works and how it can be used for parameterizing and launching test suites can be found at the <a href="https://maven.apache.org/surefire/maven-surefire-plugin/">Surefire</a> website. Additional information for integrating Maven builds into a CI/CD tool can be found in the documentation of the tool in use.</p>
+<h2 id="launching-a-suite-xml-in-the-ide">Launching a Suite XML in the IDE</h2>
+<p>For local execution runs and debugging during the development phase, IDEs like Intellij IDEA support instant run of TestNG Suite XML files. With the TestNG plugin installed and enabled, simply right click a valid TestNG XML file, and click <code>Run</code>. If results are not generated in the <code>test-output</code> folder in the project root, go to the Run Configurations and (using IntelliJ IDEA as an example), open the configuration for the selected file, go to the <code>Listeners</code> tab, and enable the <code>Use default reporters</code> checkbox.</p>
+
+</div>
+
+
+
+    
+	
+  
+
+
+
+          </main>
+        </div>
+      </div>
       <footer class="td-footer row d-print-none">
   <div class="container-fluid">
     <div class="row mx-md-2">

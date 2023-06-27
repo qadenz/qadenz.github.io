@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Qadenz – Docsy Blog</title>
-    <link>//qadenz.dev/blog/</link>
-    <description>Recent content in Docsy Blog on Qadenz</description>
+    <title>Qadenz – Blog Posts - 2023</title>
+    <link>//qadenz.dev/blog/2023/</link>
+    <description>Recent content in Blog Posts - 2023 on Qadenz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="//qadenz.dev/blog/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="//qadenz.dev/blog/2023/index.xml" rel="self" type="application/rss+xml" />
     
     
       

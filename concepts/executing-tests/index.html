@@ -4,7 +4,6 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.113.0">
-<link rel="alternate" type="application/rss&#43;xml" href="//qadenz.dev/index.xml">
 <meta name="robots" content="index, follow">
 
 
@@ -19,16 +18,25 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Qadenz</title>
-<meta name="description" content="A friendly automation library">
-<meta property="og:title" content="Welcome to Test Automation with Qadenz!" />
-<meta property="og:description" content="A friendly automation library" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="//qadenz.dev/" /><meta property="og:site_name" content="Qadenz" />
-<meta itemprop="name" content="Welcome to Test Automation with Qadenz!">
-<meta itemprop="description" content="A friendly automation library"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Welcome to Test Automation with Qadenz!"/>
-<meta name="twitter:description" content="A friendly automation library"/>
+<title>Executing Tests | Qadenz</title>
+<meta name="description" content="Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.
+">
+<meta property="og:title" content="Executing Tests" />
+<meta property="og:description" content="Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//qadenz.dev/concepts/executing-tests/" /><meta property="article:section" content="Concepts" />
+
+<meta property="article:modified_time" content="2023-06-26T21:02:19-04:00" /><meta property="og:site_name" content="Qadenz" />
+<meta itemprop="name" content="Executing Tests">
+<meta itemprop="description" content="Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.
+">
+<meta itemprop="dateModified" content="2023-06-26T21:02:19-04:00" />
+<meta itemprop="wordCount" content="1096">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Executing Tests"/>
+<meta name="twitter:description" content="Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.
+"/>
 
 
 
@@ -51,7 +59,7 @@ if (!doNotTrack) {
 }
 </script>
   </head>
-  <body class="td-home">
+  <body class="td-page">
     <header>
       <nav class="td-navbar navbar-dark js-navbar-scroll">
 <div class="container-fluid flex-column flex-md-row">
@@ -85,7 +93,7 @@ if (!doNotTrack) {
   <nav class="collapse td-sidebar-nav" id="td-section-nav">
     <ul class="td-sidebar-nav__section pe-md-3 ul-0">
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m--li">
-  <a href="/" title="Welcome to Test Automation with Qadenz!" class="align-left ps-0 active td-sidebar-link td-sidebar-link__section tree-root" id="m-"><span class="td-sidebar-nav-active-item">Documentation</span></a>
+  <a href="/" title="Welcome to Test Automation with Qadenz!" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-"><span class="">Documentation</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-overview-li">
   <a href="/overview/" title="Welcome to Test Automation with Qadenz!" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-overview"><span class="">Overview</span></a>
@@ -96,13 +104,13 @@ if (!doNotTrack) {
   <a href="/overview/getting-started/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-overviewgetting-started"><span class="">Getting Started</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-concepts-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-concepts-li">
   <a href="/concepts/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-concepts"><span class="">Concepts</span></a>
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-conceptswriting-tests-li">
   <a href="/concepts/writing-tests/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-conceptswriting-tests"><span class="">Writing Tests</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-conceptsexecuting-tests-li">
-  <a href="/concepts/executing-tests/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-conceptsexecuting-tests"><span class="">Executing Tests</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-conceptsexecuting-tests-li">
+  <a href="/concepts/executing-tests/" class="align-left ps-0 active td-sidebar-link td-sidebar-link__page" id="m-conceptsexecuting-tests"><span class="td-sidebar-nav-active-item">Executing Tests</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-components-li">
@@ -137,12 +145,24 @@ if (!doNotTrack) {
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
             
 <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
-<a href="https://github.com/qadenz/qadenz.github.io/issues/new?title=Welcome%20to%20Test%20Automation%20with%20Qadenz!" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create Docs Issue</a>
+<a href="https://github.com/qadenz/qadenz.github.io/issues/new?title=Executing%20Tests" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create Docs Issue</a>
   <a href="https://github.com/qadenz/qadenz/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create Qadenz Issue</a>
-  
+  <a id="print" href="//qadenz.dev/concepts/_print/"><i class="fa-solid fa-print fa-fw"></i> Print entire section</a>
+
 </div>
 
-            
+            <div class="td-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#execution-requirements">Execution Requirements</a></li>
+    <li><a href="#testng-xml-parameters">TestNG XML Parameters</a></li>
+    <li><a href="#maven-surefire-plugin">Maven Surefire Plugin</a></li>
+    <li><a href="#command-line-execution">Command Line Execution</a></li>
+    <li><a href="#launching-a-suite-xml-in-the-ide">Launching a Suite XML in the IDE</a></li>
+  </ul>
+</nav>
+      </div>
+    
             
 
 	
@@ -173,8 +193,8 @@ if (!doNotTrack) {
             
             
 <div class="td-content">
-	<h1>Welcome to Test Automation with Qadenz!</h1>
-  
+	<h1>Executing Tests</h1>
+	<div class="lead">Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.</div>
 	<header class="article-meta">
 		
 
@@ -192,43 +212,122 @@ if (!doNotTrack) {
 
 		
 	</header>
-	<blockquote>
-<p><strong>This site is undergoing some upgrades and updates. Please pardon any broken links, unhandled variables, and other small issues while things are getting sorted out. Things will be back to normal just as quick as possible.</strong></p>
-</blockquote>
-<p>Qadenz is a robust test automation library written in Java that wraps <a href="https://www.selenium.dev/">Selenium</a> for browser automation, <a href="https://testng.org">TestNG</a> for suite management, and <a href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a> for validations. Using a mildly opinionated approach, Qadenz solves the common issues encountered while implementing the wrapper layer between the tests and accompanying UI models, and the underlying frameworks (like Selenium and TestNG).</p>
-<p>The goal of Qadenz is to take the heavy lifting out of developing a test automation project, and allow teams to focus instead on rapid scripting of tests. This is accomplished by using an easy-to-learn API that encourages simple to read tests without using Gherkin/BDD-based tools that add unnecessary complexity and maintenance overhead to the development workload.</p>
-<p>Core Features of Qadenz:</p>
+	<h2 id="execution-requirements">Execution Requirements</h2>
+<p>There are two requirements for running test suites with Qadenz.</p>
+<p>First, a working Selenium Grid must be running. The Grid can be configured either remotely, or in Standlone Mode on a local machine. In the case of a remote Grid, at least one properly configured Node must be active and conencted to the Hub. In the case of a local machine running Selenium Grid in Standalone Mode, the OS must be properly configured with at least one browser driver.</p>
+<p>Second, is the use of a TestNG Suite XML file. One XML file with one <code>&lt;suite&gt;</code> node must be provided in order to configure the Suite, and define the scope of included tests.</p>
+<h2 id="testng-xml-parameters">TestNG XML Parameters</h2>
+<p>Suite configuration in Qadenz is made via parameters on the TestNG Suite XML file.</p>
 <ul>
-<li>Boilerplate test setup and configuration is built and ready to use</li>
-<li>Selenium element interaction functionality is wrapped in a simple to use API</li>
-<li>A unique conditions-based approach to validations</li>
-<li>Custom built-in HTML reporting that provides detailed results data along with integrated screenshots</li>
+<li><code>gridHost</code>: Directs the tests to a Selenium Grid Hub. The expected value is simply the IP address of the Hub. The default port number (4444) is pre-configured.</li>
+<li><code>browser</code>: Specifies which browser will run the test.</li>
+<li><code>browserVersion</code>: An optional parameter that allows a specific version of the browser to be used for the test.</li>
+<li><code>browserConfigProfile</code>: Provides arguments for the browser configuration. This is optional. If the parameter is not declared, or if the parameter value does not match an existing profile name, no arguments will be passed to the <code>WebDriver</code> for the execution cycle.</li>
+<li><code>platform</code>: Directs the tests to a Node running a given OS. This parameter is optional.</li>
+<li><code>timeout</code>: Sets the max allowable time for the Explicit Waits to run in Qadenz. This is an optional parameter, expressed in seconds. If this parameter is not given, a default of 30 seconds will be used.</li>
+<li><code>appUrl</code>: The full URL of the application under test.</li>
+<li><code>retryInterceptedClicks</code>: This works with the <code>click()</code> command. If a click throws an <code>ElementClickInterceptedException</code>, enabling this parameter will direct the <code>WebDriver</code> to retry the click using the <code>Actions</code> API. Do note, however, that this exception is typically a symptom of a selector issue. This parameter is optional, and defaults to enabled.</li>
 </ul>
-<p>Qadenz is also extensible and stands ready to support custom functionality based on the needs of the tests to be automated. The design patterns that Qadenz provides can quickly and easily be followed for seamless integration of team-specific features.</p>
-<h1 id="license">License</h1>
-<p>The Qadenz Library is made available under the <a href="https://polyformproject.org/licenses/internal-use/1.0.0/">PolyForm Internal Use License</a> as a &ldquo;Source Available&rdquo; library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz) as a product for their customers.</p>
-<h1 id="getting-started">Getting Started</h1>
-<p>Getting started with Qadenz is as simple as importing the dependency from Maven. On the <code>pom.xml</code>, add a new entry to the <code>&lt;dependencies&gt;</code> section:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#000080">&lt;dependency&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;groupId&gt;</span>dev.qadenz<span style="color:#000080">&lt;/groupId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;artifactId&gt;</span>qadenz<span style="color:#000080">&lt;/artifactId&gt;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;version&gt;</span>1.0.0<span style="color:#000080">&lt;/version&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/dependency&gt;</span>
-</span></span></code></pre></div><p>The code is also available at <a href="https://github.com/qadenz/qadenz">GitHub</a>.</p>
-<p>This documentation on this site covers the general approach to automated test design from Qadenz, the major components and how they can be implemented, how test suites can be executed and results can be reviewed and shared. Improvements to the documentation are always in progress, but [questions and suggestions]({{ site.repo2 }}/issues/new?labels={% if page.editable %}{{ page.editable }}{% else %}question{% endif %}&amp;title=Question:&amp;body=Question on: {{ site.repo }}/tree/master/{{ page.path }}) are always welcome and will be a big help to understanding where to prioritize updates.</p>
-<p>Happy automating :)</p>
+<p>The <code>gridHost</code> is a Suite-level parameter, and is assigned only once during execution prior to any tests executing. The others are all Test-level parameters, and are assigned before each <code>&lt;test&gt;</code> node on the TestNG Suite XML file.</p>
+<p>The Test-level parameters allow for configuration changes to take place during the execution cycle. For example, if the goal of the suite is to run the same set of tests in multiple browsers, rather than create 3 different Suite XML files, 3 <code>&lt;test&gt;</code> nodes can be added to the same Suite XML file with different configurations.</p>
+<p>In the below example, both <code>&lt;test&gt;</code> nodes will use the same set of parameter values:</p>
+<pre tabindex="0"><code>&lt;suite name=&#34;Automated Tests&#34; parallel=&#34;methods&#34; thread-count=&#34;6&#34;&gt;
 
-        <div class="section-index">
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</div>
+    &lt;parameter name=&#34;gridHost&#34; value=&#34;10.1.10.10&#34;/&gt;
+    &lt;parameter name=&#34;appUrl&#34; value=&#34;http://qa.acmecorp.com&#34;/&gt;
+    &lt;parameter name=&#34;browser&#34; value=&#34;chrome&#34;/&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Permissions Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.PermissionsTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;
+</code></pre><p>Parameters on TestNG Suite XML files obey scoping rules. That is to say, a parameter declared within a <code>&lt;test&gt;</code> will take precedence over the same parameter as declared on the <code>&lt;suite&gt;</code>.</p>
+<p>In this next example, the second <code>&lt;test&gt;</code> will override the <code>browser</code> parameter, while the others will use follow what is declared at the <code>&lt;suite&gt;</code>.</p>
+<pre tabindex="0"><code>&lt;suite name=&#34;Automated Tests&#34; parallel=&#34;methods&#34; thread-count=&#34;6&#34;&gt;
+
+    &lt;parameter name=&#34;gridHost&#34; value=&#34;10.1.10.10&#34;/&gt;
+    &lt;parameter name=&#34;appUrl&#34; value=&#34;http://qa.acmecorp.com&#34;/&gt;
+    &lt;parameter name=&#34;browser&#34; value=&#34;chrome&#34;/&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Permissions Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;firefox&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.PermissionsTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Account Management Tests&#34;&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AccountManagementTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;
+</code></pre><p>In another example, to run the same set of tests in three different browsers as part of the same execution, Test-level parameters can be used accordingly:</p>
+<pre tabindex="0"><code>&lt;suite name=&#34;Automated Tests&#34; parallel=&#34;methods&#34; thread-count=&#34;6&#34;&gt;
+
+    &lt;parameter name=&#34;gridHost&#34; value=&#34;10.1.10.10&#34;/&gt;
+    &lt;parameter name=&#34;appUrl&#34; value=&#34;http://qa.acmecorp.com&#34;/&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;chrome&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;firefox&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+
+    &lt;test name=&#34;Authentication Tests&#34;&gt;
+        &lt;parameter name=&#34;browser&#34; value=&#34;edge&#34;/&gt;
+        &lt;classes&gt;
+            &lt;class name=&#34;com.acme.test.cases.AuthenticationTest&#34;/&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;
+</code></pre><h2 id="maven-surefire-plugin">Maven Surefire Plugin</h2>
+<p>Any means of invoking the TestNG XML file that is valid for TestNG should work without issue for a Qadenz-based project. Depending on the approach, however, some additional coding may be required. One simple method that is highly recommended is using the <a href="https://maven.apache.org/surefire/maven-surefire-plugin/">Maven Surefire</a> plugin. This allows a Suite XML file to be stored within the project itself and invoked as part of the Maven Test command.</p>
+<p>Start by adding the Surefire plugin to the project&rsquo;s <code>pom.xml</code>.</p>
+<pre tabindex="0"><code>&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0-M4&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;suiteXmlFiles&gt;
+            &lt;suiteXmlFile&gt;TestNGSuite.xml&lt;/suiteXmlFile&gt;
+        &lt;/suiteXmlFiles&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre><p>The example above assumes a TestNG Suite XML file called <code>TestNGSuite.xml</code> is located at the project root. Storing TestNG XML files in a subdirectory is also possible, but would require a reference to the directory in the <code>&lt;suiteXmlFile&gt;</code> node. Additionally, if multiple TestNG XML files are stored, it is possible to parameterize the file specification so that a command-line argument can be passed to Maven to specify which file to use for a given execution run.</p>
+<pre tabindex="0"><code>&lt;suiteXmlFiles&gt;
+    &lt;suiteXmlFile&gt;xml-suites/${suiteFile}&lt;/suiteXmlFile&gt;
+&lt;/suiteXmlFiles&gt;
+</code></pre><p>This example shows a folder at the project root called <code>xml-suites</code> which stores multiple suite files. The <code>${suiteFile}</code> property then becomes a command-line argument, allowing the TestNG XML file to be specified. It is worth noting that the above example may be interpreted as an error in some IDEs such as IntelliJ IDEA. This will not impact the ability to compile the project, nor will it impact test execution. This is an issue where the <code>pom.xml</code> does not have a value defined for the declared property. As long as the value is declared on the command line, the test run will launch.</p>
+<h2 id="command-line-execution">Command Line Execution</h2>
+<p>To run a TestNG XML file called <code>acme-tests.xml</code>, the following command would be used.</p>
+<pre tabindex="0"><code>mvn clean test -DsuiteFile=&#34;acme-tests.xml&#34;
+</code></pre><p>This approach can be used on the local machine, or defined in a CI/CD tool like Jenkins or TeamCity as the build command.</p>
+<p>Further information on how the Surefire plugin works and how it can be used for parameterizing and launching test suites can be found at the <a href="https://maven.apache.org/surefire/maven-surefire-plugin/">Surefire</a> website. Additional information for integrating Maven builds into a CI/CD tool can be found in the documentation of the tool in use.</p>
+<h2 id="launching-a-suite-xml-in-the-ide">Launching a Suite XML in the IDE</h2>
+<p>For local execution runs and debugging during the development phase, IDEs like Intellij IDEA support instant run of TestNG Suite XML files. With the TestNG plugin installed and enabled, simply right click a valid TestNG XML file, and click <code>Run</code>. If results are not generated in the <code>test-output</code> folder in the project root, go to the Run Configurations and (using IntelliJ IDEA as an example), open the configuration for the selected file, go to the <code>Listeners</code> tab, and enable the <code>Use default reporters</code> checkbox.</p>
 
 	
 		<style>
@@ -301,6 +400,7 @@ if (!doNotTrack) {
 </div>
 
 </div>
+
 
           </main>
         </div>

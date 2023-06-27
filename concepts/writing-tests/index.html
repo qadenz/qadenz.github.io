@@ -18,16 +18,25 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>404 Page not found | Qadenz</title>
-<meta name="description" content="A friendly automation library">
-<meta property="og:title" content="404 Page not found" />
-<meta property="og:description" content="A friendly automation library" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="//qadenz.dev/404.html" /><meta property="og:site_name" content="Qadenz" />
-<meta itemprop="name" content="404 Page not found">
-<meta itemprop="description" content="A friendly automation library"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="404 Page not found"/>
-<meta name="twitter:description" content="A friendly automation library"/>
+<title>Writing Tests | Qadenz</title>
+<meta name="description" content="Writing Tests with Qadenz
+">
+<meta property="og:title" content="Writing Tests" />
+<meta property="og:description" content="Writing Tests with Qadenz
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//qadenz.dev/concepts/writing-tests/" /><meta property="article:section" content="Concepts" />
+
+<meta property="article:modified_time" content="2023-06-26T21:02:19-04:00" /><meta property="og:site_name" content="Qadenz" />
+<meta itemprop="name" content="Writing Tests">
+<meta itemprop="description" content="Writing Tests with Qadenz
+">
+<meta itemprop="dateModified" content="2023-06-26T21:02:19-04:00" />
+<meta itemprop="wordCount" content="396">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Writing Tests"/>
+<meta name="twitter:description" content="Writing Tests with Qadenz
+"/>
 
 
 
@@ -50,7 +59,7 @@ if (!doNotTrack) {
 }
 </script>
   </head>
-  <body class="td-404">
+  <body class="td-page">
     <header>
       <nav class="td-navbar navbar-dark js-navbar-scroll">
 <div class="container-fluid flex-column flex-md-row">
@@ -68,14 +77,246 @@ if (!doNotTrack) {
 </div>
 </nav>
     </header>
-    <div class="container-fluid td-default td-outer">
-      <main role="main" class="td-main">
-        <div class="td-content">
-  <h1>Not found</h1>
-  <p>Oops! This page doesn't exist. Try going back to the <a href="/">home page</a>.</p>
-  <p>You can learn how to make a 404 page like this in <a href="https://gohugo.io/templates/404/">Custom 404 Pages</a>.</p>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            <div id="td-sidebar-menu" class="td-sidebar__inner">
+  <div id="content-mobile">
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ms-3 fas fa-bars" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  </div>
+  <div id="content-desktop"></div>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m--li">
+  <a href="/" title="Welcome to Test Automation with Qadenz!" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-"><span class="">Documentation</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-overview-li">
+  <a href="/overview/" title="Welcome to Test Automation with Qadenz!" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-overview"><span class="">Overview</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-overviewphilosophy-of-use-li">
+  <a href="/overview/philosophy-of-use/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-overviewphilosophy-of-use"><span class="">Philosophy of Use</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-overviewgetting-started-li">
+  <a href="/overview/getting-started/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-overviewgetting-started"><span class="">Getting Started</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-concepts-li">
+  <a href="/concepts/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-concepts"><span class="">Concepts</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-conceptswriting-tests-li">
+  <a href="/concepts/writing-tests/" class="align-left ps-0 active td-sidebar-link td-sidebar-link__page" id="m-conceptswriting-tests"><span class="td-sidebar-nav-active-item">Writing Tests</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-conceptsexecuting-tests-li">
+  <a href="/concepts/executing-tests/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-conceptsexecuting-tests"><span class="">Executing Tests</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-components-li">
+  <a href="/components/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-components"><span class="">Components</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentsconfiguration-li">
+  <a href="/components/configuration/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentsconfiguration"><span class="">Configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentscommands-li">
+  <a href="/components/commands/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentscommands"><span class="">Commands</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentsconditions-and-expectations-li">
+  <a href="/components/conditions-and-expectations/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentsconditions-and-expectations"><span class="">Conditions &amp; Expectations</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentslogging-and-reporting-li">
+  <a href="/components/logging-and-reporting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentslogging-and-reporting"><span class="">Logging &amp; Reporting</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentsvalidations-li">
+  <a href="/components/validations/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentsvalidations"><span class="">Validations</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-componentsui-modeling-li">
+  <a href="/components/ui-modeling/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-componentsui-modeling"><span class="">UI Modeling</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-tutorials-li">
+  <a href="/tutorials/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-tutorials"><span class="">Tutorials</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-faq-li">
+  <a href="/faq/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-faq"><span class="">FAQ</span></a>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
 </div>
-      </main>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+<div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+<a href="https://github.com/qadenz/qadenz.github.io/issues/new?title=Writing%20Tests" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create Docs Issue</a>
+  <a href="https://github.com/qadenz/qadenz/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> Create Qadenz Issue</a>
+  <a id="print" href="//qadenz.dev/concepts/_print/"><i class="fa-solid fa-print fa-fw"></i> Print entire section</a>
+
+</div>
+
+            <div class="td-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#custom-configurations">Custom Configurations</a></li>
+    <li><a href="#integrating-with-testng">Integrating with TestNG</a></li>
+  </ul>
+</nav>
+      </div>
+    
+            
+
+	
+		
+			
+
+
+
+  
+  
+
+		
+			
+
+
+
+  
+  
+
+		
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            
+            
+<div class="td-content">
+	<h1>Writing Tests</h1>
+	<div class="lead">Writing Tests with Qadenz</div>
+	<header class="article-meta">
+		
+
+  
+    
+      
+
+
+    
+      
+
+
+    
+  
+
+		
+	</header>
+	<p>Adding new tests to a Qadenz-powered project is as simple as extending the <code>AutomatedWebTest</code> class, and adding <code>@Test</code> annotated methods. This inheritance is required in order to utilize the Qadenz suite configuration features.</p>
+<pre tabindex="0"><code>public class AuthenticationTest extends AutomatedWebTest {
+
+    @Test
+    public void verifySuccessfulAuthenticationWithValidCredentials() {
+        // add test code
+    }
+
+    @Test
+    public void verifyAuthenticationErrorWhenUsingInvalidCredentials() {
+        // add test code
+    }
+}
+</code></pre><h2 id="custom-configurations">Custom Configurations</h2>
+<p>If project-specific configurations need to be performed during the setup or tear-down phases of the execution cycle, an intermediate class may be inserted into the inheritance hierarchy. For example, a project may require that certain data items be in place as preconditions for tests, or other custom testing components would have to be started. These tasks would be well suited to be kept on a class that extends <code>AutomatedWebTest</code>, and is in turn extended by classes that hold <code>@Test</code> methods.</p>
+<pre tabindex="0"><code>public class AcmeAutomatedWebTest extends AutomatedWebTest {
+
+    @BeforeSuite
+    public void loadItemData() {
+        // perform setup tasks
+    }
+}
+
+public class ItemInventorySearchTest extends AcmeAutomatedWebTest {
+    // add @Test methods
+}
+</code></pre><h2 id="integrating-with-testng">Integrating with TestNG</h2>
+<p>AutomatedWebTest uses standard <a href="https://testng.org/doc/documentation-main.html#annotations">TestNG Annotations</a> for configuration steps. As such, any intermediate configuration class that performs custom setup and tear-down tasks can utilize the same annotations to integrate seamlessly into the TestNG suite workflow.</p>
+<p>Accessibility to TestNG features is generally open-ended with Qadenz. This was done intentionally so as to minimize restrictions on how users could configure their suites. Data handling features such as DataProviders and Parameters are usable, as are other features like Test Factories and disabling tests via the <code>@Ignore</code> annotation.</p>
+<p>Parallelism can be set as desired, but do keep in mind that Qadenz executes WebDriver startup and shutdown in the <code>@BeforeMethod</code> and <code>@AfterMethod</code>. As such, for most projects, specifying <code>parallel=&quot;methods&quot;</code> on the TestNG Suite XML file is recommended. Deviating from this approach should only be done if there is a specific need to do so within the design of the test project.</p>
+<p>Qadenz does make use of dependencies within the scope of configuration methods to ensure that methods that take place at the same point in the workflow (for example, there are two <code>@BeforeSuite</code> methods) are executed in a certain order. This pattern can be repeated as needed should custom configurations need also to be performed in order. Given the focus on parallel execution with Qadenz, however, it is not recommended that <code>@Test</code> methods utilize any dependencies among one another.</p>
+
+	
+		<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<br>
+<hr>
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof ga !== 'function') return;
+    const args = {
+      command: 'send',
+      hitType: 'event',
+      category: 'Helpful',
+      action: 'click',
+      label: window.location.pathname,
+      value: value
+    };
+    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(1);
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+
+		<br />
+	
+	
+	<div class="text-muted mt-5 pt-3 border-top">
+  Last modified June 26, 2023 
+</div>
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
       <footer class="td-footer row d-print-none">
   <div class="container-fluid">
     <div class="row mx-md-2">
