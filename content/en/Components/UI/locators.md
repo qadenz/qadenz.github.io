@@ -1,6 +1,6 @@
 ---
 title: "Locators"
-weight: 5
+weight: 1
 ---
 
 The Locator is the central component of UI modeling with Qadenz. It is a key ingredient in an approach that seeks to improve the UI modeling by avoiding the `PageFactory` class and `@FindBy` annotation entirely. It's design sets out to accomplish several things. First, the Locator is a clean wrapper for both an element's selector and a display friendly name. Second, the Locator is a vehicle for parameterization of element selectors, leading to much more efficient UI models. And finally, the Locator carries attributes that assist with validations and element inspections.
