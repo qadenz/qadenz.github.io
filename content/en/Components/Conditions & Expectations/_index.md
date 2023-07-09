@@ -16,3 +16,5 @@ A `Condition` describes a specific criteria to be evaluated on the UI. This coul
 ## How does it work?
 
 Each `Condition` uses WebDriver commands to retrieve data from, or information about, elements on the UI. Each `Expectation` invokes a Hamcrest `Matcher` that is used for the evaluation, which is passed to the `Condition`. If the the value retrieved by the `Condition` matches the value given on the `Expectation`, the `Condition` result will return `TRUE`.
+
+Logging of evaluations is achieved by combining a description of the evaluation on the `Condition` with a description of the expected outcome on the `Expectation`. If an evaluation should fail and the `Condition` result return `FALSE`, additional information will be provided on the logs to illustrate the cause of the failure. This typically equates to capturing the "actual" value that did not meet the "expected" value.
