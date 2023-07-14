@@ -34,8 +34,8 @@
 
 
 
-<link rel="preload" href="/scss/main.min.dffc1689fd83830a5fb090d38ca9680587c322008ad97c675ee0ca22e5fb10d5.css" as="style">
-<link href="/scss/main.min.dffc1689fd83830a5fb090d38ca9680587c322008ad97c675ee0ca22e5fb10d5.css" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.2f700e0efa3061e9809e02a73b10146223b23adc65c024e3eefca8ab2ad06c88.css" as="style">
+<link href="/scss/main.min.2f700e0efa3061e9809e02a73b10146223b23adc65c024e3eefca8ab2ad06c88.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.3.min.js"
@@ -204,21 +204,92 @@ This is the multi-page printable view of this section.
 	<p>Bootstrapping an automation project with Qadenz is as simple as starting a new Java/Maven project, adding a dependency, and building a simple test. This guide will run through the pre-requisites, and show how to build a simple first automated test that verifies the functionality of an authentication form.</p>
 <h2 id="the-foundation">The Foundation</h2>
 <p>Before we dive into a fresh project, let us first make sure we have the necessary tooling in place to do so.</p>
-<p>Being a Java project, we&rsquo;ll need a JDK. Qadenz is currently built with <strong>JDK 11</strong>, so an equivalent or newer version must be installed. Next is an IDE. This is completely a preference-based decision, but with the prevalence of <strong>IntelliJ IDEA</strong>, it is strongly recommended. The Community Edition is free to use and will be sufficient for automation development with Qadenz. Most IDEs come with <strong>Maven</strong> bundled, and IntelliJ is no different. This is perfectly functional, but can be known to exhibit some different behavior in certain situations than a native installation. It is recommended to install the latest Maven and configure the IDE to use the native instance instead of the bundled version. Version control is also an important part of collaborating with other team members. While there are a number of tools available to suit this need, <strong>Git</strong> is very commonly adopted by teams. Finally, ensuring IDE support for things like <strong>TestNG</strong>, <strong>Maven</strong>, and <strong>Git</strong> can make working with these tools very convenient.</p>
+<p>Being a Java project, we&rsquo;ll need a JDK. Qadenz is currently built with <strong>JDK 11</strong>, so an equivalent or newer version must be installed. Next is an IDE. This is completely a preference-based decision, but with the prevalence of <strong>IntelliJ IDEA</strong>, it is strongly recommended. The Community Edition is free to use and will be sufficient for automation development with Qadenz. Most IDEs come with <strong>Maven</strong> bundled, and IntelliJ is no different. This is perfectly functional, but can be known to exhibit some different behavior in certain situations than a native installation. It is recommended to install the latest Maven and configure the IDE to use the native instance instead of the bundled version. Finally, ensuring IDE support for things like <strong>TestNG</strong> and <strong>Maven</strong> can make working with these tools very convenient.</p>
 <p>Next, since this is a test automation project, we&rsquo;ll need to make sure some related tooling is in place. Qadenz is built to use the <code>RemoteWebDriver</code>, so the <strong><a href="https://www.selenium.dev/downloads/">Selenium Server</a></strong> is a necessity. <strong>Chromedriver</strong> and the <strong>Chrome</strong> browser itself will also need to be in place. Other browsers are certainly supported, Chrome is simply a good starting point due to it&rsquo;s dominant market share.</p>
 <p>Package managers are a great way to install and update development tools. In a Windows environment, <strong>Chocolatey</strong> is a good option. For Mac, <strong>Homebrew</strong> is a great choice. Linux distros will have their own package systems baked in, and these tools are typically available through official repos.</p>
 <h2 id="the-framing">The Framing</h2>
-<p>((Standing up a Java project, adding Qadenz, first classes))</p>
 <p>In the IDE, start a fresh Maven project. Open the <code>pom.xml</code> file and add the dependency information for Qadenz.</p>
-<pre tabindex="0"><code>&lt;dependency&gt;
-    &lt;groupId&gt;dev.qadenz&lt;/groupId&gt;
-    &lt;artifactId&gt;qadenz&lt;/artifactId&gt;
-    &lt;version&gt;2.0.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h2 id="the-fixtures">The Fixtures</h2>
-<p>(( First UI models, Write and run a first test ))</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#000080">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;groupId&gt;</span>dev.qadenz<span style="color:#000080">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;artifactId&gt;</span>qadenz<span style="color:#000080">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;version&gt;</span>2.0.0<span style="color:#000080">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>Next, create a Package and Class that can hold our first test, which will exercise the Form Authentication page at <a href="https://the-internet.herokuapp.com/login">Heroku&rsquo;s The-Internet</a> app. To ensure this new class is recognized as an ran as a Qadenz Test Class, the class must extend <code>AutomatedWebTest</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> <span style="color:#555">com.herokuapp.theinternet</span><span style="color:#000;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span> <span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">FormAuthenticationTest</span> <span style="color:#000;font-weight:bold">extends</span> AutomatedWebTest <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h2 id="the-fixturing">The Fixturing</h2>
+<p>Our first test will be to complete the form with a valid username and password, click &lsquo;Login&rsquo;, and verify the confirmation text that indicates successful authentication.</p>
+<p>Let&rsquo;s first take a peek at the <a href="https://the-internet.herokuapp.com/login">Form Authentication</a> page. In order to complete the test, we need to map the Username and Password fields, and the Login button.</p>
+<p><img src="/img/demo-login-page.png" alt=""></p>
+<p>Then, in the Secure Area, we&rsquo;ll need to map the banner in order to verify the message.</p>
+<p><img src="/img/demo-login-secure.png" alt=""></p>
+<p>On the <code>FormAuthenticationTest</code> class, create Locators for the elements with which the test will interact.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">private</span> Locator usernameField <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Locator<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;Username Field&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#d14">&#34;#username&#34;</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">private</span> Locator passwordField <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Locator<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;Password Field&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#d14">&#34;#password&#34;</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">private</span> Locator loginButton <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Locator<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;Login Button&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#d14">&#34;#login .fa-sign-in&#34;</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">private</span> Locator bannerMessage <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Locator<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;Banner Message&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#d14">&#34;#flash&#34;</span><span style="color:#000;font-weight:bold">);</span>
+</span></span></code></pre></div>
+
+<div class="alert alert-primary" role="alert">
+
+
+    Under normal circumstances, we would want to create some basic page objects and properly model the UI under test. Since this is a <em>very</em> rudimentary demo, the <code>Locator</code> is being used in a simple way just to define the elements required for this exercise.
+
+</div>
+
+<p>Next, add the test method. A <code>WebCommander</code> instance is created and commands are invoked to interact with the form and complete the steps of the test.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#3c5d5d;font-weight:bold">@Test</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">public</span> <span style="color:#458;font-weight:bold">void</span> <span style="color:#900;font-weight:bold">testAuthenticationSucceedsWithValidCredentials</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    WebCommander commander <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> WebCommander<span style="color:#000;font-weight:bold">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    commander<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">enterText</span><span style="color:#000;font-weight:bold">(</span>usernameField<span style="color:#000;font-weight:bold">,</span> <span style="color:#d14">&#34;tomsmith&#34;</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>    commander<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">enterText</span><span style="color:#000;font-weight:bold">(</span>passwordField<span style="color:#000;font-weight:bold">,</span> <span style="color:#d14">&#34;SuperSecretPassword!&#34;</span><span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>    commander<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">click</span><span style="color:#000;font-weight:bold">(</span>loginButton<span style="color:#000;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span>    commander<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">verify</span><span style="color:#000;font-weight:bold">(</span>Conditions<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">directTextOfElement</span><span style="color:#000;font-weight:bold">(</span>bannerMessage<span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>            Expectations<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">isEqualTo</span><span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;You logged into a secure area!&#34;</span><span style="color:#000;font-weight:bold">)));</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><p>And finally, add a TestNG Suite XML file at the project root. The required parameters will tell Qadenz which browser to use for the test, the URL of the application, and where to find the Selenium Server.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">&lt;!DOCTYPE suite SYSTEM &#34;https://testng.org/testng-1.0.dtd&#34; &gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;suite</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;Qadenz Quickstart&#34;</span> <span style="color:#008080">verbose=</span><span style="color:#d14">&#34;1&#34;</span> <span style="color:#008080">thread-count=</span><span style="color:#d14">&#34;1&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;parameter</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;browser&#34;</span> <span style="color:#008080">value=</span><span style="color:#d14">&#34;chrome&#34;</span><span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;parameter</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;appUrl&#34;</span> <span style="color:#008080">value=</span><span style="color:#d14">&#34;https://the-internet.herokuapp.com/login&#34;</span><span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;parameter</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;gridHost&#34;</span> <span style="color:#008080">value=</span><span style="color:#d14">&#34;127.0.0.1&#34;</span><span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;test</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;Login Test&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000080">&lt;classes&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&lt;class</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;com.herokuapp.theinternet.FormAuthenticationTest&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000080">&lt;methods&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#000080">&lt;include</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;testAuthenticationSucceedsWithValidCredentials&#34;</span><span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#000080">&lt;/methods&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&lt;/class&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000080">&lt;/classes&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;/test&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/suite&gt;</span>
+</span></span></code></pre></div><p>The coding portion is now complete, the next step is to run the test and view the results.</p>
 <h2 id="the-finishing">The Finishing</h2>
-<p>(( Results viewing ))</p>
+<p>Before the test can be launched, a Selenium Server must be started. When running tests locally, this can be easily done by launching the server in standalone mode. Open a command prompt and change to the directory where the Selenium Server jar is located, then run the following command&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>java -jar selenium-server-4.10.0.jar standalone
+</span></span></code></pre></div><p>Next, return to the IDE, right click the TestNG Suite XML file, and select <code>Run</code>. The suite will run, a browser will be launched, and the test will be executed. Once complete, the Logs and HTML Report will be available for review.</p>
+<h4 id="console-logs">Console Logs</h4>
+<p>In the IDE, the console will display logs captured by the test run. The console logs will contain output from the <code>SUITE</code> logger, which shows information about the Suite in progress. This will include data such as XML <code>&lt;parameter&gt;</code> values, browser configuration arugments, and which test methods are being ran.</p>
+<p>The <code>TEST</code> logger will show information from the actual test. For the login test, the following will be displayed&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-console" data-lang="console"><span style="display:flex;"><span><span style="color:#888">21:06:57:620 | Thread: main | INFO | WebCommander | Entering text [tomsmith] into element [Username Field].
+</span></span></span><span style="display:flex;"><span><span style="color:#888">21:06:57:798 | Thread: main | INFO | WebCommander | Entering text [SuperSecretPassword!] into element [Password Field].
+</span></span></span><span style="display:flex;"><span><span style="color:#888">21:06:57:893 | Thread: main | INFO | WebCommander | Clicking element [Login Button].
+</span></span></span><span style="display:flex;"><span><span style="color:#888">21:06:58:149 | Thread: main | INFO | Commands | Verifying Condition - Direct text of element [Banner Message] is equal to [You logged into a secure area!].
+</span></span></span><span style="display:flex;"><span><span style="color:#888">21:06:58:274 | Thread: main | INFO | Commands | Result - PASS
+</span></span></span></code></pre></div><p>Each line will contain a timestamp, a thread identifier, the logging level, the name of the logger, and the log message showing the details of each step of the test.</p>
+<h4 id="html-reports">HTML Reports</h4>
+<p>Qadenz has a built-in HTML reporter that presents the logs from each test in a browser along with screenshots of failed validations and caught exceptions. The <code>suite-results.html</code> file is located in the <code>test-output</code> directory at the project root alongside the reports generated by TestNG.</p>
+<p><img src="/img/demo-html-report.png" alt=""></p>
+<p>The HTML report sorts test methods by result, then groups by class. Screenshots are embedded directly into the HTML as Base64 encorded Strings, which makes sharing test results extremely simple.</p>
 
 </div>
 

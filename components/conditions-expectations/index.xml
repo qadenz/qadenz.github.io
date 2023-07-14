@@ -1,0 +1,85 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Qadenz – Conditions &amp; Expectations</title>
+    <link>//qadenz.dev/components/conditions-expectations/</link>
+    <description>Recent content in Conditions &amp; Expectations on Qadenz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="//qadenz.dev/components/conditions-expectations/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Components: Validations</title>
+      <link>//qadenz.dev/components/conditions-expectations/validations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/conditions-expectations/validations/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Unit testing frameworks such as TestNG or JUnit include assertion functionality as a core component, and are relatively simple to use. Being open-ended frameworks, however, individual users may tend to express very similar validations in a variety of different assertions. This leads to inconsistent coding patterns, and more difficult maintenance of test code.&lt;/p&gt;
+&lt;p&gt;Using &lt;code&gt;Conditions&lt;/code&gt; and &lt;code&gt;Expectations&lt;/code&gt; allows a team to ensure all contributors are following the same pattern for validations.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Conditions.textOfElement(greetingText, Expectations.isEqualTo(&amp;#34;Hello World!&amp;#34;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That said, Qadenz does employ a single TestNG assertion, the &lt;code&gt;assertTrue()&lt;/code&gt; method, as a means of validating a Condition. The &lt;code&gt;result()&lt;/code&gt; of a Condition is a simple representation of whether the state of the UI under test meets expectation. If the output of the Condition evaluation matches the Expectation, &lt;code&gt;result()&lt;/code&gt; will return &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;By passing this result to the &lt;code&gt;assertTrue()&lt;/code&gt; method, Qadenz is ensuring that a passing result depends on the Condition evaluation meeting the Expectation. If not, the validation will fail.&lt;/p&gt;
+&lt;h2 id=&#34;assertion-types&#34;&gt;Assertion Types&lt;/h2&gt;
+&lt;p&gt;The concept of Hard Assertions and Soft Assertions are not new in the test automation world. Qadenz implements both concepts by way of the &lt;code&gt;verify()&lt;/code&gt; and &lt;code&gt;check()&lt;/code&gt; methods.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;verify()&lt;/code&gt; represents a Hard Assertion. If the validation fails, the test will be marked as failed and execution will be stopped.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;check()&lt;/code&gt; represents a Soft Assertion. If the validation fails, the test will be marked as failed, but execution will be allowed to continue until a call to &lt;code&gt;Assertions.flush()&lt;/code&gt; is made, which will stop execution of the test if any failures have been encountered.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;verify()&lt;/code&gt; or &lt;code&gt;check()&lt;/code&gt; methods are available on the Commands Hierarchy and are callable on any descendant class of &lt;code&gt;Commands&lt;/code&gt;. The mechanics of using these validations are the same, with the only difference being an additional step with &lt;code&gt;check()&lt;/code&gt; required to call &lt;code&gt;Assertions.flush()&lt;/code&gt; in order to handle any failed Soft Assertions and stop execution.&lt;/p&gt;
+&lt;h2 id=&#34;grouped-conditions&#34;&gt;Grouped Conditions&lt;/h2&gt;
+&lt;p&gt;Validations in Qadenz are further enhanced with the ability to evaluate multiple Conditions as a group. In scenarios where a single UI action can trigger multiple verification points in a test, a tester may have to express multiple assert statements to ensure necessary coverage. If, for example, the first assertion were to fail, the remaining assertions would remain unchecked until either the UI under test is fixed, or the test scenario is executed manually.&lt;/p&gt;
+&lt;p&gt;Using Qadenz, a tester is able to execute these same validations in one call to &lt;code&gt;verify()&lt;/code&gt; or &lt;code&gt;check()&lt;/code&gt;, and will receive results for each Condition evaluation regardless of individual results. If again, the first validation fails, Qadenz will perform handling tasks on the failure, then proceed to evaluate each of the other Conditions that were passed. In the case of a &lt;code&gt;verify()&lt;/code&gt; with multiple Conditions where one or more have failed, halting of test execution will be delayed until all Conditions have been evaluated, which will ensure that the test step is completed in its entirety.&lt;/p&gt;
+&lt;p&gt;In the example below, a user has added an item to the shopping cart, and the next step will verify a snackbar notification is displayed with a confirmation message, the item quantity is shown on the shopping cart icon, and the &amp;lsquo;Checkout Now&amp;rsquo; button is enabled.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;commander.verify(
+        Conditions.textOfElement(snackBarNotification, Expectations.isEqualTo(&amp;#34;Items added successfully!&amp;#34;)),
+        Conditions.textOfElement(quantityInCartIndicator, Expectations.isEqualTo(&amp;#34;1&amp;#34;)),
+        Conditions.enabledStateOfElement(checkOutNowButton, Expectations.isTrue()));
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;By grouping these verifications together, even if one (or more) Conditions fail, all will be evaluated and reported individually.&lt;/p&gt;
+&lt;h2 id=&#34;managing-soft-assertions&#34;&gt;Managing Soft Assertions&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;check()&lt;/code&gt; methods works alongside the static &lt;code&gt;Assertions.flush()&lt;/code&gt; method to delay execution stoppages in the event of failed validations. As calls to &lt;code&gt;check()&lt;/code&gt; are made and executed through the course of a test, the &lt;a href=&#34;https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Assertions.java&#34;&gt;&lt;code&gt;Assertions&lt;/code&gt;&lt;/a&gt; class tracks whether any failures have been encountered. When the call to &lt;code&gt;Assertions.flush()&lt;/code&gt; is made, this tracker is checked. If any failures are present, execution will be stopped. If no failures are found, execution continues.&lt;/p&gt;
+&lt;p&gt;Since the tracker is live for the entire duration of a test, there is no limit to how many calls to &lt;code&gt;Assertions.flush()&lt;/code&gt; can be made throughout a test. It is possible then, to create a series of &amp;ldquo;checkpoints&amp;rdquo; in longer tests whenever it is deemed sensible to stop a test if failures have been found. This is especially convenient for smoke to end-to-end tests where a focus on completion of test is important for a full accounting of key validation points.&lt;/p&gt;
+&lt;p&gt;Please note, however, that at least one call to &lt;code&gt;Assertions.flush()&lt;/code&gt; is required in tests where only &lt;code&gt;check()&lt;/code&gt; validations are made. If no call is made, the test will be allowed to continue to completion, and individual steps will be reported as failed (if validations have indeed failed), but the test as a whole will be reported as passing. Since the Qadenz reporter is integrated with TestNG, the &lt;code&gt;AssertionError&lt;/code&gt; thrown by the &lt;code&gt;flush()&lt;/code&gt; method in the event of individual failures is required to mark the test itself as failed.&lt;/p&gt;
+&lt;p&gt;One additional design consideration must be made when mixing &lt;code&gt;verify()&lt;/code&gt; and &lt;code&gt;check()&lt;/code&gt; validations within the same test. When a &lt;code&gt;check()&lt;/code&gt; validation is made, and is followed by a &lt;code&gt;verify()&lt;/code&gt; validation prior to calling &lt;code&gt;Assertions.flush()&lt;/code&gt;, if the &lt;code&gt;verify()&lt;/code&gt; validation fails, the test will be stopped at the failed &lt;code&gt;verify()&lt;/code&gt; validation.&lt;/p&gt;
+&lt;h2 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h2&gt;
+&lt;p&gt;Qadenz validations are built to capture screenshots whenever a Condition evaluation fails. If screenshots are desired for validation failures, no special action need be taken. Should screenshots &lt;em&gt;not&lt;/em&gt; be needed for a validation, disabling is easy with the overloaded &lt;code&gt;verify()&lt;/code&gt; and &lt;code&gt;check()&lt;/code&gt; methods.&lt;/p&gt;
+&lt;p&gt;Adding a call to &lt;code&gt;Screenshot.SKIP&lt;/code&gt; as the first argument in either &lt;code&gt;verify()&lt;/code&gt; or &lt;code&gt;check()&lt;/code&gt; will disable screenshots from being captured if the evaluations for any accompanying Conditions fail.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;verify(Screenshot.SKIP, Conditions.visibilityOfElement(locator, Expectations.isTrue());
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;A &lt;code&gt;boolean&lt;/code&gt; could also be passed to achieve the same outcome. The &lt;code&gt;Screenshot.SKIP&lt;/code&gt; value is intended as a means to keep the resulting code easily readable at a glance.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: Waits</title>
+      <link>//qadenz.dev/components/conditions-expectations/waits/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/conditions-expectations/waits/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Selenium provides both Implicit and Explicit Wait types, and Java provides the &lt;code&gt;Thread.sleep()&lt;/code&gt;. While all technically valid, each have their own advantages and disadvantages. Qadenz does not implement the &lt;code&gt;WebDriver&lt;/code&gt; Implicit Wait. The Implicit Wait can serve as a basic catch-all wait approach in simple projects, but the flexibility is limited, and more importantly, it tends to not pair well with Explicit Waits. Using both in conjunction can cause some very &lt;a href=&#34;https://www.selenium.dev/documentation/webdriver/waits/#implicit-wait&#34;&gt;unexpected side effects&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Qadenz opts for the Explicit Wait as the primary UI synchronization approach, and pairs this concept with &lt;code&gt;Conditions&lt;/code&gt; and &lt;code&gt;Expectations&lt;/code&gt; to define the criteria for the syncronization.&lt;/p&gt;
+&lt;h2 id=&#34;what-about-expectedconditions&#34;&gt;What about ExpectedConditions?&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;ExpectedConditions&lt;/code&gt; class is well known among automation engineers and provides a wide variety of wait-conditions to handle timing and synchronization. In his &lt;a href=&#34;https://youtu.be/gyfUpOysIF8?t=1773&#34;&gt;2017 Selenium State of the Union&lt;/a&gt;, Simon Stewart calls &lt;code&gt;ExpectedConditions&lt;/code&gt; a &amp;ldquo;useful dumping ground for functionality&amp;rdquo; that &amp;ldquo;brutally violates this attempt to be concise&amp;rdquo;. While there is no denying the usefulness of a class such as &lt;code&gt;ExpectedConditions&lt;/code&gt;, it could also be said that the method options aren&amp;rsquo;t always intuitive for choosing an ideal fit. In that same talk, Mr. Stewart uses the original intent and the evolution of &lt;code&gt;ExpectedConditions&lt;/code&gt; as an example of why it&amp;rsquo;s important that developers not punish themselves too harshly for code written in the past.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Conditions&lt;/code&gt; and &lt;code&gt;Expectations&lt;/code&gt; are implemented in Qadenz for waits with the intent of making the invocations of wait-conditions much more concise and exact, thus enhancing the readability (and maintainability) in test code, as well as improving the clarity and precision of logging output that is captured and presented on the final reports.&lt;/p&gt;
+&lt;h2 id=&#34;invoking-a-wait&#34;&gt;Invoking a Wait&lt;/h2&gt;
+&lt;p&gt;Invoking a Wait is as simple as calling the &lt;code&gt;pause()&lt;/code&gt; command, and passing an appropriate &lt;code&gt;Condition&lt;/code&gt;/&lt;code&gt;Expectation&lt;/code&gt; pairing.&lt;/p&gt;
+&lt;p&gt;If an application under test displays a confirmation banner when an item is added to a shopping cart that blocks access to the navigation menu, for example, the test would benefit from pausing execution until the banner confirmation disappears after a few seconds.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;commander&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;pause&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;Conditions&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;visibilityOfElement&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;addItemConfirmation&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; Expectations&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;isFalse&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;()));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Unlike the validation functionality that consumes the &lt;code&gt;Condition&lt;/code&gt; and &lt;code&gt;Expectation&lt;/code&gt; pairing, the &lt;code&gt;pause()&lt;/code&gt; method does not provide the ability to pass multiple Conditions as a group for a wait. This is done in the mindset that waits should be used as sparingly as possible to avoid unnecessary lenthening of execution times.&lt;/p&gt;
+&lt;h2 id=&#34;i-want-my-mtv-expectedconditions&#34;&gt;I want my &lt;del&gt;MTV&lt;/del&gt; ExpectedConditions&lt;/h2&gt;
+&lt;p&gt;While Qadenz does implement certain functionality in an opinionated manner, there is no reason to prevent access to the underlying tools for use in a customized solution within a consuming test project. By &lt;a href=&#34;//qadenz.dev/components/commands/extensibility&#34;&gt;extending the &lt;code&gt;WebCommander&lt;/code&gt;&lt;/a&gt;, it would be very possible to create an instance of the &lt;code&gt;WebDriverWait&lt;/code&gt; and pass an &lt;code&gt;ExpectedCondition&lt;/code&gt; to execute a wait. The recommended practice would be to use this approach only if a suitable &lt;code&gt;Condition&lt;/code&gt; does not exist for the needed wait.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

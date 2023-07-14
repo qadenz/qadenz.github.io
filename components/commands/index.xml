@@ -1,0 +1,219 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Qadenz – Commands</title>
+    <link>//qadenz.dev/components/commands/</link>
+    <description>Recent content in Commands on Qadenz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="//qadenz.dev/components/commands/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Components: Web Commander</title>
+      <link>//qadenz.dev/components/commands/webcommander/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/commands/webcommander/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;WebCommander&lt;/code&gt; performs actions against WebElements. This class also extends the abstract class &lt;code&gt;Commands&lt;/code&gt;, which is built to be agnostic of any automation tooling. From this class, functionality such as validations, time-based waits, and log wrappers are available to inheriting classes. This design was intended as a future-proofing measure should Qadenz at some point expand to include other underlying tool sets.&lt;/p&gt;
+&lt;p&gt;Each method on the &lt;code&gt;WebCommander&lt;/code&gt; includes a number of activities beyond simply performing WebElement interactions. The workflow for these methods is as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Log the action taking place and the name of the target element.&lt;/li&gt;
+&lt;li&gt;Initialize a &lt;code&gt;WebElement&lt;/code&gt; using the provided &lt;code&gt;Locator&lt;/code&gt; instance.&lt;/li&gt;
+&lt;li&gt;Perform the &lt;code&gt;WebElement&lt;/code&gt; or &lt;code&gt;Actions&lt;/code&gt; command.&lt;/li&gt;
+&lt;li&gt;Catch and log any exceptions that are thrown.&lt;/li&gt;
+&lt;li&gt;If an exception is caught, capture a screenshot of the UI under test.&lt;/li&gt;
+&lt;li&gt;Throw the exception to stop execution of the test.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;All &lt;code&gt;WebCommander&lt;/code&gt; commands include an Explicit Wait during &lt;code&gt;WebElement&lt;/code&gt; initialization. Commands that involve a Click action include a wait for the clickability of the target element. All other commands include a wait for the visibility of the target element to be &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;basic-element-commands&#34;&gt;Basic Element Commands&lt;/h4&gt;
+&lt;p&gt;The 4 basic &lt;a href=&#34;https://www.selenium.dev/documentation/webdriver/elements/interactions/&#34;&gt;Selenium WebElement Interactions&lt;/a&gt; are covered by the &lt;code&gt;WebCommander&lt;/code&gt;. These are the &lt;code&gt;click()&lt;/code&gt;, &lt;code&gt;sendKeys()&lt;/code&gt;, &lt;code&gt;clear()&lt;/code&gt;, and &lt;code&gt;select()&lt;/code&gt; functions.&lt;/p&gt;
+&lt;h5 id=&#34;clicks&#34;&gt;Clicks&lt;/h5&gt;
+&lt;p&gt;The primary &lt;code&gt;click()&lt;/code&gt; method includes a fallback intended for flexibility against tricky DOM configurations. On the chance that an element click would be intercepted by another element and an &lt;code&gt;ElementClickInterceptedException&lt;/code&gt; Exception is caught, the &lt;code&gt;click()&lt;/code&gt; method may reattempt the click using &lt;code&gt;Actions.click()&lt;/code&gt;. This behavior is configurable and is enabled by default. To configure, simply add a parameter to the TestNG Suite XML file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000080&#34;&gt;&amp;lt;parameter&lt;/span&gt; &lt;span style=&#34;color:#008080&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;retryInterceptedClicks&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#008080&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#000080&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It should be noted that the &lt;code&gt;ElementClickInterceptedException&lt;/code&gt; can be a symptom of an element selector that needs to be optimized a little further. Before relying on the fallback, it is highly recommended to address the &lt;code&gt;Locator&lt;/code&gt; first.&lt;/p&gt;
+&lt;p&gt;An overloaded &lt;code&gt;click()&lt;/code&gt; method is also available that allows point-precision clicks on an element. Two &lt;code&gt;int&lt;/code&gt; arguments represent X and Y offsets that allow the click to be placed precisely on an element. Since this method wraps the &lt;code&gt;Actions&lt;/code&gt; class, the &lt;code&gt;ElementClickInterceptedException&lt;/code&gt; fallback is not included.&lt;/p&gt;
+&lt;h5 id=&#34;inputs&#34;&gt;Inputs&lt;/h5&gt;
+&lt;p&gt;The &lt;code&gt;enterText()&lt;/code&gt; method retains the flexibility of the underlying &lt;code&gt;WebElement.sendKeys()&lt;/code&gt; method to accept both characters (Strings) and enumerated &lt;code&gt;Keys&lt;/code&gt;. The logging in this method is configured to accurately represent both in a simple manner on the resulting reports.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;clearAndEnterText()&lt;/code&gt; method combines clearing a field and sending input as a convenience wrapper to save a second method call.&lt;/p&gt;
+&lt;h5 id=&#34;selects&#34;&gt;Selects&lt;/h5&gt;
+&lt;p&gt;As the method name would imply, the &lt;code&gt;select()&lt;/code&gt; method wraps the &lt;code&gt;Select&lt;/code&gt; API to interact with menus constructed on the DOM as &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; elements. The &lt;code&gt;WebCommander&lt;/code&gt; currently selects and deselects options only by visible text as a common use pattern. To gain access to other forms of interaction (by Index or by Value), the best solution is to extend &lt;code&gt;WebCommander&lt;/code&gt; and create custom commands as needed. (More on this topic below)&lt;/p&gt;
+&lt;h4 id=&#34;webdriver-actions&#34;&gt;WebDriver Actions&lt;/h4&gt;
+&lt;p&gt;The &lt;code&gt;Actions&lt;/code&gt; API is an extremely versatile interface for simulating keyboard, mouse, pen, and wheel actions. The Builder pattern invovled with the &lt;code&gt;Actions&lt;/code&gt; API would make wrapping various combinations extremely difficult and extremely limited in actual value in a consuming project. While there are some more common and straightforward action sequences that are provided on the &lt;code&gt;WebCommander&lt;/code&gt;, the &lt;code&gt;Actions&lt;/code&gt; API is largely intended to build sequences custom to the needs of the UI under test.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;WebCommander&lt;/code&gt; currently provides &lt;code&gt;Actions&lt;/code&gt; wrapping for a point-precise &lt;code&gt;click()&lt;/code&gt; on an element, a &lt;code&gt;doubleClick()&lt;/code&gt; on an element, a &lt;code&gt;controlClick()&lt;/code&gt; series on multiple elements, and a &lt;code&gt;hover()&lt;/code&gt; on an element.&lt;/p&gt;
+&lt;p&gt;More complex usage of the &lt;code&gt;Actions&lt;/code&gt; API can be (and should be) wrapped as custom commands on a Project-level &lt;code&gt;WebCommander&lt;/code&gt; sub-class. More on this in the &amp;lsquo;Extensibility&amp;rsquo; section below.&lt;/p&gt;
+&lt;h4 id=&#34;other-functions&#34;&gt;Other Functions&lt;/h4&gt;
+&lt;p&gt;In addition to &lt;code&gt;WebElement&lt;/code&gt; interactions, the &lt;code&gt;WebCommander&lt;/code&gt; provides additional functionality that helps to interact with the rendered DOM.&lt;/p&gt;
+&lt;h5 id=&#34;frames&#34;&gt;Frames&lt;/h5&gt;
+&lt;p&gt;Switching between frames is one such function. The methods involved simply wrap the &lt;code&gt;WebDriver.switchTo().defaultContent()&lt;/code&gt; and &lt;code&gt;WebDriver.switchTo().frame()&lt;/code&gt;. To move focus to a child frame, simple invoke the &lt;code&gt;focusOnFrame(Locator locator)&lt;/code&gt; method with a &lt;code&gt;Locator&lt;/code&gt; instance that maps of the Frame node on the DOM. Invoking the &lt;code&gt;focusOnDefaultContent()&lt;/code&gt; method will return focus to the primary frame on the page.&lt;/p&gt;
+&lt;h5 id=&#34;waits&#34;&gt;Waits&lt;/h5&gt;
+&lt;p&gt;Inevitably, tests will need to work around some timing and synchronization issues. Implementing a time-based wait such as &lt;code&gt;Thread.sleep()&lt;/code&gt; can work in a pinch, but best practices suggest something more flexible and performant. The &lt;code&gt;pause(Condition)&lt;/code&gt; method was designed to function as an Explicit Wait, but uses Qadenz&amp;rsquo;s &lt;a href=&#34;//qadenz.dev/components-old/conditions-and-expectations/&#34;&gt;Conditions and Expectations&lt;/a&gt; to express the type and criteria of the wait. As with Explicit Waits, the Condition will be evaluated repeatedly until either the Condition is satisfied, or a timeout occurs, at which point the test will be stopped.&lt;/p&gt;
+&lt;h5 id=&#34;screenshots&#34;&gt;Screenshots&lt;/h5&gt;
+&lt;p&gt;While failed assertions and caught exceptions will trigger the capturing of a screenshot, there are other occasions where a team might need visual confirmation of the UI state at a given point in a test. This can also provide some additional insights while troubleshooting a troublesome test.&lt;/p&gt;
+&lt;p&gt;Invoking the &lt;code&gt;captureScreenshot()&lt;/code&gt; method will save an image of the visible UI and embed the image into the final HTML report.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: Web Inspector</title>
+      <link>//qadenz.dev/components/commands/webinspector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/commands/webinspector/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;WebInspector&lt;/code&gt; works alongside the &lt;code&gt;WebCommander&lt;/code&gt;, but instead of acting upon UI elements, this class interrogates them for information. This includes retrieving inner text values, attribute values, element state, and instance counts. Most of the methods on &lt;code&gt;WebInspector&lt;/code&gt; are used by Conditions and Expectations as part of evaluative logic for verifications and waits, but can be useful through the course of a test for retrieving data from the UI under test.&lt;/p&gt;
+&lt;p&gt;Each method on the &lt;code&gt;WebInspector&lt;/code&gt; includes a number of activities beyond simply performing WebElement inspections. The workflow for these methods is as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Log the action taking place and the name of the target element.&lt;/li&gt;
+&lt;li&gt;Initialize a &lt;code&gt;WebElement&lt;/code&gt; using the provided &lt;code&gt;Locator&lt;/code&gt; instance.&lt;/li&gt;
+&lt;li&gt;Retrieve the required information from the &lt;code&gt;WebElement&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Catch and log any exceptions that are thrown.&lt;/li&gt;
+&lt;li&gt;If an exception is caught, capture a screenshot of the UI under test.&lt;/li&gt;
+&lt;li&gt;Throw the exception to stop execution of the test.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;element-attributes-and-properties&#34;&gt;Element Attributes and Properties&lt;/h4&gt;
+&lt;p&gt;The values assigned to attributes on elements can be retrieved via the &lt;code&gt;getAttributeOfElement()&lt;/code&gt; method by passing the name of the attribute to be evaluated. Invoking &lt;code&gt;getAttributeOfElements()&lt;/code&gt; will return the value for all instances of the matching &lt;code&gt;Locator&lt;/code&gt; on a &lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, the value of a CSS property can be retrieved from an element via the &lt;code&gt;getCssPropertyOfElement()&lt;/code&gt; method.&lt;/p&gt;
+&lt;h4 id=&#34;element-states&#34;&gt;Element States&lt;/h4&gt;
+&lt;p&gt;Element states can be evaluated and will return a boolean value based on the result.&lt;/p&gt;
+&lt;h5 id=&#34;enabled&#34;&gt;Enabled&lt;/h5&gt;
+&lt;p&gt;The &lt;code&gt;getEnabledStateOfElement()&lt;/code&gt; method evaluates if an element is enabled for interaction, and returns &lt;code&gt;true&lt;/code&gt; if the element is in fact enabled. This is useful for determining if elements such as &lt;code&gt;&amp;lt;input&amp;gt;&lt;/code&gt; elements or &lt;code&gt;&amp;lt;button&amp;gt;&lt;/code&gt; elements are enabled. The state is determined by first invoking the &lt;code&gt;WebElement.isEnabled()&lt;/code&gt; method. If the WebElement evaluates as enabled, a second check is performed against &lt;a href=&#34;//qadenz.dev/components/locators/#disabled-elements&#34;&gt;user-defined attributes&lt;/a&gt; on the element via the &lt;code&gt;Locator&lt;/code&gt; instance.&lt;/p&gt;
+&lt;p&gt;This method presumes an element is enabled until one of the evaluations proves the element is disabled.&lt;/p&gt;
+&lt;h5 id=&#34;selected&#34;&gt;Selected&lt;/h5&gt;
+&lt;p&gt;The &lt;code&gt;getSelectedStateOfElement()&lt;/code&gt; method evaluates if an element is selected, and returns &lt;code&gt;true&lt;/code&gt; if the element is in fact selected. This is useful for determining if elements such as checkboxes or radio buttons are selected. The state is determined by first invoking the &lt;code&gt;WebElement.isSelected()&lt;/code&gt; method. If the WebElement evaluates as selected, a second check is performed against &lt;a href=&#34;//qadenz.dev/components/locators/#selected-elements&#34;&gt;user-defined attributes&lt;/a&gt; on the element via the &lt;code&gt;Locator&lt;/code&gt; instance.&lt;/p&gt;
+&lt;p&gt;This method presumes an element is selected until one of the evaluations proves the element is not selected.&lt;/p&gt;
+&lt;h5 id=&#34;visiblity&#34;&gt;Visiblity&lt;/h5&gt;
+&lt;p&gt;The &lt;code&gt;getVisibilityOfElement()&lt;/code&gt; method evaluates if an element is visible on the UI, and returns &lt;code&gt;true&lt;/code&gt; if the element is in fact visible. The state is determined by first finding all matching DOM nodes for the element selector on the given &lt;code&gt;Locator&lt;/code&gt;. If more than zero matches are found, the method will then evaluate the dimensions of the first matching node. If the element has a height and width greater than zero, the method will then evaluate the styling and attributes of the element. The element will be checked for &lt;code&gt;display:none;&lt;/code&gt; and then &lt;code&gt;visibility:hidden;&lt;/code&gt;, and finally a check for the &lt;code&gt;hidden&lt;/code&gt; attribute. If these checks result in no match, the method will then evaluate &lt;a href=&#34;//qadenz.dev/components/locators/#hidden-elements&#34;&gt;user-defined attributes&lt;/a&gt; on the element via the &lt;code&gt;Locator&lt;/code&gt; instance. Additionally, the method will catch a &lt;code&gt;StaleElementReferenceException&lt;/code&gt; throughout this series of evaluations and instantly return a &lt;code&gt;false&lt;/code&gt; result.&lt;/p&gt;
+&lt;p&gt;This method presumes an element is visible until one of the evaluations proves the element is hidden.&lt;/p&gt;
+&lt;h4 id=&#34;element-text&#34;&gt;Element Text&lt;/h4&gt;
+&lt;p&gt;The &lt;code&gt;WebInspector&lt;/code&gt; offers methods that retrieve text of UI elements in a variety of ways and a variety of formats. In addition to returning String values, methods exist to convert and return element text values as Temporals or Numbers as well. This allows a test to be designed where the UI data can be interacted with in a more flexible way, enjoying the ability to perform operations against, comparisons, and validations with the capabilities of these secondary object types.&lt;/p&gt;
+&lt;p&gt;General text inspection methods allow retrieval of basic element text, a &lt;code&gt;List&lt;/code&gt; of text values from all matching nodes of the given &lt;code&gt;Locator&lt;/code&gt;, the currently selected &lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt; value on a &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; menu, or the &lt;code&gt;List&lt;/code&gt; of &lt;code&gt;&amp;lt;option&amp;gt;&lt;/code&gt; values on a &lt;code&gt;&amp;lt;select&amp;gt;&lt;/code&gt; menu.&lt;/p&gt;
+&lt;h5 id=&#34;element-text-vs-direct-element-text&#34;&gt;Element Text vs Direct Element Text&lt;/h5&gt;
+&lt;p&gt;The &lt;code&gt;WebElement.getText()&lt;/code&gt; method returns the visible inner text of the given element along with the text of any child elements. In most use cases, this is perfectly fine. Some situations exist, however, when the DOM is constructed in such a way where a target element has child elements that also contain visible inner text that a tester may wish to ignore or avoid for an inspection or validation. For these scenarios, &lt;code&gt;WebInspector&lt;/code&gt; employs a concept of &amp;lsquo;direct text of element&amp;rsquo;. Methods with &lt;code&gt;directTextOfElement&lt;/code&gt; in the name will retrieve element text, but prior to returning the text value to the calling method, will filter the visible inner text values of any child elements relative to the given target element.&lt;/p&gt;
+&lt;h5 id=&#34;element-text-as-a-non-string-object&#34;&gt;Element Text as a non-String Object&lt;/h5&gt;
+&lt;p&gt;The &lt;code&gt;WebInspector&lt;/code&gt; includes the means to examine the text of an element, and with the aid of a formatter, parse and convert the text value into a &lt;code&gt;Number&lt;/code&gt; or &lt;code&gt;Temporal&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;code&gt;NumberFormat&lt;/code&gt; can be used to drive the converstion of a text value to either an &lt;code&gt;Integer&lt;/code&gt; or a &lt;code&gt;Double&lt;/code&gt; value. A &lt;code&gt;DateTimeFormatter&lt;/code&gt; can be used to drive the conversion to either a &lt;code&gt;LocalDate&lt;/code&gt;, &lt;code&gt;LocalDateTime&lt;/code&gt;, or a &lt;code&gt;LocalTime&lt;/code&gt; object. By using these methods, the UI data can be used in mathematical operations directly without requiring the need to build any parsing or conversion logic into the test.&lt;/p&gt;
+&lt;h4 id=&#34;element-instances&#34;&gt;Element Instances&lt;/h4&gt;
+&lt;p&gt;There are also methods on &lt;code&gt;WebInspector&lt;/code&gt; that focus specifically on all instances of an element. The &lt;code&gt;getCountOfElement()&lt;/code&gt; simply returns the number of instances on the DOM of a matching &lt;code&gt;Locator&lt;/code&gt;. This can drive mathematical operations, looping logic, or precision validations of element groups. The &lt;code&gt;getInstanceOfElementText()&lt;/code&gt; and &lt;code&gt;getInstanceOfElementAttribute()&lt;/code&gt; will examine all instances of a matching &lt;code&gt;Locator&lt;/code&gt; and return the index of the first node that contains a matching text or attribute value. This capability can provide an extra convenience in dynamically parameterizing &lt;code&gt;Locator&lt;/code&gt; selector values based on the state if the UI.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: Logging</title>
+      <link>//qadenz.dev/components/commands/logging/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/commands/logging/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;WebCommander&lt;/code&gt; and &lt;code&gt;WebInspector&lt;/code&gt; can be instantiated and used either from the tests directly, or from the UI Modeling layer, depending on the design of the test project. Both &lt;code&gt;WebCommander&lt;/code&gt; and &lt;code&gt;WebInspector&lt;/code&gt; have overloaded constructors that enable different types of logging to take place, and will both directly impact how the logs are presented on the report output.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;WebCommander&lt;/code&gt; constructor is used as an example, but the &lt;code&gt;WebInspector&lt;/code&gt; shares this same pattern:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;private&lt;/span&gt; Logger LOG&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;WebCommander&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    LOG &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; LoggerFactory&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;WebCommander&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;WebCommander&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;Class&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; logger&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;logger&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    LOG &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; LoggerFactory&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;logger&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The no-args constructor is generic and can be used regardless of how the classes are consumed. This constructor assigns the &lt;code&gt;WebCommander.class&lt;/code&gt; as the &lt;code&gt;Logger&lt;/code&gt;, and all logging output for method calls on this class will be shown to originate from the &lt;code&gt;WebCommander&lt;/code&gt; class. If the UI of the application under test is very simple, or the team simply does not require a level of detail in the logging that ties actions to specific UI Models, then this constructor will provide an ideal configuration.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;09:55:00.939 | INFO | WebCommander | Entering text [admin@qadenz.dev] into element [Username Field].
+09:55:01.308 | INFO | WebCommander | Entering text [Test123$] into element [Password Field].
+09:55:01.472 | INFO | WebCommander | Clicking element [Sign In Button].
+09:55:02.583 | INFO | Commands | Verifying Condition - Visibility of element [Qadenz Logo Image] is TRUE.
+09:55:02.998 | INFO | Commands | Result - PASS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The overloaded constructor requires a &lt;code&gt;Class&amp;lt;?&amp;gt;&lt;/code&gt; argument, and allows for another class reference to be injected as the logger for the &lt;code&gt;WebCommander&lt;/code&gt; instance. If &lt;code&gt;WebCommander&lt;/code&gt; is being instantiated from a Page Object, and the Page Object class is passed to the constructor, the logs and reporting output will be shown to originate from the Page Object itself, resulting in a greater level of detail in the logs and reports. By using the class injection for the logger, commands will be logged in the context of the page where the command was executed.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;09:55:00.939 | INFO | LoginPage | Entering text [admin@qadenz.dev] into element [Username Field].
+09:55:01.308 | INFO | LoginPage | Entering text [Test123$] into element [Password Field].
+09:55:01.472 | INFO | LoginPage | Clicking element [Sign In Button].
+09:55:02.583 | INFO | UserProfilePage | Verifying Condition - Visibility of element [Company Logo Image] is TRUE.
+09:55:02.998 | INFO | UserProfilePage | Result - PASS
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: Extensibility</title>
+      <link>//qadenz.dev/components/commands/extensibility/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/commands/extensibility/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Both the &lt;code&gt;WebCommander&lt;/code&gt; and &lt;code&gt;WebInspector&lt;/code&gt; classes are designed to be extended within automation projects to enable custom commands to be created as needed by the UI under test.&lt;/p&gt;
+&lt;p&gt;Starting at the class-level, the class will obviously need to extend either &lt;code&gt;WebCommander&lt;/code&gt; or &lt;code&gt;WebInspector&lt;/code&gt;. Then, a &lt;code&gt;Logger&lt;/code&gt; instance and constructors need to be added.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;org.slf4j.Logger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#555&#34;&gt;org.slf4j.LoggerFactory&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#458;font-weight:bold&#34;&gt;AcmeWebCommander&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;extends&lt;/span&gt; WebCommander &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;private&lt;/span&gt; Logger LOG&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;AcmeWebCommander&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        LOG &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; LoggerFactory&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;AcmeWebCommander&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;AcmeWebCommander&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;Class&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;&amp;lt;?&amp;gt;&lt;/span&gt; logger&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;logger&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        LOG &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; LoggerFactory&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;logger&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then, the anatomy of the command method is as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#458;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;doSomething&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;Locator locator&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    LOG&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;info&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;Doing something with element [{}].&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; locator&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;());&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        WebElement webElement &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; webFinder&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;findWhenVisible&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;locator&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#998;font-style:italic&#34;&gt;// add logic as needed to complete the custom command
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#998;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;catch&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;Exception exception&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        LOG&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;Error doing something :: {}: {}&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; exception&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getClass&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;().&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getSimpleName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; exception&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;getMessage&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;());&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        screenshot&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#008080&#34;&gt;capture&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;throw&lt;/span&gt; exception&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first operation in a command method is to log the command being executed (at the &lt;code&gt;INFO&lt;/code&gt; level). Qadenz uses Logback, which provides the &lt;code&gt;{}&lt;/code&gt; placeholder for additional values to be inserted. It is recommended to utilize this where possible to convey an appropriate level of detail in the logs and subsequent reports.&lt;/p&gt;
+&lt;p&gt;Next, the &lt;code&gt;try&lt;/code&gt; block will initialize a &lt;code&gt;WebElement&lt;/code&gt; using the inherited &lt;code&gt;WebFinder&lt;/code&gt; instance, then perform any necessary actions. If the method is on a &lt;code&gt;WebInspector&lt;/code&gt; sub-class, the &lt;code&gt;return&lt;/code&gt; should take place within the &lt;code&gt;try&lt;/code&gt; block.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;catch&lt;/code&gt; block should be set to catch the appropriate Exception, though a wide net may be cast by simply catching all descendents of &lt;code&gt;Expception&lt;/code&gt;. A multi-catch or &lt;code&gt;finally&lt;/code&gt; could be employed here if the use case is appropriate. Within the &lt;code&gt;catch&lt;/code&gt; block, the Exception will be logged (at the &lt;code&gt;ERROR&lt;/code&gt; level) and, if appropriate, a screenshot captured using the inherited &lt;code&gt;Screenshot&lt;/code&gt; instance.&lt;/p&gt;
+&lt;p&gt;Finally, re-throw the Exception. Throwing a new instance of &lt;code&gt;RunTimeException&lt;/code&gt; with a context-friendly message would be an appropriate alternative to allowing the Exception to surface to the test level, requiring a &lt;code&gt;try/catch&lt;/code&gt; in the test itself or an Exception to be added to the method signature. This is obviously a preferential decision to be made within the automation project. Qadenz has simply been designed to avoid the need to do this.&lt;/p&gt;
+&lt;p&gt;Once complete, instantiating the new commands class in either the UI Models or directly in the test method will make functionality available for use.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: Browser Commands</title>
+      <link>//qadenz.dev/components/commands/browser-commands/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/commands/browser-commands/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;code&gt;Browser&lt;/code&gt; class manages the browser under test. This includes activities within the browser, but outside the rendered DOM of the application. Actions such as navigation, alert handling, cookie management, and switching between browser windows, are all handled by the &lt;code&gt;Browser&lt;/code&gt;. The methods on the &lt;code&gt;Browser&lt;/code&gt; class are static, and are able to be called from anywhere within the scope of the test, be it from the UI Modeling layer or directly from the test itself.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

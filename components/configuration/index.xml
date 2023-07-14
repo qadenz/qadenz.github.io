@@ -1,0 +1,105 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Qadenz – Configuration</title>
+    <link>//qadenz.dev/components/configuration/</link>
+    <description>Recent content in Configuration on Qadenz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="//qadenz.dev/components/configuration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Components: AutomatedWebTest</title>
+      <link>//qadenz.dev/components/configuration/automatedwebtest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/configuration/automatedwebtest/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;a href=&#34;https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/AutomatedWebTest.java&#34;&gt;&lt;code&gt;AutomatedWebTest&lt;/code&gt;&lt;/a&gt; is the base class for all test classes in a Qadenz-powered test project. This class is responsible for gathering parameter values from the TestNG Suite XML file, configuring and starting a &lt;code&gt;WebDriver&lt;/code&gt; instance on a Selenium Grid for each test method, stopping the &lt;code&gt;WebDriver&lt;/code&gt; after each test, and invoking the reporters after the Suite has completed.&lt;/p&gt;
+&lt;p&gt;Classes that hold &lt;code&gt;@Test&lt;/code&gt; methods must extend this class in order for tests to run using Qadenz configurations.&lt;/p&gt;
+&lt;h3 id=&#34;the-execution-cycle&#34;&gt;The Execution Cycle&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Before the Suite Begins&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The first task performed after launching a Suite execution is to capture a timestamp and save as the &lt;code&gt;suiteStartDate&lt;/code&gt; value on the &lt;code&gt;WebConfig&lt;/code&gt;. This will be used later by the reporter to calculate the duration of the execution. Next, the Suite-level parameters are retrieved from the &lt;code&gt;ITestContext&lt;/code&gt;, which were specified by the user on the TestNG Suite XML file. The  &lt;code&gt;gridHost&lt;/code&gt; is validated and saved.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Before Each Test&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Repeated before each test method, the Test-level parameters are retrieved from the &lt;code&gt;ITestContext&lt;/code&gt;, which are the &lt;code&gt;browser&lt;/code&gt;, &lt;code&gt;browserVersion&lt;/code&gt;, &lt;code&gt;browserConfigProfile&lt;/code&gt;, &lt;code&gt;platform&lt;/code&gt;, &lt;code&gt;timeout&lt;/code&gt;, &lt;code&gt;appUrl&lt;/code&gt;, &lt;code&gt;retryInterceptedClicks&lt;/code&gt;. These parameters are validated and saved to the &lt;code&gt;WebConfig&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Once all the parameters are processed, the &lt;code&gt;WebDriver&lt;/code&gt; can be launched and execution of a test method can begin. The &lt;code&gt;CapabilityProvider&lt;/code&gt; is invoked to configure the browser session. The &lt;code&gt;CapabilityProvider&lt;/code&gt; calls values on the &lt;code&gt;WebConfig&lt;/code&gt; and attempts to load any Browser Config Profiles declared in one of the browser configuration JSON files. This process chooses a browser, determines if a specific version of the browser is required if a version has been declared, ensures that the test will be run on the appropriate OS if one has been specified, and applies any arguments provided on the JSON file if a matching Browser Config Profile was found.&lt;/p&gt;
+&lt;p&gt;These options are then used to configure and initialize a &lt;code&gt;WebDriver&lt;/code&gt; instance, which is in turn set on the &lt;code&gt;WebDriverProvider&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, the browser window is maximized, and the &lt;code&gt;appUrl&lt;/code&gt; value is loaded.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;After Each Test&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;At the end of each test method, the &lt;code&gt;WebDriver&lt;/code&gt; is stopped.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;After the Suite Ends&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The final task of the execution cycle is to capture a second timestamp as the &lt;code&gt;suiteEndDate&lt;/code&gt; on the &lt;code&gt;WebConfig&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reporting&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The default TestNG reporters are not disabled by default, so the standard HTML &amp;amp; XML reports will be generated, along with the &lt;code&gt;emailable-report.html&lt;/code&gt;. Next, the &lt;code&gt;TestReporter&lt;/code&gt; is invoked which generates the Qadenz Reports in JSON and HTML formats.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: WebConfig</title>
+      <link>//qadenz.dev/components/configuration/webconfig/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/configuration/webconfig/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/WebConfig.java&#34;&gt;&lt;code&gt;WebConfig&lt;/code&gt;&lt;/a&gt; stores information that Qadenz uses at various points throughout the execution cycle. Primarily, these are the values given as parameters on the TestNG Suite XML file. While Qadenz calls these values during the setup and reporting phases they are made available on the chance these values are needed for any project-specific configuration.&lt;/p&gt;
+&lt;p&gt;Since these fields are all static, there really is no need to extend this class. Teams are encouraged to follow this pattern, though, and create a ProjectConfig class of their own should the need arise to track specific values or project-specific Suite parameters are in play.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: WebDriverProvider</title>
+      <link>//qadenz.dev/components/configuration/webdriverprovider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/configuration/webdriverprovider/</guid>
+      <description>
+        
+        
+        &lt;p&gt;The &lt;a href=&#34;https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/WebDriverProvider.java&#34;&gt;&lt;code&gt;WebDriverProvider&lt;/code&gt;&lt;/a&gt; stores the &lt;code&gt;WebDriver&lt;/code&gt; instance and makes it available to components where it is needed. Since the test classes work on an inheritance hierarchy, and with how TestNG manages threads, the &lt;code&gt;WebDriver&lt;/code&gt; instance is required to be kept on a &lt;code&gt;ThreadLocal&amp;lt;WebDriver&amp;gt;&lt;/code&gt; object. Rather than forcing testers to pass the &lt;code&gt;WebDriver&lt;/code&gt; around to various library components, Qadenz has chosen to make the &lt;code&gt;ThreadLocal&lt;/code&gt; static, and allow components that need the &lt;code&gt;WebDriver&lt;/code&gt; to call a centralized location. On the (hopefully) rare occurrence where the &lt;code&gt;WebDriver&lt;/code&gt; is needed directly, it can be invoked with the following call.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;WebDriver webDriver = WebDriverProvider.getWebDriver();
+&lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Components: Browser Config Profiles</title>
+      <link>//qadenz.dev/components/configuration/browser-config-profiles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//qadenz.dev/components/configuration/browser-config-profiles/</guid>
+      <description>
+        
+        
+        &lt;p&gt;In some cases, extra configuration arguments need to be passed to the browser Options instance for &lt;code&gt;WebDriver&lt;/code&gt; configuration. A common case for this is instructing a browser to run in headless mode. Qadenz provides a simple means to set these configurations, and allows for multiple &amp;ldquo;profiles&amp;rdquo; of these configurations to be set on the TestNG Suite XML file. For example, if a tester wishes to run in headless mode on the Selenium Grid, but run in a native browser when executing locally, the switch is as simple as altering a parameter value.&lt;/p&gt;
+&lt;p&gt;Configurations are stored in JSON files within the project&amp;rsquo;s &lt;code&gt;resources&lt;/code&gt; directory. To create a new configuration, within the &lt;code&gt;resources&lt;/code&gt; directory, add a new folder called &lt;code&gt;config&lt;/code&gt;, and create a new JSON file. This file must be named &lt;code&gt;{browser}-config.json&lt;/code&gt;, where &lt;code&gt;{browser}&lt;/code&gt; is the name of the browser being configured. A separate file must be created for each browser
+requiring configuration.&lt;/p&gt;
+&lt;p&gt;This example configures Chrome to run in headless mode.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[
+    {
+        &amp;#34;profile&amp;#34;: &amp;#34;headless&amp;#34;,
+        &amp;#34;args&amp;#34;: [
+            &amp;#34;--headless&amp;#34;,
+            &amp;#34;--window-size=1920,1080&amp;#34;,
+            &amp;#34;--disable-gpu&amp;#34;
+        ]
+    }
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The JSON format is an array of configuration objects. Each object holds &lt;code&gt;profile&lt;/code&gt; and &lt;code&gt;args&lt;/code&gt; fields. The &lt;code&gt;profile&lt;/code&gt; field will be matched to the &lt;code&gt;browserConfigProfile&lt;/code&gt; parameter on the Suite XML. The &lt;code&gt;args&lt;/code&gt; is an array of individual arguments to be passed to the &lt;code&gt;WebDriver&lt;/code&gt; configuration.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
