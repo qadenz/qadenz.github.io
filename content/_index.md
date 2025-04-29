@@ -7,21 +7,21 @@ weight: 20
 cascade:
 - _target:
     path: "/blog/**"
-  type: "blog"
-  # set to false to include a blog section in the section nav along with docs
-  toc_root: true
+    type: "blog"
+    # set to false to include a blog section in the section nav along with docs
+    toc_root: true
 - _target:
     path: "/**"
     kind: "page"
-  type: "docs"
+    type: "docs"
 - _target:
     path: "/**"
     kind: "section"
-  type: "docs"
+    type: "docs"
 - _target:
     path: "/**"
     kind: "section"
-  type: "docs"
+    type: "docs"
 ---
 
 > **This site is undergoing some upgrades and updates. Please pardon any broken links, unhandled variables, and other small issues while things are getting sorted out. Things will be back to normal just as quick as possible.**
