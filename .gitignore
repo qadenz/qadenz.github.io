@@ -15,7 +15,6 @@ ehthumbs.db
 
 # Node.js dependencies (if using npm/yarn for assets)
 /node_modules/
-/package-lock.json
 /yarn.lock
 
 # Python virtual environment (if using for scripts)
