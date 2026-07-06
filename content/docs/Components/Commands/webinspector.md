@@ -1,5 +1,5 @@
 ---
-title: Web Inspector
+title: "Web Inspector"
 description: >
   Web Inspector Description
 weight: 2

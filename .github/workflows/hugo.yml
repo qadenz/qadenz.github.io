@@ -49,7 +49,6 @@ jobs:
       - name: Install Node.js dependencies
         run: |
           [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
-          npm install -g postcss-cli
       - name: Verify installed Node.js dependencies
         run: npm ls
       - name: Build with Hugo

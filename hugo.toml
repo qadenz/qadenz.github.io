@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://qadenz.dev/'
 languageCode = 'en-us'
 title = 'Qadenz'
 description = 'A friendly test automation library'

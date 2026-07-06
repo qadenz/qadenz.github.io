@@ -1,5 +1,5 @@
 ---
-title: Extensibility
+title: "Extensibility"
 description: >
   Web Inspector Description
 weight: 4

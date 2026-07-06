@@ -1,5 +1,5 @@
 ---
-title: Browser Config Profiles
+title: "Browser Config Profiles"
 description: >
   Configuration
 weight: 4
