@@ -1,5 +1,5 @@
 ---
-title: Logging
+title: "Logging"
 description: >
   Web Inspector Description
 weight: 3

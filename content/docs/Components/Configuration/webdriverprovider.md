@@ -1,5 +1,5 @@
 ---
-title: WebDriverProvider
+title: "WebDriverProvider"
 description: >
   Configuration
 weight: 3

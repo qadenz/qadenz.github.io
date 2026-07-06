@@ -1,5 +1,5 @@
 ---
-title: WebConfig
+title: "WebConfig"
 description: >
   Configuration
 weight: 2

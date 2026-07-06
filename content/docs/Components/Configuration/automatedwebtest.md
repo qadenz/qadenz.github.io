@@ -1,5 +1,5 @@
 ---
-title: AutomatedWebTest
+title: "AutomatedWebTest"
 description: >
   Configuration
 weight: 1

@@ -1,5 +1,5 @@
 ---
-title: Browser Commands
+title: "Browser Commands"
 description: >
   Web Inspector Description
 weight: 5
