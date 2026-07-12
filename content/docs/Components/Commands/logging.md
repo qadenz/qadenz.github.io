@@ -5,9 +5,9 @@ description: >
 weight: 3
 ---
 
-The `WebCommander` and `WebInspector` can be instantiated and used either from the tests directly, or from the UI Modeling layer, depending on the design of the test project. Both `WebCommander` and `WebInspector` have overloaded constructors that enable different types of logging to take place, and will both directly impact how the logs are presented on the report output.
+The two constructors on `WebCommander` and `WebInspector` are not just a way to instantiate the classes. They decide how every logged step is attributed on the report. The [choice between them]({{< relref "/docs/Components/Commands/webcommander.md#creating-a-webcommander" >}}) tracks a design decision: whether commands are called directly from the test, or from a UI-modeling layer such as a page object. This page shows what each choice produces.
 
-The `WebCommander` constructor is used as an example, but the `WebInspector` shares this same pattern:
+Both classes share the same constructor pattern. The `WebCommander` is used here as the example:
 
 ```java
 private Logger LOG;

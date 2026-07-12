@@ -11,6 +11,34 @@ Every method follows the [four-step anatomy]({{< relref "/docs/Components/Comman
 
 `WebCommander` extends the tool-agnostic `Commands` base, which is where the validation methods (`verify`, `check`) and the `pause` wait live. Those are documented alongside the vocabulary they use, under [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}).
 
+## Creating a WebCommander
+
+A `WebCommander` is instantiated where it is used, whether that is directly in a test or inside a UI-modeling layer such as a page object. Which of its two constructors to reach for is the first decision, and it comes down to how much detail the logs should carry.
+
+Use the no-argument constructor when commands are called straight from the test, or when the UI is simple enough that tracing each action to a specific page is not worth the ceremony. Every logged step is attributed to the `WebCommander`.
+
+```java
+WebCommander commander = new WebCommander();
+```
+
+Use the `Class<?>` constructor when a page object or other UI-modeling layer is in place and each step should be attributed to the page it happened on. Pass the consuming class, and its name stands in as the source of every logged step.
+
+```java
+WebCommander commander = new WebCommander(getClass());
+```
+
+However it is instantiated, each command reads as the step it performs:
+
+```java
+commander.enterText(usernameField, "admin@qadenz.dev");
+commander.enterText(passwordField, "Test123$");
+commander.click(signInButton);
+```
+
+Where those calls live, whether directly in a test or wrapped in page-object methods, is a design choice for the consuming project rather than a constraint of the API.
+
+The two constructors produce visibly different reports. See [Logging]({{< relref "/docs/Components/Commands/logging.md" >}}) for a side-by-side comparison of the output.
+
 ## How the wait is chosen
 
 The explicit wait built into element initialization is not identical for every command. It is matched to the interaction:
@@ -37,7 +65,11 @@ An overloaded `click(Locator, int xOffset, int yOffset)` places a point-precise 
 
 ### Inputs
 
-`enterText(Locator, CharSequence...)` retains the flexibility of the underlying `WebElement.sendKeys()`, accepting both text and enumerated `Keys`. Its logging is shaped to render both cleanly on the report.
+`enterText(Locator, CharSequence...)` retains the flexibility of the underlying `WebElement.sendKeys()`, accepting both text and enumerated `Keys` in a single call. Its logging is shaped to render both cleanly on the report.
+
+```java
+commander.enterText(searchField, "qadenz", Keys.ENTER);
+```
 
 `clearAndEnterText(Locator, String)` clears a field and enters text in a single call, saving the separate `clear` step.
 
