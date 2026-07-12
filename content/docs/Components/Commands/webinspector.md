@@ -5,7 +5,7 @@ description: >
   The commands that interrogate elements: text, attributes, CSS, element state, and instance counts.
 weight: 2
 ---
-The `WebInspector` works alongside the `WebCommander`, but instead of acting on elements it interrogates them for information: inner text, attribute and CSS values, element state, and instance counts. Most of these methods are the evaluative logic behind [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}), and they are equally useful on their own for pulling data out of the UI during a test.
+The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebInspector.java) works alongside the `WebCommander`, but instead of acting on elements it interrogates them for information: inner text, attribute and CSS values, element state, and instance counts. Most of these methods are the evaluative logic behind [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}), and they are equally useful on their own for pulling data out of the UI during a test.
 
 Each method follows the same [four-step anatomy]({{< relref "/docs/Components/Commands/_index.md" >}}) as the rest of the commands. It logs the inspection and target, initializes the element through an explicit wait, and on failure captures a screenshot before surfacing the exception. The difference is the third step: rather than performing an action, an inspection reads a value and returns it.
 

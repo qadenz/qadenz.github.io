@@ -5,7 +5,7 @@ description: >
   Static commands for controlling the browser around the DOM: navigation, alerts, cookies, and window focus.
 weight: 3
 ---
-The `Browser` class manages the browser itself, as opposed to the elements rendered inside it. Navigation, alert handling, cookie management, and switching between windows all happen at the browser level, outside the DOM of the application under test. Those actions live here rather than on the `WebCommander`.
+The [`Browser`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Browser.java) class manages the browser itself, as opposed to the elements rendered inside it. Navigation, alert handling, cookie management, and switching between windows all happen at the browser level, outside the DOM of the application under test. Those actions live here rather than on the `WebCommander`.
 
 Like the element commands, each `Browser` method logs the action it performs and, on failure, captures a screenshot before surfacing the exception. What these methods do not carry is an element wait, because they do not act on elements. There is no `Locator` to initialize and no visibility to wait on.
 

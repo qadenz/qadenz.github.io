@@ -5,7 +5,7 @@ description: >
   Add project-specific commands by subclassing WebCommander or WebInspector, inheriting the full command anatomy.
 weight: 5
 ---
-No fixed set of commands can anticipate every UI. When a project needs an interaction the built-in commands do not cover, extend `WebCommander` or `WebInspector` and add it, rather than forking Qadenz or reaching around it. A custom command written this way inherits the same [four-step anatomy]({{< relref "/docs/Components/Commands/_index.md" >}}) as every built-in command: the wait, the logging, and the screenshot-on-failure all come for free.
+No fixed set of commands can anticipate every UI. When a project needs an interaction the built-in commands do not cover, extend [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebCommander.java) or [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebInspector.java) and add it, rather than forking Qadenz or reaching around it. A custom command written this way inherits the same [four-step anatomy]({{< relref "/docs/Components/Commands/_index.md" >}}) as every built-in command: the wait, the logging, and the screenshot-on-failure all come for free.
 
 ## Extend the class
 

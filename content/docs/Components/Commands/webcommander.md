@@ -5,11 +5,11 @@ description: >
   The commands that act on elements: clicks, text entry, selects, frames, and Actions-based sequences.
 weight: 1
 ---
-The `WebCommander` performs actions against elements: clicking, entering text, selecting options, switching frames, and driving `Actions`-based sequences. It is the class a test reaches for whenever it needs to *do* something to the UI.
+The [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebCommander.java) performs actions against elements: clicking, entering text, selecting options, switching frames, and driving `Actions`-based sequences. It is the class a test reaches for whenever it needs to *do* something to the UI.
 
 Every method follows the [four-step anatomy]({{< relref "/docs/Components/Commands/_index.md" >}}) shared by all commands: it logs the action and the target element, initializes the element through an explicit wait, performs the interaction, and on failure captures a screenshot before surfacing the exception to stop the test. The rest of this page covers what each command does, not that boilerplate, because the boilerplate is the same everywhere.
 
-`WebCommander` extends the tool-agnostic `Commands` base, which is where the validation methods (`verify`, `check`) and the `pause` wait live. Those are documented alongside the vocabulary they use, under [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}).
+`WebCommander` extends the tool-agnostic [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Commands.java) base, which is where the validation methods (`verify`, `check`) and the `pause` wait live. Those are documented alongside the vocabulary they use, under [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}).
 
 ## Creating a WebCommander
 
