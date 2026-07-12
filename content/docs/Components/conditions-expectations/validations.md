@@ -5,6 +5,20 @@ description: >
 weight: 1
 ---
 
+Two design ideas shape how validations work in Qadenz, and both are worth understanding before the mechanics.
+
+The first is that hard and soft asserts are first-class. `verify()` is a hard assert: a failure stops the test. `check()` is a soft assert: a failure is recorded, and the test continues until a later checkpoint decides whether to stop. Both take the same Conditions and Expectations used everywhere else, so choosing how strict a check should be never changes how it is written.
+
+## A complete picture when a step fails
+
+Most steps check more than one thing. After adding an item to the cart, a step might confirm the notification message, the cart quantity, and that checkout is now enabled. Written as three separate assertions, the first failure stops the step and the other two never run. The report shows one problem when there might be three, and the rest stay hidden until the bug is fixed and the test runs again.
+
+`verify()` takes a group of Conditions and evaluates every one before it decides to halt. Each Condition is reported on its own, so a single run surfaces every result. The step still fails and still stops the test, but only after accounting for everything in the group. It behaves like a soft assertion wrapped in a hard one: the completeness of a soft assert, with the firm stop of a hard assert.
+
+The sections below cover the mechanics.
+
+## Consistent validations
+
 Unit testing frameworks such as TestNG or JUnit include assertion functionality as a core component, and are relatively simple to use. Being open-ended frameworks, however, individual users may tend to express very similar validations in a variety of different assertions. This leads to inconsistent coding patterns, and more difficult maintenance of test code.
 
 Using `Conditions` and `Expectations` allows a team to ensure all contributors are following the same pattern for validations.
