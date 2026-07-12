@@ -9,7 +9,7 @@ An `Expectation` defines the expected value and how to compare against it. Each 
 
 Many names are shared across types. `isEqualTo` exists for text, numbers, and dates, and the version in play is chosen by the type of the value passed. So the surface to learn is smaller than the method count suggests.
 
-For exhaustive signatures, see the [`Expectations` API reference](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/expectations/Expectations.java). If a comparison you need is missing, [write your own]({{< relref "/docs/Components/conditions-expectations/extensibility.md" >}}).
+For exhaustive signatures, see the [`Expectations` API reference](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/expectations/Expectations.java). If none of them covers a comparison, [build a custom Expectation]({{< relref "/docs/Components/conditions-expectations/extensibility.md" >}}).
 
 ## Boolean
 

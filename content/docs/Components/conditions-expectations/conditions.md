@@ -17,7 +17,7 @@ Every Condition evaluates a value of one of five types. That type decides which 
 | **Temporal** | `textOfElementAsDate`, `textOfElementAsDateTime`, `textOfElementAsTime` | `isBefore`, `isAfter`, `isWithin`, `isDayOfWeekAsLocalDate`, ... |
 | **List** | `textOfListedElementsUnordered`, `textOfSelectMenuOptions`, `selectedMenuOptions` | `listContainsValues` |
 
-The sections below list every Condition by family. For exhaustive signatures, see the [`Conditions` API reference](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/conditions/Conditions.java). If none of them fits a case, [write your own]({{< relref "/docs/Components/conditions-expectations/extensibility.md" >}}).
+The sections below list every Condition by family. For exhaustive signatures, see the [`Conditions` API reference](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/conditions/Conditions.java). If none of them fits a case, [build a custom Condition]({{< relref "/docs/Components/conditions-expectations/extensibility.md" >}}).
 
 ## Boolean state
 

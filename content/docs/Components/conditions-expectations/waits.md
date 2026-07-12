@@ -33,7 +33,7 @@ Unlike a validation, `pause()` takes a single Condition rather than a group. Wai
 
 ## When no built-in Condition fits
 
-The built-in Conditions cover the common cases, but not all of them. When none expresses the wait a test needs, write a Condition of your own rather than dropping out of the vocabulary. A custom Condition works with `pause()` exactly like a built-in one, and logs the same way on the report. See [Extensibility]({{< relref "/docs/Components/conditions-expectations/extensibility.md" >}}).
+The built-in Conditions cover the common cases, but not all of them. When none expresses the wait a test needs, build a custom Condition rather than dropping out of the vocabulary. A custom Condition works with `pause()` exactly like a built-in one, and logs the same way on the report. See [Extensibility]({{< relref "/docs/Components/conditions-expectations/extensibility.md" >}}).
 
 ## A fixed pause, as a last resort
 
