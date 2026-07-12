@@ -3,7 +3,7 @@ title: "Browser"
 linkTitle: "Browser"
 description: >
   Static commands for controlling the browser around the DOM: navigation, alerts, cookies, and window focus.
-weight: 5
+weight: 3
 ---
 The `Browser` class manages the browser itself, as opposed to the elements rendered inside it. Navigation, alert handling, cookie management, and switching between windows all happen at the browser level, outside the DOM of the application under test. Those actions live here rather than on the `WebCommander`.
 

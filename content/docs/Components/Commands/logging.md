@@ -2,7 +2,7 @@
 title: "Logging"
 description: >
   Web Inspector Description
-weight: 3
+weight: 4
 ---
 
 The two constructors on `WebCommander` and `WebInspector` are not just a way to instantiate the classes. They decide how every logged step is attributed on the report. The [choice between them]({{< relref "/docs/Components/Commands/webcommander.md#creating-a-webcommander" >}}) tracks a design decision: whether commands are called directly from the test, or from a UI-modeling layer such as a page object. This page shows what each choice produces.
