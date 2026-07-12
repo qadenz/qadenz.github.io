@@ -54,7 +54,9 @@ Assertions.flush();
 
 Place `flush()` wherever it makes sense to stop if failures have piled up. Because the flag lives for the whole test, a test can hold several `flush()` calls, each a checkpoint that halts if anything has failed up to that point. This suits long smoke or end-to-end tests, where finishing the run matters for a full accounting of the important validations.
 
-One rule to keep in mind: a test that uses only `check()` needs at least one `flush()`. Without it, failed checks are still reported on their individual steps, but the test as a whole passes, since the `AssertionError` that marks a test failed is thrown only by `flush()`.
+One rule to keep in mind: a test that uses only `check()` needs at least one `flush()`. The `AssertionError` that marks a test failed is thrown only by `flush()`, so leaving it out has a quiet but serious consequence. Each failed `check()` still logs its failure and captures a screenshot on its own step, so the report looks like it caught the problem. But with nothing to throw the error, the test's overall result is `passed`, and it is filed with the passing tests. The failure sits in plain view on a step while the suite reports green, and a real defect can slip by unnoticed.
+
+Nothing in the compiler or the IDE enforces this. A test can call `check()` and never call `flush()` and still compile and run. Treat the pairing as a habit: any test that uses `check()` ends its relevant checkpoints with a `flush()`, so recorded failures actually decide the test's result.
 
 Mixing the two methods is fine, with one consequence to expect. If a `verify()` fails after some `check()` calls but before a `flush()`, the test stops at that `verify()`, and the earlier recorded failures never reach a `flush()`.
 
