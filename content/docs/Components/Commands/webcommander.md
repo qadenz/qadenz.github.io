@@ -1,71 +1,107 @@
 ---
-title: "Web Commander"
+title: "WebCommander"
+linkTitle: "WebCommander"
 description: >
-  Web Commander Description
+  The commands that act on elements: clicks, text entry, selects, frames, and Actions-based sequences.
 weight: 1
 ---
+The [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebCommander.java) performs actions against elements: clicking, entering text, selecting options, switching frames, and driving `Actions`-based sequences. It is the class a test reaches for whenever it needs to *do* something to the UI.
 
-The `WebCommander` performs actions against WebElements. This class also extends the abstract class `Commands`, which is built to be agnostic of any automation tooling. From this class, functionality such as validations, time-based waits, and log wrappers are available to inheriting classes. This design was intended as a future-proofing measure should Qadenz at some point expand to include other underlying tool sets.
+Every method follows the [four-step anatomy]({{< relref "/docs/Components/Commands/_index.md" >}}) shared by all commands: it logs the action and the target element, initializes the element through an explicit wait, performs the interaction, and on failure captures a screenshot before surfacing the exception to stop the test. The rest of this page covers what each command does, not that boilerplate, because the boilerplate is the same everywhere.
 
-Each method on the `WebCommander` includes a number of activities beyond simply performing WebElement interactions. The workflow for these methods is as follows:
+`WebCommander` extends the tool-agnostic [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Commands.java) base, which is where the validation methods (`verify`, `check`) and the `pause` wait live. Those are documented alongside the vocabulary they use, under [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}).
 
-1. Log the action taking place and the name of the target element.
-2. Initialize a `WebElement` using the provided `Locator` instance.
-3. Perform the `WebElement` or `Actions` command.
-4. Catch and log any exceptions that are thrown.
-5. If an exception is caught, capture a screenshot of the UI under test.
-6. Throw the exception to stop execution of the test.
+## Creating a WebCommander
 
-All `WebCommander` commands include an Explicit Wait during `WebElement` initialization. Commands that involve a Click action include a wait for the clickability of the target element. All other commands include a wait for the visibility of the target element to be `true`.
+A `WebCommander` is instantiated where it is used, whether that is directly in a test or inside a UI-modeling layer such as a page object. Which of its two constructors to reach for is the first decision, and it comes down to how much detail the logs should carry.
 
-#### Basic Element Commands
+Use the no-argument constructor when commands are called straight from the test, or when the UI is simple enough that tracing each action to a specific page is not worth the ceremony. Every logged step is attributed to the `WebCommander`.
 
-The 4 basic [Selenium WebElement Interactions](https://www.selenium.dev/documentation/webdriver/elements/interactions/) are covered by the `WebCommander`. These are the `click()`, `sendKeys()`, `clear()`, and `select()` functions.
+```java
+WebCommander commander = new WebCommander();
+```
 
-##### Clicks
+Use the `Class<?>` constructor when a page object or other UI-modeling layer is in place and each step should be attributed to the page it happened on. Pass the consuming class, and its name stands in as the source of every logged step.
 
-The primary `click()` method includes a fallback intended for flexibility against tricky DOM configurations. On the chance that an element click would be intercepted by another element and an `ElementClickInterceptedException` Exception is caught, the `click()` method may reattempt the click using `Actions.click()`. This behavior is configurable and is enabled by default. To configure, simply add a parameter to the TestNG Suite XML file.
+```java
+WebCommander commander = new WebCommander(getClass());
+```
+
+However it is instantiated, each command reads as the step it performs:
+
+```java
+commander.enterText(usernameField, "admin@qadenz.dev");
+commander.enterText(passwordField, "Test123$");
+commander.click(signInButton);
+```
+
+Where those calls live, whether directly in a test or wrapped in page-object methods, is a design choice for the consuming project rather than a constraint of the API.
+
+The two constructors produce visibly different reports. See [Logging]({{< relref "/docs/Components/Commands/logging.md" >}}) for a side-by-side comparison of the output.
+
+## How the wait is chosen
+
+The explicit wait built into element initialization is not identical for every command. It is matched to the interaction:
+
+- Commands that click wait for the target element to be **clickable**.
+- Commands that upload a file wait for the input to be **present**, since file inputs are frequently hidden.
+- All other commands wait for the target element to be **visible**.
+
+## Element commands
+
+The four standard [Selenium element interactions](https://www.selenium.dev/documentation/webdriver/elements/interactions/) are covered directly: `click`, `enterText`, `clear`, and `select`.
+
+### Clicks
+
+The primary `click(Locator)` method includes a fallback for tricky DOM configurations. If a click is intercepted by another element and Selenium throws `ElementClickInterceptedException`, the method re-locates the element and reattempts the click through the `Actions` API. This behavior is enabled by default and is controlled by a TestNG Suite XML parameter:
 
 ```xml
 <parameter name="retryInterceptedClicks" value="false" />
 ```
 
-It should be noted that the `ElementClickInterceptedException` can be a symptom of an element selector that needs to be optimized a little further. Before relying on the fallback, it is highly recommended to address the `Locator` first.
+An intercepted click is often a symptom of a `Locator` that needs tightening, so address the selector before relying on the fallback.
 
-An overloaded `click()` method is also available that allows point-precision clicks on an element. Two `int` arguments represent X and Y offsets that allow the click to be placed precisely on an element. Since this method wraps the `Actions` class, the `ElementClickInterceptedException` fallback is not included.
+An overloaded `click(Locator, int xOffset, int yOffset)` places a point-precise click on an element using X and Y offsets. Because this variant wraps the `Actions` class, it does not include the interception fallback.
 
-##### Inputs
+### Inputs
 
-The `enterText()` method retains the flexibility of the underlying `WebElement.sendKeys()` method to accept both characters (Strings) and enumerated `Keys`. The logging in this method is configured to accurately represent both in a simple manner on the resulting reports.
+`enterText(Locator, CharSequence...)` retains the flexibility of the underlying `WebElement.sendKeys()`, accepting both text and enumerated `Keys` in a single call. Its logging is shaped to render both cleanly on the report.
 
-The `clearAndEnterText()` method combines clearing a field and sending input as a convenience wrapper to save a second method call.
+```java
+commander.enterText(searchField, "qadenz", Keys.ENTER);
+```
 
-##### Selects
+`clearAndEnterText(Locator, String)` clears a field and enters text in a single call, saving the separate `clear` step.
 
-As the method name would imply, the `select()` method wraps the `Select` API to interact with menus constructed on the DOM as `<select>` elements. The `WebCommander` currently selects and deselects options only by visible text as a common use pattern. To gain access to other forms of interaction (by Index or by Value), the best solution is to extend `WebCommander` and create custom commands as needed. (More on this topic below)
+`clear(Locator)` empties an input field.
 
-#### WebDriver Actions
+### Selects
 
-The `Actions` API is an extremely versatile interface for simulating keyboard, mouse, pen, and wheel actions. The Builder pattern invovled with the `Actions` API would make wrapping various combinations extremely difficult and extremely limited in actual value in a consuming project. While there are some more common and straightforward action sequences that are provided on the `WebCommander`, the `Actions` API is largely intended to build sequences custom to the needs of the UI under test.
+`select(Locator, String)` wraps Selenium's `Select` API to interact with menus built as `<select>` elements, and `deselect(Locator, String)` reverses it. Both operate by the visible text of the option, and both offer a varargs overload for acting on several options at once. To select by index or by value, [extend the `WebCommander`]({{< relref "/docs/Components/Commands/extensibility.md" >}}) with a custom command.
 
-The `WebCommander` currently provides `Actions` wrapping for a point-precise `click()` on an element, a `doubleClick()` on an element, a `controlClick()` series on multiple elements, and a `hover()` on an element.
+### Files
 
-More complex usage of the `Actions` API can be (and should be) wrapped as custom commands on a Project-level `WebCommander` sub-class. More on this in the 'Extensibility' section below.
+`uploadFile(Locator fileInput, String fileName)` uploads a file to a file `<input>`. The file is resolved from the project resources by name, and a `LocalFileDetector` is set so the upload works against a remote or grid-hosted browser as well as a local one.
 
-#### Other Functions
+## Actions sequences
 
-In addition to `WebElement` interactions, the `WebCommander` provides additional functionality that helps to interact with the rendered DOM.
+The `Actions` API simulates keyboard, mouse, pen, and wheel input. Its builder pattern makes wholesale wrapping impractical and of little value, so complex sequences are best built as [custom commands]({{< relref "/docs/Components/Commands/extensibility.md" >}}) tailored to the UI under test. The `WebCommander` provides wrappers for the most common sequences:
 
-##### Frames
+- `doubleClick(Locator)` double-clicks an element.
+- `controlClick(Locator...)` clicks each of several elements while holding the CTRL key, for multi-select interactions.
+- `hover(Locator)` moves the pointer over an element, for menus and tooltips that respond to hover.
 
-Switching between frames is one such function. The methods involved simply wrap the `WebDriver.switchTo().defaultContent()` and `WebDriver.switchTo().frame()`. To move focus to a child frame, simple invoke the `focusOnFrame(Locator locator)` method with a `Locator` instance that maps of the Frame node on the DOM. Invoking the `focusOnDefaultContent()` method will return focus to the primary frame on the page.
+## Frames
 
-##### Waits
+Content inside an `<iframe>` is only reachable once focus moves into that frame.
 
-Inevitably, tests will need to work around some timing and synchronization issues. Implementing a time-based wait such as `Thread.sleep()` can work in a pinch, but best practices suggest something more flexible and performant. The `pause(Condition)` method was designed to function as an Explicit Wait, but uses Qadenz's [Conditions and Expectations](/components-old/conditions-and-expectations/) to express the type and criteria of the wait. As with Explicit Waits, the Condition will be evaluated repeatedly until either the Condition is satisfied, or a timeout occurs, at which point the test will be stopped.
+- `focusOnFrame(Locator)` moves focus into the frame mapped by the given `Locator`.
+- `focusOnDefaultContent()` returns focus to the main document.
 
-##### Screenshots
+## Waits
 
-While failed assertions and caught exceptions will trigger the capturing of a screenshot, there are other occasions where a team might need visual confirmation of the UI state at a given point in a test. This can also provide some additional insights while troubleshooting a troublesome test.
+Beyond the waits already built into each command, `pause(Condition)` waits for a specific state to be reached before the test proceeds. It functions as an explicit wait, but expresses the wait using the [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}) vocabulary, evaluating the `Condition` repeatedly until it is satisfied or the timeout expires.
 
-Invoking the `captureScreenshot()` method will save an image of the visible UI and embed the image into the final HTML report.
+## Screenshots
+
+Failed validations and caught exceptions capture a screenshot automatically. When a test needs visual confirmation of the UI at a specific point, or an extra frame while troubleshooting, `captureScreenshot()` saves an image of the visible UI and embeds it in the HTML report.

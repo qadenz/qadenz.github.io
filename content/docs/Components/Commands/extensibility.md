@@ -1,13 +1,15 @@
 ---
 title: "Extensibility"
+linkTitle: "Extensibility"
 description: >
-  Web Inspector Description
-weight: 4
+  Add project-specific commands by subclassing WebCommander or WebInspector, inheriting the full command anatomy.
+weight: 5
 ---
+No fixed set of commands can anticipate every UI. When a project needs an interaction the built-in commands do not cover, extend [`WebCommander`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebCommander.java) or [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebInspector.java) and add it, rather than forking Qadenz or reaching around it. A custom command written this way inherits the same [four-step anatomy]({{< relref "/docs/Components/Commands/_index.md" >}}) as every built-in command: the wait, the logging, and the screenshot-on-failure all come for free.
 
-Both the `WebCommander` and `WebInspector` classes are designed to be extended within automation projects to enable custom commands to be created as needed by the UI under test.
+## Extend the class
 
-Starting at the class-level, the class will obviously need to extend either `WebCommander` or `WebInspector`. Then, a `Logger` instance and constructors need to be added.
+Start by subclassing either `WebCommander` or `WebInspector`. Add a `Logger`, and carry over both constructors so the subclass preserves the [logging choice]({{< relref "/docs/Components/Commands/webcommander.md#creating-a-webcommander" >}}) for its consumers.
 
 ```java
 import org.slf4j.Logger;
@@ -29,10 +31,11 @@ public class AcmeWebCommander extends WebCommander {
 }
 ```
 
-Then, the anatomy of the command method is as follows:
+## Write a command
+
+A command method follows the same anatomy as the built-in commands:
 
 ```java
-
 public void doSomething(Locator locator) {
     LOG.info("Doing something with element [{}].", locator.getName());
     try {
@@ -49,12 +52,17 @@ public void doSomething(Locator locator) {
 }
 ```
 
-The first operation in a command method is to log the command being executed (at the `INFO` level). Qadenz uses Logback, which provides the `{}` placeholder for additional values to be inserted. It is recommended to utilize this where possible to convey an appropriate level of detail in the logs and subsequent reports.
+Build it in the same order every command follows:
 
-Next, the `try` block will initialize a `WebElement` using the inherited `WebFinder` instance, then perform any necessary actions. If the method is on a `WebInspector` sub-class, the `return` should take place within the `try` block.
+1. **Log the action** at the `INFO` level. Qadenz uses Logback, so use the `{}` placeholder to fold element names and values into the message for readable reports.
+2. **Initialize the element** inside the `try` block using the inherited `WebFinder`, then perform the interaction. On a `WebInspector` subclass, return the value from within the `try` block.
+3. **Handle failure** in the `catch` block: log the exception at the `ERROR` level and capture a screenshot with the inherited `Screenshot`. Catch the specific exception where that helps, or cast a wide net by catching all descendants of `Exception`. A multi-catch or a `finally` fits here when the use case calls for it.
+4. **Surface the exception** so it stops the test. Re-throw it as shown, or throw a new `RuntimeException` with a context-friendly message. Throwing an unchecked exception keeps the command free of a checked-exception signature, so tests that call it need no `try`/`catch` of their own. Qadenz is built to keep that burden off the test.
 
-The `catch` block should be set to catch the appropriate Exception, though a wide net may be cast by simply catching all descendents of `Expception`. A multi-catch or `finally` could be employed here if the use case is appropriate. Within the `catch` block, the Exception will be logged (at the `ERROR` level) and, if appropriate, a screenshot captured using the inherited `Screenshot` instance.
+## Reaching the WebDriver directly
 
-Finally, re-throw the Exception. Throwing a new instance of `RunTimeException` with a context-friendly message would be an appropriate alternative to allowing the Exception to surface to the test level, requiring a `try/catch` in the test itself or an Exception to be added to the method signature. This is obviously a preferential decision to be made within the automation project. Qadenz has simply been designed to avoid the need to do this.
+Most custom commands build on the inherited `WebFinder` and `Screenshot`, and on the existing commands. For the rare interaction that needs to go lower than the command layer, the raw `WebDriver` is always available through `WebDriverProvider.getWebDriver()`. Extending Qadenz adds to the tooling without walling off what sits underneath it.
 
-Once complete, instantiating the new commands class in either the UI Models or directly in the test method will make functionality available for use.
+## Use the custom command
+
+Instantiate the subclass wherever commands are used, whether in the UI-modeling layer or directly in a test, and the new command is available alongside every inherited one.
