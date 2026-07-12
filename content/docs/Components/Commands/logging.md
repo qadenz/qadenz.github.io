@@ -1,7 +1,7 @@
 ---
 title: "Logging"
 description: >
-  Web Inspector Description
+  How the constructor choice attributes each logged step, and how a test adds its own notes to the report.
 weight: 4
 ---
 
@@ -41,4 +41,24 @@ The overloaded constructor requires a `Class<?>` argument, and allows for anothe
 09:55:01.472 | INFO | LoginPage | Clicking element [Sign In Button].
 09:55:02.583 | INFO | UserProfilePage | Verifying Condition - Visibility of element [Company Logo Image] is TRUE.
 09:55:02.998 | INFO | UserProfilePage | Result - PASS
+```
+
+## Adding notes to the report
+
+Beyond the automatic per-command logging, a test can write its own entries into the report. These are useful for labeling sections of a test, recording system state, or leaving context that helps interpret a failure.
+
+Two of these are instance methods inherited from the [`Commands`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Commands.java) base, so they are available on any `WebCommander` or `WebInspector` and are attributed to the same logger the instance was constructed with:
+
+- `log(String)` writes an entry at the `INFO` level, alongside the regular command output.
+- `annotate(String)` writes an entry at the `WARN` level, which stands out on the report for higher-level notes such as labeling a phase of the test.
+
+```java
+commander.annotate("Verifying the checkout totals.");
+commander.log("Cart contained " + itemCount + " items.");
+```
+
+For a note that belongs to the test itself rather than to a command or page, the static [`Log`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Log.java) class provides `Log.annotate(String)`. It writes at the `WARN` level under a `Test` logger, so the entry reads as a test-level annotation regardless of which commands are in play.
+
+```java
+Log.annotate("Starting the returns workflow.");
 ```
