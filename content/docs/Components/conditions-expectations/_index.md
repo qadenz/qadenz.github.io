@@ -53,6 +53,14 @@ An `Expectation` is a thin wrapper over a Hamcrest [`Matcher`](https://hamcrest.
 
 Qadenz leans on Hamcrest rather than reinventing comparison logic. Expectations stay predictable to anyone who has used matchers before, and the matching itself is handled by a library built for exactly that job.
 
+## Paired by value type
+
+A Condition reports a value of one type: a boolean, a piece of text, a number, a date or time, or a list. Every Expectation is built for one of those same types. Pairing a Condition with an Expectation means matching the types, and the compiler enforces it. A text Condition will not accept a numeric Expectation, so a mismatched pair never reaches a running test.
+
+This is why the same names can be reused across types. `isEqualTo` reads naturally for text, numbers, and dates alike, and the right one is chosen by the value passed. The menu we actually have to learn stays small.
+
+The [Conditions](./conditions/) and [Expectations](./expectations/) catalogs group everything by these types and show the pairings.
+
 ## What a team gets
 
 Because every evaluation flows through the same two types, a few things follow without any extra effort:
@@ -64,4 +72,4 @@ Because every evaluation flows through the same two types, a few things follow w
 ## Where to go next
 
 - **[Validations](./validations/)** covers the mechanics: `verify` against `check`, grouping several Conditions in one call, flushing soft assertions, and screenshots on failure.
-- **Conditions** and **Expectations** catalog what is available to pair, so the right evaluation is easy to find without reading source.
+- **[Conditions](./conditions/)** and **[Expectations](./expectations/)** catalog what is available to pair, grouped by value type.

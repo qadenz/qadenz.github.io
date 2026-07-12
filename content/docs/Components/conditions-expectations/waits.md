@@ -2,7 +2,7 @@
 title: "Waits"
 description: >
   Waits
-weight: 2
+weight: 4
 ---
 
 Selenium provides both Implicit and Explicit Wait types, and Java provides the `Thread.sleep()`. While all technically valid, each have their own advantages and disadvantages. Qadenz does not implement the `WebDriver` Implicit Wait. The Implicit Wait can serve as a basic catch-all wait approach in simple projects, but the flexibility is limited, and more importantly, it tends to not pair well with Explicit Waits. Using both in conjunction can cause some very [unexpected side effects](https://www.selenium.dev/documentation/webdriver/waits/#implicit-wait).

@@ -2,7 +2,7 @@
 title: "Validations"
 description: >
   Validations
-weight: 1
+weight: 3
 ---
 
 Two design ideas shape how validations work in Qadenz, and both are worth understanding before the mechanics.
