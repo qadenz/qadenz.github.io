@@ -45,7 +45,7 @@ commander.verify(Conditions.visibilityOfElement(loginButton, Expectations.isTrue
 
 This unification is the largest single reason Qadenz test code stays compact. One vocabulary, applied to waiting and validating alike.
 
-Validations build on that vocabulary with hard and soft asserts, and grouped checks that report every failure in a step rather than stopping at the first. See [Validations](./validations/).
+Validations build on that vocabulary with hard and soft asserts, and grouped checks that report every failure in a step rather than stopping at the first. See [Validations]({{< relref "/docs/Components/conditions-expectations/validations.md" >}}).
 
 ## Hamcrest does the matching
 
@@ -59,7 +59,7 @@ A Condition reports a value of one type: a boolean, a piece of text, a number, a
 
 This is why the same names can be reused across types. `isEqualTo` reads naturally for text, numbers, and dates alike, and the right one is chosen by the value passed. The menu we actually have to learn stays small.
 
-The [Conditions](./conditions/) and [Expectations](./expectations/) catalogs group everything by these types and show the pairings.
+The [Conditions]({{< relref "/docs/Components/conditions-expectations/conditions.md" >}}) and [Expectations]({{< relref "/docs/Components/conditions-expectations/expectations.md" >}}) catalogs group everything by these types and show the pairings.
 
 ## What a team gets
 
@@ -71,5 +71,5 @@ Because every evaluation flows through the same two types, a few things follow w
 
 ## Where to go next
 
-- **[Validations](./validations/)** covers the mechanics: `verify` against `check`, grouping several Conditions in one call, flushing soft assertions, and screenshots on failure.
-- **[Conditions](./conditions/)** and **[Expectations](./expectations/)** catalog what is available to pair, grouped by value type.
+- **[Validations]({{< relref "/docs/Components/conditions-expectations/validations.md" >}})** covers the mechanics: `verify` against `check`, grouping several Conditions in one call, flushing soft assertions, and screenshots on failure.
+- **[Conditions]({{< relref "/docs/Components/conditions-expectations/conditions.md" >}})** and **[Expectations]({{< relref "/docs/Components/conditions-expectations/expectations.md" >}})** catalog what is available to pair, grouped by value type.
