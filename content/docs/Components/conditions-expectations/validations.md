@@ -1,81 +1,71 @@
 ---
 title: "Validations"
+linkTitle: "Validations"
 description: >
-  Validations
+  Asserting the state of the UI with verify and check, hard and soft, one check or many.
 weight: 3
 ---
+A validation asks whether the UI meets expectation and records the answer. Every validation is a `Condition` paired with an `Expectation`, evaluated through one of two methods. Two design ideas shape how they behave.
 
-Two design ideas shape how validations work in Qadenz, and both are worth understanding before the mechanics.
+The first is that hard and soft asserts are first-class. `verify()` is a hard assert: a failure stops the test. `check()` is a soft assert: a failure is recorded, and the test continues until a later checkpoint decides whether to stop. Both take the same Conditions and Expectations used everywhere else, so choosing how strict a validation should be never changes how it is written.
 
-The first is that hard and soft asserts are first-class. `verify()` is a hard assert: a failure stops the test. `check()` is a soft assert: a failure is recorded, and the test continues until a later checkpoint decides whether to stop. Both take the same Conditions and Expectations used everywhere else, so choosing how strict a check should be never changes how it is written.
+The second is that a single validation can cover several checks at once and report all of them, so a failing step gives a complete picture instead of stopping at the first problem.
+
+## Choosing verify or check
+
+`verify()` is the primary assertion, used in most tests. It evaluates the validation, and on failure it stops the test then and there.
+
+```java
+commander.verify(Conditions.visibilityOfElement(loginButton, Expectations.isTrue()));
+```
+
+`check()` is the soft variant. On failure it records the result and lets the test continue, so later steps still run. A recorded failure is made final by a later call to `Assertions.flush()`, covered below.
+
+```java
+commander.check(Conditions.textOfElement(greeting, Expectations.isEqualTo("Hello World!")));
+```
+
+Both methods live on the `Commands` hierarchy, so they are callable from any descendant such as the `WebCommander`. The only difference in use is that `check()` needs a `flush()` at some later point to turn recorded failures into a stopped test.
 
 ## A complete picture when a step fails
 
 Most steps check more than one thing. After adding an item to the cart, a step might confirm the notification message, the cart quantity, and that checkout is now enabled. Written as three separate assertions, the first failure stops the step and the other two never run. The report shows one problem when there might be three, and the rest stay hidden until the bug is fixed and the test runs again.
 
-`verify()` takes a group of Conditions and evaluates every one before it decides to halt. Each Condition is reported on its own, so a single run surfaces every result. The step still fails and still stops the test, but only after accounting for everything in the group. It behaves like a soft assertion wrapped in a hard one: the completeness of a soft assert, with the firm stop of a hard assert.
+Pass several Conditions to a single `verify()` or `check()`, and every one is evaluated before the call decides what to do.
 
-The sections below cover the mechanics.
-
-## Consistent validations
-
-Unit testing frameworks such as TestNG or JUnit include assertion functionality as a core component, and are relatively simple to use. Being open-ended frameworks, however, individual users may tend to express very similar validations in a variety of different assertions. This leads to inconsistent coding patterns, and more difficult maintenance of test code.
-
-Using `Conditions` and `Expectations` allows a team to ensure all contributors are following the same pattern for validations.
-
-```
-Conditions.textOfElement(greetingText, Expectations.isEqualTo("Hello World!");
-```
-
-That said, Qadenz does employ a single TestNG assertion, the `assertTrue()` method, as a means of validating a Condition. The `result()` of a Condition is a simple representation of whether the state of the UI under test meets expectation. If the output of the Condition evaluation matches the Expectation, `result()` will return `true`.
-
-By passing this result to the `assertTrue()` method, Qadenz is ensuring that a passing result depends on the Condition evaluation meeting the Expectation. If not, the validation will fail.
-
-## Assertion Types
-
-The concept of Hard Assertions and Soft Assertions are not new in the test automation world. Qadenz implements both concepts by way of the `verify()` and `check()` methods.
-
-`verify()` represents a Hard Assertion. If the validation fails, the test will be marked as failed and execution will be stopped.
-
-`check()` represents a Soft Assertion. If the validation fails, the test will be marked as failed, but execution will be allowed to continue until a call to `Assertions.flush()` is made, which will stop execution of the test if any failures have been encountered.
-
-The `verify()` or `check()` methods are available on the Commands Hierarchy and are callable on any descendant class of `Commands`. The mechanics of using these validations are the same, with the only difference being an additional step with `check()` required to call `Assertions.flush()` in order to handle any failed Soft Assertions and stop execution.
-
-## Grouped Conditions
-
-Validations in Qadenz are further enhanced with the ability to evaluate multiple Conditions as a group. In scenarios where a single UI action can trigger multiple verification points in a test, a tester may have to express multiple assert statements to ensure necessary coverage. If, for example, the first assertion were to fail, the remaining assertions would remain unchecked until either the UI under test is fixed, or the test scenario is executed manually.
-
-Using Qadenz, a tester is able to execute these same validations in one call to `verify()` or `check()`, and will receive results for each Condition evaluation regardless of individual results. If again, the first validation fails, Qadenz will perform handling tasks on the failure, then proceed to evaluate each of the other Conditions that were passed. In the case of a `verify()` with multiple Conditions where one or more have failed, halting of test execution will be delayed until all Conditions have been evaluated, which will ensure that the test step is completed in its entirety.
-
-In the example below, a user has added an item to the shopping cart, and the next step will verify a snackbar notification is displayed with a confirmation message, the item quantity is shown on the shopping cart icon, and the 'Checkout Now' button is enabled.
-
-```
+```java
 commander.verify(
-        Conditions.textOfElement(snackBarNotification, Expectations.isEqualTo("Items added successfully!")),
-        Conditions.textOfElement(quantityInCartIndicator, Expectations.isEqualTo("1")),
-        Conditions.enabledStateOfElement(checkOutNowButton, Expectations.isTrue()));
+        Conditions.textOfElement(snackbarNotification, Expectations.isEqualTo("Items added successfully!")),
+        Conditions.textOfElement(cartQuantity, Expectations.isEqualTo("1")),
+        Conditions.enabledStateOfElement(checkoutButton, Expectations.isTrue()));
 ```
 
-By grouping these verifications together, even if one (or more) Conditions fail, all will be evaluated and reported individually.
+Each Condition is evaluated and reported on its own. With `verify()`, a failure in the group still stops the test, but only after all three have run, so a single execution surfaces every problem in the step. It behaves like a soft assertion wrapped in a hard one: the completeness of a soft assert, with the firm stop of a hard assert.
 
-## Managing Soft Assertions
+## Managing soft assertions
 
-The `check()` methods works alongside the static `Assertions.flush()` method to delay execution stoppages in the event of failed validations. As calls to `check()` are made and executed through the course of a test, the [`Assertions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Assertions.java) class tracks whether any failures have been encountered. When the call to `Assertions.flush()` is made, this tracker is checked. If any failures are present, execution will be stopped. If no failures are found, execution continues.
+`check()` works alongside the static `Assertions.flush()` method. As a test runs, each failed `check()` sets a per-test failure flag on the [`Assertions`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/Assertions.java) tracker. Calling `Assertions.flush()` inspects that flag: if any failure has been recorded, it throws and the test stops; if not, execution continues.
 
-Since the tracker is live for the entire duration of a test, there is no limit to how many calls to `Assertions.flush()` can be made throughout a test. It is possible then, to create a series of "checkpoints" in longer tests whenever it is deemed sensible to stop a test if failures have been found. This is especially convenient for smoke to end-to-end tests where a focus on completion of test is important for a full accounting of key validation points.
+```java
+commander.check(Conditions.textOfElement(firstName, Expectations.isEqualTo("Ada")));
+commander.check(Conditions.textOfElement(lastName, Expectations.isEqualTo("Lovelace")));
+Assertions.flush();
+```
 
-Please note, however, that at least one call to `Assertions.flush()` is required in tests where only `check()` validations are made. If no call is made, the test will be allowed to continue to completion, and individual steps will be reported as failed (if validations have indeed failed), but the test as a whole will be reported as passing. Since the Qadenz reporter is integrated with TestNG, the `AssertionError` thrown by the `flush()` method in the event of individual failures is required to mark the test itself as failed.
+Place `flush()` wherever it makes sense to stop if failures have piled up. Because the flag lives for the whole test, a test can hold several `flush()` calls, each a checkpoint that halts if anything has failed up to that point. This suits long smoke or end-to-end tests, where finishing the run matters for a full accounting of the important validations.
 
-One additional design consideration must be made when mixing `verify()` and `check()` validations within the same test. When a `check()` validation is made, and is followed by a `verify()` validation prior to calling `Assertions.flush()`, if the `verify()` validation fails, the test will be stopped at the failed `verify()` validation.
+One rule to keep in mind: a test that uses only `check()` needs at least one `flush()`. Without it, failed checks are still reported on their individual steps, but the test as a whole passes, since the `AssertionError` that marks a test failed is thrown only by `flush()`.
+
+Mixing the two methods is fine, with one consequence to expect. If a `verify()` fails after some `check()` calls but before a `flush()`, the test stops at that `verify()`, and the earlier recorded failures never reach a `flush()`.
 
 ## Screenshots
 
-Qadenz validations are built to capture screenshots whenever a Condition evaluation fails. If screenshots are desired for validation failures, no special action need be taken. Should screenshots *not* be needed for a validation, disabling is easy with the overloaded `verify()` and `check()` methods.
+By default, a validation captures a screenshot whenever a Condition fails and embeds it in the report. Nothing extra is needed to get this.
 
-Adding a call to `Screenshot.SKIP` as the first argument in either `verify()` or `check()` will disable screenshots from being captured if the evaluations for any accompanying Conditions fail.
+To turn it off for a validation, pass `Screenshot.SKIP` as the first argument to `verify()` or `check()`.
 
+```java
+commander.verify(Screenshot.SKIP, Conditions.visibilityOfElement(spinner, Expectations.isFalse()));
 ```
-verify(Screenshot.SKIP, Conditions.visibilityOfElement(locator, Expectations.isTrue());
-```
 
-A `boolean` could also be passed to achieve the same outcome. The `Screenshot.SKIP` value is intended as a means to keep the resulting code easily readable at a glance.
+`Screenshot.SKIP` is a convenience constant that resolves to `false`. Passing `false` directly works the same way, but the named constant states the intent at a glance. Screenshots are captured per failed Condition, so skipping applies to every Condition in a grouped call.
