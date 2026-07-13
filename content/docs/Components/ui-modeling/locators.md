@@ -33,9 +33,7 @@ By requiring a `name` value to be given in the Locator constructor, Qadenz refer
 
 ### CSS Selectors
 
-Many teams will choose either a default standard selector strategy (ID, CSS, XPath, etc.), or at least set an order of prioritization for the varying types. Qadenz has chosen CSS selectors for the superior performance, ease of use, and better browser compatibility when compared to XPath. The addition of the [SizzleJS](https://github.com/jquery/sizzle) library provides a number of pseudo-classes that make element selection more flexible and accurate.
-
-The end result is a powerful and straightforward selector strategy that supports full parameterization capabilities. This also leads to a singular defined approach that an entire team can adopt and consistently apply across the entire project.
+Every `Locator` selector is a CSS selector, and Qadenz uses CSS exclusively. See [Selectors and Sizzle]({{< relref "selectors-and-sizzle.md" >}}) for why CSS is the single standard, and for the Sizzle pseudo-classes that make parameterization possible.
 
 ## Parameterization
 
@@ -166,21 +164,3 @@ Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
         .setDisabledByAttribute("class", "checkbox-disabled")
         .setSelectedByAttribute("class", "checkbox-checked");
 ```
-
-## The LocatorGroup
-
-The `LocatorGroup` allows multiple `Locator` instances to be combined together on a `List`, and acted upon as a group. This is commonly applied to verify the visibility of UI component, or a set of default UI elements. Instead of passing multiple individual Conditions to a `.verify()` or `.check()` validation, a LocatorGroup can be verified with a single `Condition` call.
-
-For example, a simple authentication form has several basic elements, the ‘Username’ field, the ‘Password’ field, a ‘Remember Me’ checkbox, and a ‘Sign In’ button. Each element would be mapped as an individual `Locator` instance for the purposes of input, but these same elements could also be included in a `LocatorGroup`, should the need arise to verify each element to be visible as part of the form.
-
-```java
-Locator usernameField = new Locator("Username Field", "#username");
-Locator passwordField = new Locator("Password Field", "#password");
-Locator rememberMeCheckbox = new Locator("Remember Me Checkbox", "#remember-me");
-Locator signInButton = new Locator("Sign In Button", "#sign-in");
-
-LocatorGroup signInForm = new LocatorGroup("Sign In Form",
-        usernameField, passwordField, rememberMeCheckbox, signInButton);
-```
-
-By combining individual Locators onto a `LocatorGroup` instance, testers are able to identify and refer to collections of elements as the UI Components they represent.
