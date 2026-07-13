@@ -21,6 +21,8 @@ LocatorGroup signInForm = new LocatorGroup("Sign In Form",
         usernameField, passwordField, rememberMeCheckbox, signInButton);
 ```
 
+Because `LocatorGroup` extends `ArrayList<Locator>`, a group is itself a `List<Locator>`. It can be iterated, added to after construction, and passed anywhere a `List<Locator>` is expected.
+
 The name is what identifies the group in logs and reports, so it should read as the component it represents ("Sign In Form"), the same way a `Locator` name reads as its element.
 
 An individual `Locator` can belong to a group and still be used on its own. The four fields above are each mapped for direct input, and also collected into `signInForm` for validation. Grouping does not consume them.
