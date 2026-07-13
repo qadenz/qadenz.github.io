@@ -3,9 +3,7 @@ title: "Locators"
 weight: 1
 ---
 
-The Locator is the central component of UI modeling with Qadenz. It is a key ingredient in an approach that seeks to improve the UI modeling by avoiding the `PageFactory` class and `@FindBy` annotation entirely. It's design sets out to accomplish several things. First, the Locator is a clean wrapper for both an element's selector and a display friendly name. Second, the Locator is a vehicle for parameterization of element selectors, leading to much more efficient UI models. And finally, the Locator carries attributes that assist with validations and element inspections.
-
-In short, Qadenz is quite happy to follow [Simon Stewart's advice](https://www.youtube.com/watch?v=gyfUpOysIF8&t=1519s), and find a better way.
+The Locator is the central component of UI modeling with Qadenz. Its design accomplishes three things: it is a clean wrapper for both an element's selector and a display-friendly name, it is a vehicle for parameterization of element selectors that leads to more efficient UI models, and it carries attributes that assist with validations and element inspections.
 
 ## Basics of a Locator
 
@@ -33,9 +31,7 @@ By requiring a `name` value to be given in the Locator constructor, Qadenz refer
 
 ### CSS Selectors
 
-Many teams will choose either a default standard selector strategy (ID, CSS, XPath, etc.), or at least set an order of prioritization for the varying types. Qadenz has chosen CSS selectors for the superior performance, ease of use, and better browser compatibility when compared to XPath. The addition of the [SizzleJS](https://github.com/jquery/sizzle) library provides a number of pseudo-classes that make element selection more flexible and accurate.
-
-The end result is a powerful and straightforward selector strategy that supports full parameterization capabilities. This also leads to a singular defined approach that an entire team can adopt and consistently apply across the entire project.
+Every `Locator` selector is a CSS selector, and Qadenz uses CSS exclusively. See [Selectors and Sizzle]({{< relref "selectors-and-sizzle.md" >}}) for why CSS is the single standard, and for the Sizzle pseudo-classes that make parameterization possible.
 
 ## Parameterization
 
@@ -57,7 +53,7 @@ In this example, we also have a benefit of passing the parameter to the `name` f
 
 ### Parent Locators
 
-The Locator can hold an optional instance of another Locator. This is intended to allow abstraction of selector segments by combining the selector of the parent Locator with that of the current Locator as a single selector value. This can be helpful in reducing repeated selector segments when creating Locators for closely related UI Elements.
+A Locator can be built from another Locator, combining the parent's selector with the current one into a single selector value. Only the parent's selector is folded in, and only at construction, so the child does not retain the parent or inherit its name or state attributes. This helps abstract repeated selector segments when creating Locators for closely related UI Elements.
 
 Consider an e-commerce application wherein a list of catalog items are presented on the UI. Each item card contains the item name text, a ‘Cost’ value, a ‘Quantity’ field, and an ‘Add to Cart’ button.
 
@@ -84,7 +80,7 @@ The selector for the ‘Add to Cart’ button could be:
 #item-list-section .item-card:contains(ACME Rocket Powered Roller Skates) .item-add button
 ```
 
-While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as it’s own element mapping.
+While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as its own element mapping.
 
 With a parent `Locator` the resulting element mappings for the item card, ‘Quantity’ field, and ‘Add to Cart’ button could be:
 
@@ -166,21 +162,3 @@ Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
         .setDisabledByAttribute("class", "checkbox-disabled")
         .setSelectedByAttribute("class", "checkbox-checked");
 ```
-
-## The LocatorGroup
-
-The `LocatorGroup` allows multiple `Locator` instances to be combined together on a `List`, and acted upon as a group. This is commonly applied to verify the visibility of UI component, or a set of default UI elements. Instead of passing multiple individual Conditions to a `.verify()` or `.check()` validation, a LocatorGroup can be verified with a single `Condition` call.
-
-For example, a simple authentication form has several basic elements, the ‘Username’ field, the ‘Password’ field, a ‘Remember Me’ checkbox, and a ‘Sign In’ button. Each element would be mapped as an individual `Locator` instance for the purposes of input, but these same elements could also be included in a `LocatorGroup`, should the need arise to verify each element to be visible as part of the form.
-
-```java
-Locator usernameField = new Locator("Username Field", "#username");
-Locator passwordField = new Locator("Password Field", "#password");
-Locator rememberMeCheckbox = new Locator("Remember Me Checkbox", "#remember-me");
-Locator signInButton = new Locator("Sign In Button", "#sign-in");
-
-LocatorGroup signInForm = new LocatorGroup("Sign In Form",
-        usernameField, passwordField, rememberMeCheckbox, signInButton);
-```
-
-By combining individual Locators onto a `LocatorGroup` instance, testers are able to identify and refer to collections of elements as the UI Components they represent.
