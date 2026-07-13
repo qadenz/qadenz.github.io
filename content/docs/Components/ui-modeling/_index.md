@@ -32,6 +32,8 @@ Because it is a plain value and not a bound element, the same four demands fall 
 
 That last point is the hinge between this section and [Commands]({{< relref "/docs/Components/Commands/_index.md" >}}). A `Locator` never holds a `WebElement`. When a command receives one, the [`WebFinder`]({{< relref "webfinder.md" >}}) resolves it against the live DOM at that instant, waits for it if the command calls for a wait, and discards it after. The model is a set of descriptions; the elements are momentary. This is why a Qadenz page object does not go stale between steps: there is nothing held to go stale.
 
+The selector inside a `Locator` is always a CSS selector, and only ever CSS. Qadenz maps every element the same way rather than mixing IDs, XPath, and CSS across a suite, because a single CSS selector can express what any of them can. A team reads and reviews one selector language everywhere, with none of the per-element judgment about which style to reach for. [Selectors and Sizzle]({{< relref "selectors-and-sizzle.md" >}}) makes the case in full.
+
 ## A page is a collection of Locators
 
 A page object in Qadenz gathers the `Locator`s for one screen and exposes the actions a test takes there. It holds no `WebElement` fields and does its own waiting through the commands, so a page class is mostly a map of names to selectors plus a handful of methods.
