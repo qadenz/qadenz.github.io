@@ -31,15 +31,15 @@ Each of these methods evaluates a state and returns a `boolean`.
 
 ### Enabled
 
-`getEnabledStateOfElement(Locator)` returns `true` when an element is enabled for interaction, useful for `<input>` and `<button>` elements. It first calls `WebElement.isEnabled()`, and if that reports enabled, checks the [user-defined disabled attribute]({{< relref "/docs/Components/UI/locators.md#disabled-elements" >}}) on the `Locator`. The method presumes an element is enabled until one of the checks proves otherwise.
+`getEnabledStateOfElement(Locator)` returns `true` when an element is enabled for interaction, useful for `<input>` and `<button>` elements. It first calls `WebElement.isEnabled()`, and if that reports enabled, checks the [user-defined disabled attribute]({{< relref "/docs/Components/ui-modeling/locators.md#disabled-elements" >}}) on the `Locator`. The method presumes an element is enabled until one of the checks proves otherwise.
 
 ### Selected
 
-`getSelectedStateOfElement(Locator)` returns `true` when an element is selected, useful for checkboxes and radio buttons. It first calls `WebElement.isSelected()`, and if that reports selected, checks the [user-defined selected attribute]({{< relref "/docs/Components/UI/locators.md#selected-elements" >}}) on the `Locator`. The method presumes an element is selected until one of the checks proves otherwise.
+`getSelectedStateOfElement(Locator)` returns `true` when an element is selected, useful for checkboxes and radio buttons. It first calls `WebElement.isSelected()`, and if that reports selected, checks the [user-defined selected attribute]({{< relref "/docs/Components/ui-modeling/locators.md#selected-elements" >}}) on the `Locator`. The method presumes an element is selected until one of the checks proves otherwise.
 
 ### Visibility
 
-`getVisibilityOfElement(Locator)` returns `true` when an element is visible on the UI. It finds all nodes matching the selector, then evaluates the first match through a series of checks: the element's dimensions must be greater than zero, and it must not carry `display: none;`, `visibility: hidden;`, or the `hidden` attribute. If those pass, it checks the [user-defined hidden attribute]({{< relref "/docs/Components/UI/locators.md#hidden-elements" >}}) on the `Locator`. A `StaleElementReferenceException` at any point returns `false`. The method presumes an element is visible until one of the checks proves otherwise.
+`getVisibilityOfElement(Locator)` returns `true` when an element is visible on the UI. It finds all nodes matching the selector, then evaluates the first match through a series of checks: the element's dimensions must be greater than zero, and it must not carry `display: none;`, `visibility: hidden;`, or the `hidden` attribute. If those pass, it checks the [user-defined hidden attribute]({{< relref "/docs/Components/ui-modeling/locators.md#hidden-elements" >}}) on the `Locator`. A `StaleElementReferenceException` at any point returns `false`. The method presumes an element is visible until one of the checks proves otherwise.
 
 ## Element text
 
