@@ -3,7 +3,7 @@ title: "Locators"
 weight: 1
 ---
 
-The Locator is the central component of UI modeling with Qadenz. It is a key ingredient in an approach that seeks to improve the UI modeling by avoiding the `PageFactory` class and `@FindBy` annotation entirely. It's design sets out to accomplish several things. First, the Locator is a clean wrapper for both an element's selector and a display friendly name. Second, the Locator is a vehicle for parameterization of element selectors, leading to much more efficient UI models. And finally, the Locator carries attributes that assist with validations and element inspections.
+The Locator is the central component of UI modeling with Qadenz. It is a key ingredient in an approach that seeks to improve the UI modeling by avoiding the `PageFactory` class and `@FindBy` annotation entirely. Its design sets out to accomplish several things. First, the Locator is a clean wrapper for both an element's selector and a display friendly name. Second, the Locator is a vehicle for parameterization of element selectors, leading to much more efficient UI models. And finally, the Locator carries attributes that assist with validations and element inspections.
 
 In short, Qadenz is quite happy to follow [Simon Stewart's advice](https://www.youtube.com/watch?v=gyfUpOysIF8&t=1519s), and find a better way.
 
@@ -55,7 +55,7 @@ In this example, we also have a benefit of passing the parameter to the `name` f
 
 ### Parent Locators
 
-The Locator can hold an optional instance of another Locator. This is intended to allow abstraction of selector segments by combining the selector of the parent Locator with that of the current Locator as a single selector value. This can be helpful in reducing repeated selector segments when creating Locators for closely related UI Elements.
+A Locator can be built from another Locator, combining the parent's selector with the current one into a single selector value. Only the parent's selector is folded in, and only at construction, so the child does not retain the parent or inherit its name or state attributes. This helps abstract repeated selector segments when creating Locators for closely related UI Elements.
 
 Consider an e-commerce application wherein a list of catalog items are presented on the UI. Each item card contains the item name text, a ‘Cost’ value, a ‘Quantity’ field, and an ‘Add to Cart’ button.
 
@@ -82,7 +82,7 @@ The selector for the ‘Add to Cart’ button could be:
 #item-list-section .item-card:contains(ACME Rocket Powered Roller Skates) .item-add button
 ```
 
-While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as it’s own element mapping.
+While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as its own element mapping.
 
 With a parent `Locator` the resulting element mappings for the item card, ‘Quantity’ field, and ‘Add to Cart’ button could be:
 
