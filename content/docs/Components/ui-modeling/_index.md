@@ -59,6 +59,13 @@ public class SignInPage {
 
 The test that drives this page never sees a selector. It calls `signIn(...)`, the page speaks in `Locator` names, and the commands turn those names into waited, logged, screenshot-on-failure interactions. How to structure these classes at scale, one command per method, a shared base page, and where the `WebCommander` lives, is a topic for a Guides walkthrough rather than this reference.
 
+## What a team gets
+
+- **Reports in the application's language.** Every log line and every failure names the element a person recognizes, the "Sign In Button" rather than `.btn-signIn`, so a result reads without anyone translating a selector back into a place on the page.
+- **One selector language to review.** Every element is mapped in CSS and only CSS, so a code review reads one dialect throughout instead of a mix of IDs, XPath, and CSS chosen element by element.
+- **Mappings that outlive the render.** A `Locator` holds no element, so nothing goes stale between steps and a UI that re-renders does not break a page object that worked a moment earlier.
+- **Less duplication to maintain.** A shared selector fragment is written once through a parent, and one parameterized mapping covers a whole family of elements, so a change to the UI is a small edit in a single place.
+
 ## The pieces
 
 - **[Locators]({{< relref "locators.md" >}})** map a single element: display name, selector, runtime parameters, parent chaining, and the state attributes that harden inspections against unconventional UIs.
