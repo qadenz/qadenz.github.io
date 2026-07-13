@@ -9,6 +9,8 @@ When a run comes back red, someone has to answer a question before anything else
 
 Qadenz treats that story as the product of the run. Every command, inspection, and validation a test performs is logged as it happens, a screenshot is captured at the moment anything fails, and the whole record is compiled into a report sorted the way a team actually reads results. The verdict is one bit at the top; the evidence underneath it is the part that lets someone act without re-running a thing.
 
+![The Qadenz HTML report with its result sections collapsed, showing the summary header across the top and each class grouped under a color-coded result section.](/img/qadenz-report-main.png)
+
 ## One stream, two destinations
 
 Qadenz uses [Logback](https://logback.qos.ch/) for all logging, and every log event carries the same four fields: a timestamp, the level, the name of the logger, and the message. What changes is where an event goes and how it is dressed for the audience there.
