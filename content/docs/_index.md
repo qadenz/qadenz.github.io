@@ -39,6 +39,6 @@ The source is on [GitHub](https://github.com/qadenz/qadenz).
 
 ## License
 
-The Qadenz library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a Source Available library. Teams are welcome to use Qadenz to power their internally managed test automation projects and to modify it as needed, but may not redistribute the library or market or sell Qadenz (or derivative works) as a product for their own customers.
+The Qadenz library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0) as a Source Available library. Teams are welcome to use Qadenz to power their internally managed test automation projects and to modify it as needed, but may not redistribute the library or market or sell Qadenz (or derivative works) as a product for their own customers.
 
 Happy automating :)
