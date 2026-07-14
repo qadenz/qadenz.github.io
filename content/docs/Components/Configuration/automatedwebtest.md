@@ -1,38 +1,65 @@
 ---
-title: AutomatedWebTest
+title: "AutomatedWebTest"
+linkTitle: "AutomatedWebTest"
 description: >
-  Configuration
+  The base class every test extends, and the owner of the execution cycle from suite start to final report.
 weight: 1
 ---
 
-The [`AutomatedWebTest`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/AutomatedWebTest.java) is the base class for all test classes in a Qadenz-powered test project. This class is responsible for gathering parameter values from the TestNG Suite XML file, configuring and starting a `WebDriver` instance on a Selenium Grid for each test method, stopping the `WebDriver` after each test, and invoking the reporters after the Suite has completed.
+[`AutomatedWebTest`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/config/AutomatedWebTest.java) is the base class for every test class in a Qadenz project. Extending it is what enrolls a class in the Qadenz execution cycle: the parameter reading, the driver lifecycle, and the reporting all hang off this class and its parent. A class that holds `@Test` methods must extend `AutomatedWebTest`, directly or through an intermediate class, or its tests run with none of that machinery in place.
 
-Classes that hold `@Test` methods must extend this class in order for tests to run using Qadenz configurations.
+## The class hierarchy
 
-### The Execution Cycle
+`AutomatedWebTest` extends `AutomatedTest`, and the two split the work by how specific it is to web testing.
 
-**Before the Suite Begins**
+`AutomatedTest` sits at the top of the hierarchy and holds configuration that any kind of automated test would share. It stamps the suite's start and end times onto the [`WebConfig`]({{< relref "webconfig.md" >}}), and it carries the `@Listeners` declaration that registers the Qadenz reporter. Nothing here touches a browser.
 
-The first task performed after launching a Suite execution is to capture a timestamp and save as the `suiteStartDate` value on the `WebConfig`. This will be used later by the reporter to calculate the duration of the execution. Next, the Suite-level parameters are retrieved from the `ITestContext`, which were specified by the user on the TestNG Suite XML file. The  `gridHost` is validated and saved.
+`AutomatedWebTest` adds everything specific to driving one: reading the Suite parameters, launching and quitting the driver, and loading the application. A project's test classes extend `AutomatedWebTest`, so they inherit both layers at once.
 
-**Before Each Test**
+## The execution cycle
 
-Repeated before each test method, the Test-level parameters are retrieved from the `ITestContext`, which are the `browser`, `browserVersion`, `browserConfigProfile`, `platform`, `timeout`, `appUrl`, `retryInterceptedClicks`. These parameters are validated and saved to the `WebConfig`.
+Qadenz hangs its setup and teardown on standard TestNG lifecycle annotations. Followed from the start of a suite to the end, the cycle runs in this order.
 
-Once all the parameters are processed, the `WebDriver` can be launched and execution of a test method can begin. The `CapabilityProvider` is invoked to configure the browser session. The `CapabilityProvider` calls values on the `WebConfig` and attempts to load any Browser Config Profiles declared in one of the browser configuration JSON files. This process chooses a browser, determines if a specific version of the browser is required if a version has been declared, ensures that the test will be run on the appropriate OS if one has been specified, and applies any arguments provided on the JSON file if a matching Browser Config Profile was found.
+**Before the suite** (`@BeforeSuite`)
 
-These options are then used to configure and initialize a `WebDriver` instance, which is in turn set on the `WebDriverProvider`.
+Inherited from `AutomatedTest`. Qadenz captures a timestamp as the `suiteStartDate` on the `WebConfig`, which the reporter later uses to calculate the run's duration.
 
-Finally, the browser window is maximized, and the `appUrl` value is loaded.
+**Before each `<test>`** (`@BeforeTest`)
 
-**After Each Test**
+Once for every `<test>` node on the Suite XML file, Qadenz reads the declared parameters, validates them through the `XmlParameterValidator`, and stores the results on the `WebConfig`. A missing required parameter, or an unrecognized `browser` or `platform`, fails the run here, before any browser launches. [Suite Parameters]({{< relref "suite-parameters.md" >}}) covers the full set and how each is validated.
 
-At the end of each test method, the `WebDriver` is stopped.
+**Before each test method** (`@BeforeMethod`)
 
-**After the Suite Ends**
+Repeated ahead of every `@Test` method, this is where a test's browser comes to life. Qadenz initializes the assertion collector for the test, asks the `CapabilityProvider` to assemble the browser options (applying any [Browser Config Profile]({{< relref "browser-config-profiles.md" >}}) named for the run), launches a `RemoteWebDriver` against the Grid at `gridHost`, and hands it to the [`WebDriverProvider`]({{< relref "webdriverprovider.md" >}}). It then loads the `appUrl`. Because this runs per method, every test method starts on a driver of its own.
 
-The final task of the execution cycle is to capture a second timestamp as the `suiteEndDate` on the `WebConfig`.
+**After each test method** (`@AfterMethod`)
+
+Qadenz quits the driver, ending the browser session and discarding its state. The next test method begins the sequence again with a fresh one.
+
+**After the suite** (`@AfterSuite`)
+
+Inherited from `AutomatedTest`. Qadenz captures a second timestamp as the `suiteEndDate`, closing the window the reporter measures.
 
 **Reporting**
 
-The default TestNG reporters are not disabled by default, so the standard HTML & XML reports will be generated, along with the `emailable-report.html`. Next, the `TestReporter` is invoked which generates the Qadenz Reports in JSON and HTML formats.
+Qadenz does not disable the default TestNG reporters, so the standard HTML and XML reports and the `emailable-report.html` are still produced. Alongside them, the `TestReporter` registered on `AutomatedTest` generates the Qadenz reports in JSON and HTML. See [Test Results]({{< relref "/docs/Components/Test-Results/_index.md" >}}) for what those contain.
+
+## Inserting custom configuration
+
+A project often needs setup the framework cannot know about: seeding reference data, standing up a service, or signing in through an API before the browser opens. Rather than modify Qadenz, insert an intermediate class between `AutomatedWebTest` and the test classes, and give it the TestNG lifecycle methods the project needs.
+
+```java
+public class AcmeAutomatedWebTest extends AutomatedWebTest {
+
+    @BeforeSuite
+    public void seedReferenceData() {
+        // project setup
+    }
+}
+
+public class InventorySearchTest extends AcmeAutomatedWebTest {
+    // @Test methods
+}
+```
+
+Because Qadenz builds its own lifecycle on these same standard annotations, a project's `@BeforeSuite`, `@BeforeMethod`, and the rest join the same TestNG workflow rather than working around it. Test classes extend the intermediate class and inherit the project's configuration on top of the full Qadenz cycle beneath it. All of TestNG's tools for ordering and data, method dependencies, factories, and data providers, remain available to that intermediate class.

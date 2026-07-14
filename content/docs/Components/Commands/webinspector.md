@@ -1,65 +1,85 @@
 ---
-title: Web Inspector
+title: "WebInspector"
+linkTitle: "WebInspector"
 description: >
-  Web Inspector Description
+  The commands that interrogate elements: text, attributes, CSS, element state, and instance counts.
 weight: 2
 ---
+The [`WebInspector`](https://github.com/qadenz/qadenz/blob/master/src/main/java/dev/qadenz/automation/commands/WebInspector.java) works alongside the `WebCommander`, but instead of acting on elements it interrogates them for information: inner text, attribute and CSS values, element state, and instance counts. Most of these methods are the evaluative logic behind [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}), and they are equally useful on their own for pulling data out of the UI during a test.
 
-The `WebInspector` works alongside the `WebCommander`, but instead of acting upon UI elements, this class interrogates them for information. This includes retrieving inner text values, attribute values, element state, and instance counts. Most of the methods on `WebInspector` are used by Conditions and Expectations as part of evaluative logic for verifications and waits, but can be useful through the course of a test for retrieving data from the UI under test.
+Each method follows the same [four-step anatomy]({{< relref "/docs/Components/Commands/_index.md" >}}) as the rest of the commands. It logs the inspection and target, initializes the element through an explicit wait, and on failure captures a screenshot before surfacing the exception. The difference is the third step: rather than performing an action, an inspection reads a value and returns it.
 
-Each method on the `WebInspector` includes a number of activities beyond simply performing WebElement inspections. The workflow for these methods is as follows:
+## Creating a WebInspector
 
-1. Log the action taking place and the name of the target element.
-2. Initialize a `WebElement` using the provided `Locator` instance.
-3. Retrieve the required information from the `WebElement`.
-4. Catch and log any exceptions that are thrown.
-5. If an exception is caught, capture a screenshot of the UI under test.
-6. Throw the exception to stop execution of the test.
+The `WebInspector` shares the same two constructors as the [`WebCommander`]({{< relref "/docs/Components/Commands/webcommander.md#creating-a-webcommander" >}}), and the choice works the same way. The no-argument constructor attributes logged inspections to the `WebInspector`; the `Class<?>` constructor attributes them to the page or class passed in.
 
-#### Element Attributes and Properties
+```java
+WebInspector inspector = new WebInspector(getClass());
+```
 
-The values assigned to attributes on elements can be retrieved via the `getAttributeOfElement()` method by passing the name of the attribute to be evaluated. Invoking `getAttributeOfElements()` will return the value for all instances of the matching `Locator` on a `List<String>`.
+See [Logging]({{< relref "/docs/Components/Commands/logging.md" >}}) for what each constructor produces on the report.
 
-Similarly, the value of a CSS property can be retrieved from an element via the `getCssPropertyOfElement()` method.
+## Attributes and CSS properties
 
-#### Element States
+`getAttributeOfElement(Locator, String attributeName)` returns the value of the named attribute. `getAttributeOfElements(Locator, String attributeName)` returns those values for every element matching the `Locator`, as a `List<String>`.
 
-Element states can be evaluated and will return a boolean value based on the result.
+`getCssPropertyOfElement(Locator, String cssProperty)` returns the value of the named CSS property.
 
-##### Enabled
+## Element state
 
-The `getEnabledStateOfElement()` method evaluates if an element is enabled for interaction, and returns `true` if the element is in fact enabled. This is useful for determining if elements such as `<input>` elements or `<button>` elements are enabled. The state is determined by first invoking the `WebElement.isEnabled()` method. If the WebElement evaluates as enabled, a second check is performed against [user-defined attributes](/components/locators/#disabled-elements) on the element via the `Locator` instance.
+Each of these methods evaluates a state and returns a `boolean`.
 
-This method presumes an element is enabled until one of the evaluations proves the element is disabled.
+### Enabled
 
-##### Selected
+`getEnabledStateOfElement(Locator)` returns `true` when an element is enabled for interaction, useful for `<input>` and `<button>` elements. It first calls `WebElement.isEnabled()`, and if that reports enabled, checks the [user-defined disabled attribute]({{< relref "/docs/Components/ui-modeling/locators.md#disabled-elements" >}}) on the `Locator`. The method presumes an element is enabled until one of the checks proves otherwise.
 
-The `getSelectedStateOfElement()` method evaluates if an element is selected, and returns `true` if the element is in fact selected. This is useful for determining if elements such as checkboxes or radio buttons are selected. The state is determined by first invoking the `WebElement.isSelected()` method. If the WebElement evaluates as selected, a second check is performed against [user-defined attributes](/components/locators/#selected-elements) on the element via the `Locator` instance.
+### Selected
 
-This method presumes an element is selected until one of the evaluations proves the element is not selected.
+`getSelectedStateOfElement(Locator)` returns `true` when an element is selected, useful for checkboxes and radio buttons. It first calls `WebElement.isSelected()`, and if that reports selected, checks the [user-defined selected attribute]({{< relref "/docs/Components/ui-modeling/locators.md#selected-elements" >}}) on the `Locator`. The method presumes an element is selected until one of the checks proves otherwise.
 
-##### Visiblity
+### Visibility
 
-The `getVisibilityOfElement()` method evaluates if an element is visible on the UI, and returns `true` if the element is in fact visible. The state is determined by first finding all matching DOM nodes for the element selector on the given `Locator`. If more than zero matches are found, the method will then evaluate the dimensions of the first matching node. If the element has a height and width greater than zero, the method will then evaluate the styling and attributes of the element. The element will be checked for `display:none;` and then `visibility:hidden;`, and finally a check for the `hidden` attribute. If these checks result in no match, the method will then evaluate [user-defined attributes](/components/locators/#hidden-elements) on the element via the `Locator` instance. Additionally, the method will catch a `StaleElementReferenceException` throughout this series of evaluations and instantly return a `false` result.
+`getVisibilityOfElement(Locator)` returns `true` when an element is visible on the UI. It finds all nodes matching the selector, then evaluates the first match through a series of checks: the element's dimensions must be greater than zero, and it must not carry `display: none;`, `visibility: hidden;`, or the `hidden` attribute. If those pass, it checks the [user-defined hidden attribute]({{< relref "/docs/Components/ui-modeling/locators.md#hidden-elements" >}}) on the `Locator`. A `StaleElementReferenceException` at any point returns `false`. The method presumes an element is visible until one of the checks proves otherwise.
 
-This method presumes an element is visible until one of the evaluations proves the element is hidden.
+## Element text
 
-#### Element Text
+The `WebInspector` retrieves element text in several forms.
 
-The `WebInspector` offers methods that retrieve text of UI elements in a variety of ways and a variety of formats. In addition to returning String values, methods exist to convert and return element text values as Temporals or Numbers as well. This allows a test to be designed where the UI data can be interacted with in a more flexible way, enjoying the ability to perform operations against, comparisons, and validations with the capabilities of these secondary object types.
+- `getTextOfElement(Locator)` returns the visible inner text of an element.
+- `getTextOfElements(Locator)` returns the text of every element matching the `Locator`, as a `List<String>`.
+- `getSelectedMenuOption(Locator)` returns the text of the currently selected option on a `<select>` menu.
+- `getSelectedMenuOptions(Locator)` returns the text of all selected options on a multi-select `<select>` menu.
+- `getTextOfOptions(Locator)` returns the text of every option on a `<select>` menu, selected or not.
 
-General text inspection methods allow retrieval of basic element text, a `List` of text values from all matching nodes of the given `Locator`, the currently selected `<option>` value on a `<select>` menu, or the `List` of `<option>` values on a `<select>` menu.
+### Element text vs. direct text
 
-##### Element Text vs Direct Element Text
+`WebElement.getText()` returns an element's inner text along with the text of any child elements, which is usually what a test wants. Some DOM structures nest child elements whose text should be ignored for an inspection. For those cases, the `WebInspector` offers a "direct text" variant of each text method. Methods with `directTextOfElement` in the name filter out the visible text of child elements before returning the value of the target element alone.
 
-The `WebElement.getText()` method returns the visible inner text of the given element along with the text of any child elements. In most use cases, this is perfectly fine. Some situations exist, however, when the DOM is constructed in such a way where a target element has child elements that also contain visible inner text that a tester may wish to ignore or avoid for an inspection or validation. For these scenarios, `WebInspector` employs a concept of 'direct text of element'. Methods with `directTextOfElement` in the name will retrieve element text, but prior to returning the text value to the calling method, will filter the visible inner text values of any child elements relative to the given target element.
+### Text as a number or date
 
-##### Element Text as a non-String Object
+The `WebInspector` can parse element text into a typed value instead of a raw `String`. Supplied with a `NumberFormat`, it converts text to an `Integer` or `Double`; supplied with a `DateTimeFormatter`, it converts to a `LocalDate`, `LocalDateTime`, or `LocalTime`. This lets a test do arithmetic, comparisons, and validations against UI data directly, without hand-rolling parsing logic.
 
-The `WebInspector` includes the means to examine the text of an element, and with the aid of a formatter, parse and convert the text value into a `Number` or `Temporal`.
+```java
+Integer itemsInCart = inspector.getTextOfElementAsInteger(cartBadge, NumberFormat.getInstance());
+if (itemsInCart > 0) {
+    commander.click(checkoutButton);
+}
+```
 
-A `NumberFormat` can be used to drive the converstion of a text value to either an `Integer` or a `Double` value. A `DateTimeFormatter` can be used to drive the conversion to either a `LocalDate`, `LocalDateTime`, or a `LocalTime` object. By using these methods, the UI data can be used in mathematical operations directly without requiring the need to build any parsing or conversion logic into the test.
+Each conversion is available in both standard and direct-text forms, for example `getTextOfElementAsInteger(Locator, NumberFormat)` and `getDirectTextOfElementAsDate(Locator, DateTimeFormatter)`.
 
-#### Element Instances
+## Element instances
 
-There are also methods on `WebInspector` that focus specifically on all instances of an element. The `getCountOfElement()` simply returns the number of instances on the DOM of a matching `Locator`. This can drive mathematical operations, looping logic, or precision validations of element groups. The `getInstanceOfElementText()` and `getInstanceOfElementAttribute()` will examine all instances of a matching `Locator` and return the index of the first node that contains a matching text or attribute value. This capability can provide an extra convenience in dynamically parameterizing `Locator` selector values based on the state if the UI.
+Some methods operate across every instance of a `Locator`.
+
+- `getCountOfElement(Locator)` returns the number of matching nodes on the DOM. This can drive arithmetic, looping logic, or precise validations of element groups.
+- `getPositionOfElementWithText(Locator, String expectedText)` returns the index of the first matching element whose text contains the expected value.
+- `getPositionOfElementWithAttribute(Locator, String attributeName, String expectedValue)` returns the index of the first matching element whose named attribute contains the expected value.
+
+The two `getPositionOf...` methods are handy for dynamically parameterizing a `Locator` based on the current state of the UI: find the position of the element that contains a value, then target it by index. Because Qadenz uses Sizzle selectors, the returned position drops straight into a zero-based `:eq()` selector.
+
+```java
+int position = inspector.getPositionOfElementWithText(searchResult, "ACME Rocket Powered Roller Skates");
+Locator matchedResult = new Locator("Matched Search Result", ".search-result:eq(" + position + ")");
+commander.click(matchedResult);
+```

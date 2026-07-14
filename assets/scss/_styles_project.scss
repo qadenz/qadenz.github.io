@@ -1,0 +1,26 @@
+// Project custom styles. Docsy imports this after everything else.
+
+// Docsy 0.15 changed the top navbar default to a light bar with dark text.
+// Restore the solid colored bar with light text used prior to the theme bump.
+.td-navbar {
+  --td-navbar-bg-color: #{$primary};
+  --td-navbar-border-bottom: none;
+  --bs-navbar-color: rgba(255, 255, 255, 0.75);
+  --bs-navbar-hover-color: #fff;
+  --bs-navbar-active-color: #fff;
+  --bs-navbar-brand-color: #fff;
+  --bs-navbar-brand-hover-color: #fff;
+  background-color: $primary;
+  color: #fff;
+
+  .navbar-brand,
+  .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+
+    &:hover,
+    &:focus,
+    &.active {
+      color: #fff;
+    }
+  }
+}

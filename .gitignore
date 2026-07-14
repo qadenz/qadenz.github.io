@@ -1,11 +1,10 @@
 # Hugo build artifacts
 /public/
 /resources/
-/assets/js/bundle.js
-/assets/css/main.css
 
 # Hugo cache files
 /hugo_stats.json
+/.hugo_build.lock
 
 # Temporary files
 *.log
@@ -16,9 +15,6 @@ ehthumbs.db
 # Node.js dependencies (if using npm/yarn for assets)
 /node_modules/
 /yarn.lock
-
-# Python virtual environment (if using for scripts)
-/venv/
 
 # Hugo theme submodule (if you're using a Git submodule for your theme)
 /themes/*
