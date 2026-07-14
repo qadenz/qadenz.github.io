@@ -35,17 +35,11 @@ The split orders the work; it does not decide the outcome. A Failed test can sti
 
 Screenshots are part of the same record. Each one is captured at the point of failure and embedded directly into the report as encoded image data, so the whole thing is a single file that opens anywhere, with no broken links and no archive to unpack. A report shares as easily as an email attachment and reads the same on any machine.
 
+Both the HTML report and its JSON companion are written automatically at the end of a run, by the reporter that [`AutomatedWebTest`]({{< relref "/docs/Components/Configuration/automatedwebtest.md" >}}) registers, and both land in the TestNG output directory as `suite-results.html` and `suite-results.json`.
+
 ## What a team gets
 
 - **Every test keeps its story.** Every test carries its full step-by-step log and a screenshot at each failure, so triage happens by reading the record, not by re-running the test to rebuild it.
 - **The right view for each moment.** A live, thread-tagged console for watching or debugging a run in progress, and a sorted, self-contained report for reading results after it finishes.
 - **A result type TestNG does not have.** Qadenz forks TestNG's reporting to split failures into Failed (a validation the application did not meet) and Stopped (a test halted before it could validate), so a red run reads as a triage queue instead of one undifferentiated pile.
 - **Results that are not locked in one file.** Screenshots embed inline for easy sharing, and the same run also emits structured JSON and standard Logback output, so results can flow into a team's own dashboards, log tooling, and cross-run trend analysis.
-
-## The pieces
-
-- **[Console Logs]({{< relref "console-logs.md" >}})** are the raw, chronological, thread-tagged output shown during a run, ideal for local debugging.
-- **[HTML Reports]({{< relref "html-reports.md" >}})** are the primary view of results: a single self-contained file with per-test logs, embedded screenshots, and results sorted by outcome.
-- **[The JSON Report]({{< relref "json-report.md" >}})** is the same compiled result data as a structured file, meant for export into external presentation systems.
-
-Both files are written automatically at the end of a run by the reporter that [`AutomatedWebTest`]({{< relref "/docs/Components/Configuration/automatedwebtest.md" >}}) registers, and both land in the TestNG output directory as `suite-results.html` and `suite-results.json`.

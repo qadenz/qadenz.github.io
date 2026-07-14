@@ -1,5 +1,7 @@
 ---
 title: "Locators"
+description: >
+  Map a single element: display name, selector, runtime parameters, parent chaining, and the state attributes that harden inspections against unconventional UIs.
 weight: 1
 ---
 

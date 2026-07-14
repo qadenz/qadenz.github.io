@@ -68,8 +68,3 @@ Because every evaluation flows through the same two types, a few things follow w
 - **Every contributor writes checks the same way.** There is no house style to negotiate, because the API offers one path.
 - **The logs describe themselves.** A Condition and its Expectation each know how to state themselves in words. The example above reports as `Text of element [Greeting Message] is equal to [Hello World!].` without a line of logging code.
 - **Maintenance stays cheap.** When the application changes, we adjust a Locator or an expected value, not a scattered mix of assertion styles.
-
-## Where to go next
-
-- **[Validations]({{< relref "/docs/Components/conditions-expectations/validations.md" >}})** covers the mechanics: `verify` against `check`, grouping several Conditions in one call, flushing soft assertions, and screenshots on failure.
-- **[Conditions]({{< relref "/docs/Components/conditions-expectations/conditions.md" >}})** and **[Expectations]({{< relref "/docs/Components/conditions-expectations/expectations.md" >}})** catalog what is available to pair, grouped by value type.
