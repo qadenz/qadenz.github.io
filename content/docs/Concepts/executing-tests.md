@@ -1,6 +1,7 @@
 ---
 title: "Executing Tests"
 weight: 3
+draft: true
 description: >
     Launching test suites with Qadenz is designed to be as flexible as possible so as to integrate easily with the tooling and processes in use by the testing team.
 ---
