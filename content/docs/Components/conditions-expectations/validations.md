@@ -3,7 +3,7 @@ title: "Validations"
 linkTitle: "Validations"
 description: >
   Asserting the state of the UI with verify and check, hard and soft, one check or many.
-weight: 4
+weight: 1
 ---
 A validation asks whether the UI meets expectation and records the answer. Every validation is a `Condition` paired with an `Expectation`, evaluated through one of two methods. Two design ideas shape how they behave.
 

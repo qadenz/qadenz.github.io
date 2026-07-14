@@ -3,7 +3,7 @@ title: "Conditions"
 linkTitle: "Conditions"
 description: >
   The full menu of Conditions, grouped by the value type each one evaluates.
-weight: 1
+weight: 3
 ---
 A `Condition` reads one aspect of the UI and reports its actual state. Choose a Condition by what needs to be read from the page, then pair it with an `Expectation` of the same value type.
 
@@ -64,7 +64,7 @@ Evaluate a number. Pair with the numeric Expectations (`isGreaterThan`, `isLessT
 commander.verify(Conditions.countOfElement(searchResults, Expectations.isGreaterThan(0)));
 ```
 
-The `...As...` Conditions read the element's text as a string, then parse it into a number using a formatter passed as an argument. Parsing stays explicit, so a value like `"$1,299.00"` is read correctly.
+The `...As...` Conditions read the element's text as a string, then parse it into a number using a formatter passed as an argument. Parsing stays explicit, so a value like `"$1,299.00"` is read correctly. Each also has a `directText...As...` form (`directTextOfElementAsInteger`, `directTextOfElementAsDouble`) that excludes child element text before parsing, matching `directTextOfElement` in the text family.
 
 ```java
 commander.verify(Conditions.textOfElementAsDouble(price, new DecimalFormat("$#,##0.00"),
@@ -79,7 +79,7 @@ Evaluate a date, time, or date-time. Pair with the temporal Expectations (`isBef
 - `textOfElementAsDateTime` — parsed to a `LocalDateTime`
 - `textOfElementAsTime` — parsed to a `LocalTime`
 
-Each reads the element's text and parses it with a `DateTimeFormatter` passed as an argument.
+Each reads the element's text and parses it with a `DateTimeFormatter` passed as an argument. As with the numeric reads, each has a `directText...` counterpart (`directTextOfElementAsDate`, `directTextOfElementAsDateTime`, `directTextOfElementAsTime`) that excludes child element text.
 
 ```java
 commander.verify(Conditions.textOfElementAsDate(dueDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"),

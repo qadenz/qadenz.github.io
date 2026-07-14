@@ -1,19 +1,21 @@
 ---
 title: "Locators"
+description: >
+  Map a single element: display name, selector, runtime parameters, parent chaining, and the state attributes that harden inspections against unconventional UIs.
 weight: 1
 ---
 
-The Locator is the central component of UI modeling with Qadenz. Its design accomplishes three things: it is a clean wrapper for both an element's selector and a display-friendly name, it is a vehicle for parameterization of element selectors that leads to more efficient UI models, and it carries attributes that assist with validations and element inspections.
+A `Locator` is the central piece of UI modeling in Qadenz. It pairs a display-friendly name with a CSS selector, and that small pairing does three jobs: it names the element in every log and report, it carries parameters that let one mapping reach a whole family of elements, and it holds optional attributes that sharpen element-state inspections.
 
 ## Basics of a Locator
 
-The Locator object simply carries the name of an element, the element’s selector.
+A `Locator` carries the name of an element and its selector.
 
 ```java
 public Locator(String name, String selector)
 ```
 
-An overloaded constructor allows one Locator instance to be passed to another, allowing a child relationship to be defined and to reduce repetitious selector segments. This approach will append the selector of the child to the selector of the parent, allowing the parent to be used as a reference point for one or more child elements.
+An overloaded constructor accepts a parent `Locator`, prepending the parent's selector to this one. This defines a child relationship and removes repeated selector segments, letting one parent stand as the reference point for several child elements.
 
 ```java
 public Locator(String name, Locator parent, String selector)
@@ -21,13 +23,15 @@ public Locator(String name, Locator parent, String selector)
 
 ### Display-friendly Element Names
 
-Selenium does not readily (nor should it, being simply the tool that automates browsers) provide a meaningful context-friendly reference to element names, which can complicate debugging and troubleshooting when problems arise. Without additional logging in the test project, testers are generally only provided references to elements expressed as the given selectors. This has a very strong potential to slow down the resolution process as testers must first translate the selector in their stack trace to an actual element on the UI, which can then establish a point of orientation within the progression of test steps.
+Selenium works in selectors, not names. It is the tool that drives the browser, so when a step fails, the reference a tester gets back is the selector rather than a recognizable element. Reading a stack trace then begins with translating that selector into an actual place on the page before the failure can be located in the sequence of steps.
+
+A `Locator` closes that gap by requiring a name.
 
 ```java
 Locator signInButton = new Locator("Sign In Button", ".btn-signIn");
 ```
 
-By requiring a `name` value to be given in the Locator constructor, Qadenz refers to the display-friendly name of an element as the primary identifier in all logging and reporting output. This eliminates the time needed to perform any lookup or cross-referencing of selectors to elements in relation to test steps. By reviewing the default logging output or report content, the point at which a problem appears in a test is clearly marked and quickly identified.
+Qadenz uses that name as the element's primary identifier in all logging and reporting. A report reads in the application's own words, and the step where a problem appears is marked plainly, with no selector-to-element lookup to perform first.
 
 ### CSS Selectors
 
@@ -35,13 +39,13 @@ Every `Locator` selector is a CSS selector, and Qadenz uses CSS exclusively. See
 
 ## Parameterization
 
-Parameterization is a simple and effective means to reducing repeated code, and increasing the reusability of each component.
+Parameterization cuts repeated code and makes a single mapping reusable across many elements.
 
 ### Selector Parameters
 
-Using list of search results as an example, testers would be forced to create a separate `@FindBy` annotated `WebElement` instance for each result element needed for a test. Alternately, a `@FindBy` could be used to initialize a single `List<WebElement>`, but additional logic would be necessary to identify a specific result element needed for a test step. In either case, the result is many extra lines of code.
+Take a list of search results. With `@FindBy`, each result needs its own annotated `WebElement`, or a single `List<WebElement>` plus extra logic to pick the instance a step needs. Either way costs lines.
 
-Using a parameterized Locator (coupled with the benefits of Sizzle CSS Selectors), testers will be able to define a single Locator instance for a generic search result, and rely upon the parameterization to direct the test to choose the appropriate element instance.
+A parameterized `Locator` replaces them with one method. The argument feeds both the selector, through a Sizzle `:contains()` match, and the name.
 
 ```java
 public Locator searchResultLink(String name) {
@@ -49,15 +53,15 @@ public Locator searchResultLink(String name) {
 }
 ```
 
-In this example, we also have a benefit of passing the parameter to the `name` field on the Locator, which increases clarity in the logs and reports by providing the exact instance of the element against which the interaction takes place.
+Passing the argument into the `name` field pays off in the logs: each interaction reports the exact element instance it acted on.
 
 ### Parent Locators
 
-A Locator can be built from another Locator, combining the parent's selector with the current one into a single selector value. Only the parent's selector is folded in, and only at construction, so the child does not retain the parent or inherit its name or state attributes. This helps abstract repeated selector segments when creating Locators for closely related UI Elements.
+A `Locator` can be built from another `Locator`, combining the parent's selector with this one into a single value. Only the parent's selector is folded in, and only at construction: the child does not keep a reference to the parent or inherit its name or state attributes. This abstracts repeated selector segments across closely related elements.
 
-Consider an e-commerce application wherein a list of catalog items are presented on the UI. Each item card contains the item name text, a ‘Cost’ value, a ‘Quantity’ field, and an ‘Add to Cart’ button.
+Consider an e-commerce page that lists catalog items. Each item card holds the item name, a cost, a quantity field, and an "Add to Cart" button.
 
-As a very simple HTML representation:
+As a simple HTML representation:
 
 ```html
 <div id="item-list-section" class="grid">
@@ -71,18 +75,16 @@ As a very simple HTML representation:
                 <button type="submit">Add to Cart</button></div>
         </div>
     </div>
-<div>
+</div>
 ```
 
-The selector for the ‘Add to Cart’ button could be:
+The selector for the "Add to Cart" button could be:
 
 ```css
 #item-list-section .item-card:contains(ACME Rocket Powered Roller Skates) .item-add button
 ```
 
-While mapping the other elements on an item card, however, it would be discovered that the item card selector itself is repeated on each of the child elements. In this situation, a parent `Locator` could be created to abstract the repeated selector segments, especially if the abstracted selector can stand as its own element mapping.
-
-With a parent `Locator` the resulting element mappings for the item card, ‘Quantity’ field, and ‘Add to Cart’ button could be:
+Mapping the other elements on the card repeats the item-card segment every time. Pull it into a parent `Locator`, and the mappings for the card, the quantity field, and the button become:
 
 ```java
 public Locator itemCard(String itemName) {
@@ -96,66 +98,58 @@ public Locator itemAddToCartButton(String itemName) {
 }
 ```
 
-In the above example, the `itemCard()` Locator could have the added benefit of not only being an abstracted selector, but could also serve as the target element of a verification of a given item card element to be visible on the page.
+The `itemCard()` `Locator` does double duty here: it abstracts the shared selector, and it stands on its own as the target for verifying an item card is visible.
 
-Parent Locators are also not limited to a single layer. Locators can be passed as parent references as many times as needed.
-
-
+Parent chaining is not limited to one layer. A `Locator` can serve as a parent as many times as needed.
 
 ## Definable Element State Attributes
 
-There are some cases where the UI under test experiences conditions where traditional element state inspections are unreliable due to styling, DOM structure, UI framework in use, or perhaps even unconventional UI development. This can sometimes produce incorrect results on inspections like visibility, selected, or enabled states. To mitigate this issue, the Locator allows three additional fields to be set to assist evaluating these element states.
+Some UIs defeat the standard element-state inspections. Styling, DOM structure, the UI framework in play, or unconventional markup can make visibility, selected, or enabled states report incorrectly. To keep those inspections accurate, a `Locator` accepts three optional attributes that feed extra checks into the matching `WebInspector` methods.
 
-These fields are available as setter methods on the Locator class, and each will define an HTML attribute and expected value that will be added to the corresponding element inspection methods on `WebInspector`. Each of these methods are overloaded to allow a tester to define either an attribute/value combo, or just an attribute name in the case of empty or boolean attributes.
-
-When a `WebInspector` method that supports custom attribute checks runs, the attribute check will be appended to any default checks made to determine the given state of an element.
+Each attribute is set through a method on the `Locator` and names an HTML attribute, optionally with an expected value. Each setter is overloaded: pass an attribute and a value, or an attribute name alone for empty or boolean attributes. When a `WebInspector` method that supports custom attribute checks runs, the custom check is appended to its default checks for that state.
 
 ### Disabled Elements
 
-The `WebInspector.getEnabledStateOfElement()` method checks `<input>` elements to determine whether the element is enabled for user input. This method presumes the element to be enabled, and performs each check in an attempt to prove the element is disabled.
+`WebInspector.getEnabledStateOfElement()` inspects `<input>` elements for whether they accept user input. It assumes the element is enabled and runs each check in an attempt to prove it disabled.
 
-Consider an example where a form is present on the UI that contains a checkbox that is only enabled for input under specific conditions. The form UI is heavily stylized, and the UI developer has chosen to create checkboxes using CSS with no underlying `<input>` element. Calls to `WebElement.isEnabled()` are not reliably returning an accurate result due to the UI design.
-
-The tester has identified the CSS class that renders the checkbox inoperable, and will configure the `Locator` to provide this information to `WebInspector` to yield accurate inspections.
+Take a form with a checkbox that is only enabled under certain conditions. The form is heavily styled, and the developer built the checkbox in CSS with no underlying `<input>`, so `WebElement.isEnabled()` does not report reliably. Identify the CSS class that renders the checkbox inoperable and hand it to the `Locator`.
 
 ```java
 Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
         .setDisabledByAttribute("class", "checkbox-disabled");
 ```
 
-To specify a custom attribute that determines the element as disabled, the `setDisabledByAttribute()` method on the Locator must be called.
+`setDisabledByAttribute()` registers the attribute that marks the element disabled.
 
 ### Hidden Elements
 
-The `WebInspector.getVisibilityOfElement()` method checks for elements that match the provided selector, dimensions of the element, and standard W3C defined means of rendering elements invisible. This method presumes the element to be visible, and performs each of the checks to attempt to prove the element is in fact hidden until a check proves the element hidden (and returns a result accordingly), or no additional checks can be made (in which case the element is determined to indeed be visible).
+`WebInspector.getVisibilityOfElement()` checks for a matching element, its dimensions, and the standard W3C means of rendering an element invisible. It assumes the element is visible and runs each check in an attempt to prove it hidden, until one check succeeds and reports the element hidden, or the checks run out and it reports the element visible.
 
-Consider an example of a “Confirm” button that is present on a form page, but is hidden from view until the form input has been completed by the user. Unfortunately, the UI developers have taken an unconventional approach to hiding this element, and normal visibility inspections are determining the element is visible. The tester has identified the CSS class that hides the element, and is able to pass this information to the WebInspector for a more accurate result.
+Take a "Confirm" button that stays hidden until a form is complete, hidden by an unconventional approach that standard inspection reads as visible. Identify the CSS class that hides the element and pass it along.
 
 ```java
 Locator confirmButton = new Locator("Confirm Button", ".customButton-confirm")
         .setHiddenByAttribute("class", "invisible");
 ```
 
-To specify a custom attribute that defines the element as hidden, the `setHiddenByAttribute()` method must be called.
+`setHiddenByAttribute()` registers the attribute that marks the element hidden.
 
 ### Selected Elements
 
-The `WebInspector.getSelectedStateOfElement()` method checks element such as checkboxes, options in a `<select>` menu, and radio buttons to determine whether the element is selected. This method presumes the element to be unselected and performs each check in an attempt to prove the element to be selected.
+`WebInspector.getSelectedStateOfElement()` inspects checkboxes, `<select>` options, and radio buttons for whether they are selected. It assumes the element is unselected and runs each check in an attempt to prove it selected.
 
-Revisiting the example above for the disabled checkbox, the UI developer has also created an animated interaction when the checkbox is selected. Calls to `WebElement.isSelected()` are not reliably returning an accurate result.
-
-The tester has identified the resulting CSS class responsible for rendering the checkbox as checked, and will configure the `Locator` as required.
+Back on the checkbox above, the developer also animates the selected state, so `WebElement.isSelected()` does not report reliably. Identify the CSS class applied when the box is checked and configure the `Locator`.
 
 ```java
 Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")
         .setSelectedByAttribute("class", "checkbox-checked");
 ```
 
-To specify a custom attribute that defines the element as selected, the `setSelectedByAttribute()` method must be called.
+`setSelectedByAttribute()` registers the attribute that marks the element selected.
 
 ### Fluent Design
 
-The setters on the `Locator` for each of the element state attributes all return a self-reference. This allows the setter calls to be chained together. In the examples above where the “I Agree” checkbox has both disabled-by and selected-by attributes defined, the `Locator` can be instantiated and both configurations can be made in one chained method call.
+Every state-attribute setter returns the `Locator`, so the calls chain. The "I Agree" checkbox above needs both a disabled-by and a selected-by attribute, and both are set in one expression.
 
 ```java
 Locator iAgreeCheckbox = new Locator("I Agree Checkbox", "#i-agree")

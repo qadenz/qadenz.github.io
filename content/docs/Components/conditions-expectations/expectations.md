@@ -3,7 +3,7 @@ title: "Expectations"
 linkTitle: "Expectations"
 description: >
   The full menu of Expectations, grouped by the value type each one evaluates.
-weight: 2
+weight: 4
 ---
 An `Expectation` defines the expected value and how to compare against it. Each one wraps a Hamcrest `Matcher`. Choose an Expectation whose value type matches the Condition it pairs with. See [Conditions]({{< relref "/docs/Components/conditions-expectations/conditions.md" >}}) for the pairing table.
 
