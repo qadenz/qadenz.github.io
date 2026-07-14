@@ -1,0 +1,7 @@
+// Project SCSS variable overrides. Docsy imports this before its own defaults,
+// so anything set here wins over the theme.
+
+// Restore the classic Docsy primary blue. Docsy 0.15 ships a different default,
+// which also drives the navbar and accent colors. Pinning it keeps the site
+// consistent with the prior look.
+$primary: #30638e;
