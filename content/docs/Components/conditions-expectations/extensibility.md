@@ -3,7 +3,7 @@ title: "Extensibility"
 linkTitle: "Extensibility"
 description: >
   Writing custom Conditions and Expectations when the built-in vocabulary does not cover a case.
-weight: 3
+weight: 5
 ---
 The built-in [Conditions]({{< relref "/docs/Components/conditions-expectations/conditions.md" >}}) and [Expectations]({{< relref "/docs/Components/conditions-expectations/expectations.md" >}}) cover the cases most tests need. When one falls outside them, extend the vocabulary rather than reaching for raw Selenium. A custom Condition or Expectation plugs into `pause()`, `verify()`, and `check()` exactly like a built-in one, and it logs to the report the same way. The test code stays in one vocabulary, and nothing about reading or maintaining it changes.
 

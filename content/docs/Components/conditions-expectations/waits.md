@@ -3,7 +3,7 @@ title: "Waits"
 linkTitle: "Waits"
 description: >
   Synchronizing on the UI with Explicit Waits, driven by the same Conditions and Expectations.
-weight: 5
+weight: 2
 ---
 Tests move faster than the applications they drive. A wait is how a test stays in step with the UI, holding until the page reaches the state the next action needs.
 

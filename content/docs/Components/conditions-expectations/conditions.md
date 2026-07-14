@@ -3,7 +3,7 @@ title: "Conditions"
 linkTitle: "Conditions"
 description: >
   The full menu of Conditions, grouped by the value type each one evaluates.
-weight: 1
+weight: 3
 ---
 A `Condition` reads one aspect of the UI and reports its actual state. Choose a Condition by what needs to be read from the page, then pair it with an `Expectation` of the same value type.
 
