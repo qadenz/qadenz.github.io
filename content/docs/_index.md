@@ -4,7 +4,7 @@ linkTitle: "Documentation"
 type: "docs"
 ---
 
-Qadenz is a Java test automation library. It wraps [Selenium](https://www.selenium.dev/) for browser control, [TestNG](https://testng.org) for suite management, and [Hamcrest](http://hamcrest.org/JavaHamcrest/) for validations behind one small, opinionated API.
+Qadenz (pronounced "cadence") is a Java test automation library. It wraps [Selenium](https://www.selenium.dev/) for browser control, [TestNG](https://testng.org) for suite management, and [Hamcrest](http://hamcrest.org/JavaHamcrest/) for validations behind one small, opinionated API.
 
 Any team automating against a browser needs a layer between its tests and those tools: synchronization so an interaction does not race the page, logging and reporting so a run is legible, a way to model the UI that does not go stale. Building that layer, and then maintaining it, is often as much work as the tests it supports.
 
