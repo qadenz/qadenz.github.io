@@ -2,6 +2,8 @@
 title: "Getting Started"
 linkTitle: "Getting Started"
 weight: 2
+description: >
+    From an empty Maven project to a passing test and its report.
 ---
 
 Standing up a Qadenz project takes three things: a new Java/Maven project, the Qadenz dependency, and a test. This guide covers the prerequisites and then builds a first test that signs into an authentication form and verifies the result.

@@ -2,6 +2,8 @@
 title: "Philosophy of Use"
 linkTitle: "Philosophy of Use"
 weight: 1
+description: >
+    Why Qadenz is built the way it is, and the positions it takes.
 ---
 
 Most teams that automate against a browser end up building an intermediate layer between their tests and the underlying tools. It abstracts the common code, unifies how the team works, and answers the question of how, for this team, these tools should be used. Designing and maintaining that layer is a real and ongoing effort, often as large as keeping up with the demand for new tests. Qadenz exists so a team does not have to take it on, and it takes deliberate positions along the way. This page makes the case for them.
