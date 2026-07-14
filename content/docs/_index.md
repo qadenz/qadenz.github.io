@@ -1,43 +1,45 @@
 ---
-title: "Welcome to Test Automation with Qadenz!"
+title: "Test Automation with Qadenz"
 linkTitle: "Documentation"
 type: "docs"
 menu: {main: {weight: 20}}
 ---
 
-> **This site is undergoing some upgrades and updates. Please pardon any broken links, unhandled variables, and other small issues while things are getting sorted out. Things will be back to normal just as quick as possible.**
+Qadenz is a Java test automation library. It wraps [Selenium](https://www.selenium.dev/) for browser control, [TestNG](https://testng.org) for suite management, and [Hamcrest](http://hamcrest.org/JavaHamcrest/) for validations behind one small, opinionated API.
 
-Qadenz is a robust test automation library written in Java that wraps [Selenium](https://www.selenium.dev/) for browser automation, [TestNG](https://testng.org) for suite management, and [Hamcrest](http://hamcrest.org/JavaHamcrest/) for validations. Using a mildly opinionated approach, Qadenz solves the common issues encountered while implementing the wrapper layer between the tests and accompanying UI models, and the underlying frameworks (like Selenium and TestNG).
+Any team automating against a browser needs a layer between its tests and those tools: synchronization so an interaction does not race the page, logging and reporting so a run is legible, a way to model the UI that does not go stale. Building that layer, and then maintaining it, is often as much work as the tests it supports.
 
-The goal of Qadenz is to take the heavy lifting out of developing a test automation project, and allow teams to focus instead on rapid scripting of tests. This is accomplished by using an easy-to-learn API that encourages simple to read tests without using Gherkin/BDD-based tools that add unnecessary complexity and maintenance overhead to the development workload.
+## Turn-key on top of Selenium
 
-Core Features of Qadenz:
+Teams automating a browser tend to land in one of two places. The ready-made tools install and run, and a team writes tests the same day. Selenium asks more: a project builds its own wrapper layer around it first, then maintains that layer as an internal product, paying for both long before a test ships.
 
-- Boilerplate test setup and configuration is built and ready to use
-- Selenium element interaction functionality is wrapped in a simple to use API
-- A unique conditions-based approach to validations
-- Custom built-in HTML reporting that provides detailed results data along with integrated screenshots
+Qadenz is a third option. It is the wrapper layer, already built, maintained, and shaped by years of real automation work, so a Java team gets the ready-made start without giving up Selenium underneath: the W3C-standard engine, the real browser, and the accuracy that comes with them.
 
-Qadenz is also extensible and stands ready to support custom functionality based on the needs of the tests to be automated. The design patterns that Qadenz provides can quickly and easily be followed for seamless integration of team-specific features.
+The [Philosophy of Use]({{< relref "/docs/philosophy-of-use.md" >}}) makes the full case.
 
-# License
+## What sets Qadenz apart
 
-The Qadenz Library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a "Source Available" library. Teams are welcome to use Qadenz to power their internally managed test automation projects and modify as needed, but are prohibited from re-distributing the library or marketing/selling Qadenz (and derivative works of Qadenz) as a product for their customers.
+Most of what a framework does, other frameworks also do in some form. Two things Qadenz does that they generally do not:
 
-# Getting Started
+- **One vocabulary for waiting and asserting.** Selenium hands a team two separate languages: `ExpectedConditions` for waits, and a separate assertion library for checks. Qadenz replaces both with a single vocabulary of Conditions and Expectations that describes the state of the UI once, then drives waits, hard assertions, and soft checks alike. A grouped check reports every failure in a step instead of stopping at the first, and each one reads in plain language on the report. See [Conditions & Expectations]({{< relref "/docs/Components/conditions-expectations/_index.md" >}}).
+- **Reports that are the evidence, not the score.** Qadenz records the full step-by-step story of every test and embeds a screenshot at each failure, in one self-contained HTML file that shares without a zip. It does this with no reporting code in the tests or page objects: the report is built from the same log output the commands already produce. Most tools give a pass/fail count and a stack trace, or ask a team to thread reporting calls through its own code to get more. See [Test Results]({{< relref "/docs/Components/Test-Results/_index.md" >}}).
 
-Getting started with Qadenz is as simple as importing the dependency from Maven. On the `pom.xml`, add a new entry to the `<dependencies>` section:
+## The fundamentals, handled
 
-```xml
-<dependency>
-    <groupId>dev.qadenz</groupId>
-    <artifactId>qadenz</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
+The everyday parts are here too, built to the same standard:
 
-The code is also available at [GitHub](https://github.com/qadenz/qadenz).
+- **Commands** wrap every Selenium interaction in the wait, the logging, and the screenshot-on-failure a real test needs, so a click is never just a click. See [Commands]({{< relref "/docs/Components/Commands/_index.md" >}}).
+- **UI Modeling** names each element once, in the language of the application, with a `Locator` that holds no live element and never goes stale. See [UI Modeling]({{< relref "/docs/Components/ui-modeling/_index.md" >}}).
+- **Configuration** stands the project up from a base class and a few Suite parameters, with a fresh browser per test and safe parallelism. See [Configuration]({{< relref "/docs/Components/Configuration/_index.md" >}}).
 
-This documentation on this site covers the general approach to automated test design from Qadenz, the major components and how they can be implemented, how test suites can be executed and results can be reviewed and shared. Improvements to the documentation are always in progress, but [questions and suggestions]({{ site.repo2 }}/issues/new?labels={% if page.editable %}{{ page.editable }}{% else %}question{% endif %}&title=Question:&body=Question on: {{ site.repo }}/tree/master/{{ page.path }}) are always welcome and will be a big help to understanding where to prioritize updates.
+## Getting started
+
+[Getting Started]({{< relref "/docs/getting-started.md" >}}) builds a first test from an empty Maven project through a passing run and its report. For the reasoning behind the design, and the positions Qadenz takes, read the [Philosophy of Use]({{< relref "/docs/philosophy-of-use.md" >}}).
+
+The source is on [GitHub](https://github.com/qadenz/qadenz).
+
+## License
+
+The Qadenz library is made available under the [PolyForm Internal Use License](https://polyformproject.org/licenses/internal-use/1.0.0/) as a Source Available library. Teams are welcome to use Qadenz to power their internally managed test automation projects and to modify it as needed, but may not redistribute the library or market or sell Qadenz (or derivative works) as a product for their own customers.
 
 Happy automating :)
